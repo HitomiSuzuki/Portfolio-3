@@ -1,10 +1,16 @@
 <?php
 
-namespace App\Models;
+// @formatter:off
+/**
+ * A helper file for your Eloquent Models
+ * Copy the phpDocs from this file to the correct Model,
+ * And remove them from this file, to prevent double declarations.
+ *
+ * @author Barry vd. Heuvel <barryvdh@gmail.com>
+ */
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
+namespace App\Models{
 /**
  * App\Models\Artwork
  *
@@ -24,11 +30,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Artwork whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Artwork extends Model
-{
-    use HasFactory;
-
-    protected $fillable = [
-        'title', 'imgURL'
-    ];
+	class Artwork extends \Eloquent {}
 }
+

@@ -14,7 +14,7 @@ class ArtworkController extends Controller
      */
     public function index()
     {
-        return Artwork::oederByDesc('id')->get();
+        return Artwork::orderByDesc('id')->get();
     }
 
     /**
@@ -64,7 +64,7 @@ class ArtworkController extends Controller
      */
     public function destroy(Artwork $artwork)
     {
-        return $news->delete()
+        return $artwork->delete()
         ? response()->json($artwork)
         : response()->json([], 500);
     }
