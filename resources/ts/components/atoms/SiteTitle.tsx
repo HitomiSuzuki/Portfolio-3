@@ -10,6 +10,9 @@ export const SiteTitle: React.FC = () => {
         let x = (xCenter - e.pageX) / parallaxVal;
         let y = (yCenter - e.pageY) / parallaxVal;
 
+        console.log("X" + e.pageX)
+        console.log("Y" + e.pageY)
+
         if(!targetRef.current) {
             return
         }
@@ -34,8 +37,8 @@ export const SiteTitle: React.FC = () => {
     // パララックスのターゲット取得
     const targetRef = useRef<HTMLDivElement>(null);
     // ウィンドウの中心の取得
-    const xCenter = window.innerWidth / 2;
-    const yCenter = window.innerHeight / 2;
+    const xCenter = window.innerWidth - 280;
+    const yCenter = window.innerHeight - 160;
     // パララックスで移動させる距離
     const parallaxVal = 10; //中心からマウスの距離の10分１移動
     
@@ -54,7 +57,7 @@ interface Props {
 
 const StyledPararaxArea = styled.div<Props>`
     position: relative;
-    background-color: #f8f8f8;
+    // background-color: #f8f8f8;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -67,18 +70,21 @@ const StyledJsPararax = styled.div`
     position: absolute;
     width: 20px;
     height: 20px;
+    z-index: 1;
     border-radius: 20px;
     background-color: black;
-    transition: transform .3s linear .001s;
+    transition: all .3s linear .001s;
     bottom: 150px;
     right: 270px;
+    &:hover  {
+        background-color: blue;
+    }
 `
 
 const StyledO = styled.div`
     position: absolute;
     bottom: 100px;
     right: 220px;
-    z-index: 100;
     width: 100px;
     height: 100px;
     border-radius: 100px;
