@@ -4645,7 +4645,8 @@ var Carousel = function Carousel(props) {
       speed: 500,
       autoplay: true,
       autoplaySpeed: 5000,
-      arrows: true
+      arrows: true,
+      swipe: true
     });
   });
   return react_1["default"].createElement(StyledCarouselWrapper, {
@@ -4659,7 +4660,7 @@ var Carousel = function Carousel(props) {
   }));
 };
 exports.Carousel = Carousel;
-var StyledCarouselWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 100vh;\n    padding: 100px 0;\n    display: none;\n\n    @media(max-width: 599px) {\n        display: block;\n    }\n\n    .slick-arrow {\n        right: 30px;\n        left: auto;\n        &::before {\n            content: '';\n            width: 46px;\n            display: block;\n            height: 17px;\n            background-repeat: no-repeat;\n        }\n    }\n\n    .slick-prev {\n        top: 50px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n\n    .slick-next {\n        top: 80px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n"])), Arrow11_png_1["default"], Arrow12_png_1["default"]);
+var StyledCarouselWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 100vh;\n    padding: 150px 0 120px;\n    display: none;\n\n    @media(max-width: 599px) {\n        display: block;\n    }\n\n    .slick-arrow {\n        right: 30px;\n        left: auto;\n        &::before {\n            content: '';\n            width: 46px;\n            display: block;\n            height: 17px;\n            background-repeat: no-repeat;\n        }\n    }\n\n    .slick-prev {\n        top: 100px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n\n    .slick-next {\n        top: 130px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n"])), Arrow11_png_1["default"], Arrow12_png_1["default"]);
 var StyledCarouselImageWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 100%;\n    height: calc(100vh - 240px);\n"])));
 var StyledCarouselImage = styled_components_1["default"].img(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    max-width: 100%;\n    max-height: 100%;\n    margin: 0 auto;\n"])));
 
@@ -4983,6 +4984,87 @@ var StyledText = styled_components_1["default"].p(_templateObject4 || (_template
 
 /***/ }),
 
+/***/ "./resources/ts/components/molecules/CarouselModal.tsx":
+/*!*************************************************************!*\
+  !*** ./resources/ts/components/molecules/CarouselModal.tsx ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _templateObject, _templateObject2;
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.CarouselModal = void 0;
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var Carousel_1 = __webpack_require__(/*! ../atoms/Carousel */ "./resources/ts/components/atoms/Carousel.tsx");
+var close_png_1 = __importDefault(__webpack_require__(/*! ../../static/close.png */ "./resources/ts/static/close.png"));
+var CarouselModal = function CarouselModal(props) {
+  var modalBg = (0, react_1.useRef)(null);
+  var closeModal = function closeModal() {
+    if (!modalBg.current) {
+      return;
+    }
+    modalBg.current.classList.add('close');
+  };
+  var imgArray = props.imgArray,
+    currentImg = props.currentImg;
+  return react_1["default"].createElement(ModalBg, {
+    ref: modalBg
+  }, react_1["default"].createElement(ModalCloseButton, {
+    onClick: function onClick() {
+      return closeModal();
+    }
+  }), react_1["default"].createElement(Carousel_1.Carousel, {
+    imgArray: imgArray
+  }));
+};
+exports.CarouselModal = CarouselModal;
+var ModalBg = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 100vw;\n    height: 100vh;\n    background-color: rgba(0,0,0,0.5);\n    position: relative;\n\n    &.close {\n        display: none;\n    }\n"])));
+var ModalCloseButton = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    &::before {\n        position: absolute;\n        content: '';\n        top 20px;\n        right: 0;\n        background-image: url(", ");\n        width: 70px;\n        height: 66px;\n        z-index: 100;\n    }\n"])), close_png_1["default"]);
+
+/***/ }),
+
 /***/ "./resources/ts/index.tsx":
 /*!********************************!*\
   !*** ./resources/ts/index.tsx ***!
@@ -5041,6 +5123,7 @@ var img2_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img2.jpg */ "
 var img3_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img3.jpg */ "./resources/ts/static/img3.jpg"));
 var MouseStalker_1 = __webpack_require__(/*! ../components/atoms/MouseStalker */ "./resources/ts/components/atoms/MouseStalker.tsx");
 var Carousel_1 = __webpack_require__(/*! ../components/atoms/Carousel */ "./resources/ts/components/atoms/Carousel.tsx");
+var CarouselModal_1 = __webpack_require__(/*! ../components/molecules/CarouselModal */ "./resources/ts/components/molecules/CarouselModal.tsx");
 var Top = function Top() {
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(MouseStalker_1.MouseStalker, null), react_1["default"].createElement(Header_1.Header, null), react_1["default"].createElement(StyledPage, {
     id: "title"
@@ -5058,7 +5141,10 @@ var Top = function Top() {
     imgArray: [img1_jpg_1["default"], img2_jpg_1["default"], img3_jpg_1["default"]]
   })), react_1["default"].createElement(StyledPage, {
     id: "nft"
-  }), react_1["default"].createElement(StyledPage, {
+  }, react_1["default"].createElement(CarouselModal_1.CarouselModal, {
+    imgArray: [img1_jpg_1["default"], img2_jpg_1["default"], img3_jpg_1["default"]],
+    currentImg: img1_jpg_1["default"]
+  })), react_1["default"].createElement(StyledPage, {
     id: "bio"
   }));
 };
@@ -5296,6 +5382,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Arrow12.png?73b8cbeb17b47ef8d9d686a8550c3f2e");
+
+/***/ }),
+
+/***/ "./resources/ts/static/close.png":
+/*!***************************************!*\
+  !*** ./resources/ts/static/close.png ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/close.png?5137083c19649075db251e9dab1c7870");
 
 /***/ }),
 

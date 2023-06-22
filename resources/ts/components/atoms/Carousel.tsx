@@ -22,6 +22,7 @@ export const Carousel = (props: CarouselProps) => {
             autoplay: true,
             autoplaySpeed: 5000,
             arrows: true,
+            swipe: true
         });
     });
 
@@ -40,7 +41,7 @@ export const Carousel = (props: CarouselProps) => {
 
 const StyledCarouselWrapper = styled.div`
     height: 100vh;
-    padding: 100px 0;
+    padding: 150px 0 120px;
     display: none;
 
     @media(max-width: 599px) {
@@ -60,14 +61,14 @@ const StyledCarouselWrapper = styled.div`
     }
 
     .slick-prev {
-        top: 50px;
+        top: 100px;
         &::before {
             background-image: url(${prevArrow}); 
         }
     }
 
     .slick-next {
-        top: 80px;
+        top: 130px;
         &::before {
             background-image: url(${nextArrow}); 
         }

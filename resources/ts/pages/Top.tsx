@@ -9,6 +9,7 @@ import img2 from '../static/img2.jpg';
 import img3 from '../static/img3.jpg';
 import { MouseStalker } from "../components/atoms/MouseStalker";
 import { Carousel } from "../components/atoms/Carousel";
+import { CarouselModal } from "../components/molecules/CarouselModal";
 
 export const Top = () => {
     return (
@@ -25,7 +26,9 @@ export const Top = () => {
                 <HoverImage imgURL={img3} />
                 <Carousel imgArray={[img1, img2, img3]}/>
             </StyledPage>
-            <StyledPage id="nft"></StyledPage>
+            <StyledPage id="nft">
+                <CarouselModal imgArray={[img1, img2, img3]} currentImg={img1} />
+            </StyledPage>
             <StyledPage id="bio"></StyledPage>
         </>
     )
