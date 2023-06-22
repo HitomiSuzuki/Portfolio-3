@@ -39,39 +39,44 @@ export const Carousel = (props: CarouselProps) => {
 }
 
 const StyledCarouselWrapper = styled.div`
-height: 100vh;
-padding: 100px 0;
+    height: 100vh;
+    padding: 100px 0;
+    display: none;
 
-.slick-arrow {
-    right: 30px;
-    left: auto;
-    &::before {
-        content: '';
-        width: 46px;
+    @media(max-width: 599px) {
         display: block;
-        height: 17px;
-        background-repeat: no-repeat;
     }
-}
 
-.slick-prev {
-    top: 50px;
-    &::before {
-        background-image: url(${prevArrow}); 
+    .slick-arrow {
+        right: 30px;
+        left: auto;
+        &::before {
+            content: '';
+            width: 46px;
+            display: block;
+            height: 17px;
+            background-repeat: no-repeat;
+        }
     }
-}
 
-.slick-next {
-    top: 80px;
-    &::before {
-        background-image: url(${nextArrow}); 
+    .slick-prev {
+        top: 50px;
+        &::before {
+            background-image: url(${prevArrow}); 
+        }
     }
-}
+
+    .slick-next {
+        top: 80px;
+        &::before {
+            background-image: url(${nextArrow}); 
+        }
+    }
 `
 
 const StyledCarouselImageWrapper = styled.div`
-width: 100%;
-height: calc(100vh - 240px);
+    width: 100%;
+    height: calc(100vh - 240px);
 `
 
 const StyledCarouselImage = styled.img`

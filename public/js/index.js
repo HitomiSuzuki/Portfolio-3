@@ -4659,8 +4659,8 @@ var Carousel = function Carousel(props) {
   }));
 };
 exports.Carousel = Carousel;
-var StyledCarouselWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\nheight: 100vh;\npadding: 100px 0;\n\n.slick-arrow {\n    right: 30px;\n    left: auto;\n    &::before {\n        content: '';\n        width: 46px;\n        display: block;\n        height: 17px;\n        background-repeat: no-repeat;\n    }\n}\n\n.slick-prev {\n    top: 50px;\n    &::before {\n        background-image: url(", "); \n    }\n}\n\n.slick-next {\n    top: 80px;\n    &::before {\n        background-image: url(", "); \n    }\n}\n"])), Arrow11_png_1["default"], Arrow12_png_1["default"]);
-var StyledCarouselImageWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\nwidth: 100%;\nheight: calc(100vh - 240px);\n"])));
+var StyledCarouselWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 100vh;\n    padding: 100px 0;\n    display: none;\n\n    @media(max-width: 599px) {\n        display: block;\n    }\n\n    .slick-arrow {\n        right: 30px;\n        left: auto;\n        &::before {\n            content: '';\n            width: 46px;\n            display: block;\n            height: 17px;\n            background-repeat: no-repeat;\n        }\n    }\n\n    .slick-prev {\n        top: 50px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n\n    .slick-next {\n        top: 80px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n"])), Arrow11_png_1["default"], Arrow12_png_1["default"]);
+var StyledCarouselImageWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 100%;\n    height: calc(100vh - 240px);\n"])));
 var StyledCarouselImage = styled_components_1["default"].img(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    max-width: 100%;\n    max-height: 100%;\n    margin: 0 auto;\n"])));
 
 /***/ }),
