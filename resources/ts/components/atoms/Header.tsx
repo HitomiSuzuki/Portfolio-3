@@ -7,9 +7,9 @@ export const Header = () => {
 
     return (
         <StyledHeaderWrapper>
-            <StyledHeaderLink to="/">Gallery</StyledHeaderLink>
-            <StyledHeaderAnchorLink href="#nft" offset="50">NFT</StyledHeaderAnchorLink>
-            <StyledHeaderAnchorLink href="#bio" offset="50">Biography</StyledHeaderAnchorLink>
+            <StyledHeaderLink to="/" className='stalkerTarget'>Gallery</StyledHeaderLink>
+            <StyledHeaderAnchorLink href="#nft" offset="50" className='stalkerTarget'>NFT</StyledHeaderAnchorLink>
+            <StyledHeaderAnchorLink href="#bio" offset="50" className='stalkerTarget'>Biography</StyledHeaderAnchorLink>
         </StyledHeaderWrapper>
     )
 }

@@ -17,12 +17,10 @@ export const MouseStalker = () => {
         }
     
         const stalkerSize = window.getComputedStyle(stalker.current).getPropertyValue('width').substring(0, 2);
-        console.log("stalkerSize" + stalkerSize)
         const cssPosisionAdjust = (Number(stalkerSize) / 2);
-        console.log("cssPosisionAdjust" + cssPosisionAdjust)
         const x = e.clientX - cssPosisionAdjust;
         const y = e.clientY - cssPosisionAdjust;
-        stalker.current.style.transform = `translate(${x}px, ${y}px)`;
+        stalker.current.style.transform = `translate(${x}px, ${y + scroll}px)`;
     }
 
     //処理(リンクホバー)
@@ -44,8 +42,6 @@ export const MouseStalker = () => {
     }
 
     stalkerArea?.addEventListener('mousemove', MouseMoveFunction);
-    console.log(stalkerArea);
-
     
 
     window.addEventListener('scroll', (e: Event) => {

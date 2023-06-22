@@ -4635,13 +4635,16 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 var react_anchor_link_smooth_scroll_1 = __importDefault(__webpack_require__(/*! react-anchor-link-smooth-scroll */ "./node_modules/react-anchor-link-smooth-scroll/lib/anchor-link.js"));
 var Header = function Header() {
   return react_1["default"].createElement(StyledHeaderWrapper, null, react_1["default"].createElement(StyledHeaderLink, {
-    to: "/"
+    to: "/",
+    className: 'stalkerTarget'
   }, "Gallery"), react_1["default"].createElement(StyledHeaderAnchorLink, {
     href: "#nft",
-    offset: "50"
+    offset: "50",
+    className: 'stalkerTarget'
   }, "NFT"), react_1["default"].createElement(StyledHeaderAnchorLink, {
     href: "#bio",
-    offset: "50"
+    offset: "50",
+    className: 'stalkerTarget'
   }, "Biography"));
 };
 exports.Header = Header;
@@ -4681,7 +4684,7 @@ var HoverImage = function HoverImage(props) {
   });
 };
 exports.HoverImage = HoverImage;
-var StyledImage = styled_components_1["default"].img(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: calc(100vw * 350 / 1280);\n\n\n"])));
+var StyledImage = styled_components_1["default"].img(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: calc(100vw * 350 / 1280);\n"])));
 
 /***/ }),
 
@@ -4783,12 +4786,10 @@ var MouseStalker = function MouseStalker() {
       return;
     }
     var stalkerSize = window.getComputedStyle(stalker.current).getPropertyValue('width').substring(0, 2);
-    console.log("stalkerSize" + stalkerSize);
     var cssPosisionAdjust = Number(stalkerSize) / 2;
-    console.log("cssPosisionAdjust" + cssPosisionAdjust);
     var x = e.clientX - cssPosisionAdjust;
     var y = e.clientY - cssPosisionAdjust;
-    stalker.current.style.transform = "translate(".concat(x, "px, ").concat(y, "px)");
+    stalker.current.style.transform = "translate(".concat(x, "px, ").concat(y + scroll, "px)");
   };
   //処理(リンクホバー)
   var HoverFunction = function HoverFunction(e) {
@@ -4807,7 +4808,6 @@ var MouseStalker = function MouseStalker() {
     stalker.current.style.height = "25px";
   };
   stalkerArea === null || stalkerArea === void 0 ? void 0 : stalkerArea.addEventListener('mousemove', MouseMoveFunction);
-  console.log(stalkerArea);
   window.addEventListener('scroll', function (e) {
     scroll = window.scrollY;
   });
@@ -4985,9 +4985,7 @@ var img2_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img2.jpg */ "
 var img3_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img3.jpg */ "./resources/ts/static/img3.jpg"));
 var MouseStalker_1 = __webpack_require__(/*! ../components/atoms/MouseStalker */ "./resources/ts/components/atoms/MouseStalker.tsx");
 var Top = function Top() {
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(Header_1.Header, null), react_1["default"].createElement("div", {
-    id: "stalkerArea"
-  }, react_1["default"].createElement(MouseStalker_1.MouseStalker, null), react_1["default"].createElement(StyledPage, {
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(MouseStalker_1.MouseStalker, null), react_1["default"].createElement(Header_1.Header, null), react_1["default"].createElement(StyledPage, {
     id: "title"
   }, react_1["default"].createElement(SiteTitle_1.SiteTitle, null)), react_1["default"].createElement(StyledPage, {
     id: "gallery"
@@ -5003,10 +5001,10 @@ var Top = function Top() {
     id: "nft"
   }), react_1["default"].createElement(StyledPage, {
     id: "bio"
-  })));
+  }));
 };
 exports.Top = Top;
-var StyledPage = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 100vh;\n\n    &:nth-of-type(2) {\n        background: red;\n    }\n    &:nth-of-type(3) {\n        background: blue;\n    }\n    &:nth-of-type(4) {\n        background: green;\n    }\n    &:nth-of-type(5) {\n        background: violet;\n    }\n"])));
+var StyledPage = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 100vh;\n\n    &:nth-of-type(3) {\n        background: red;\n    }\n    &:nth-of-type(4) {\n        background: blue;\n    }\n    &:nth-of-type(5) {\n        background: green;\n    }\n    &:nth-of-type(6) {\n        background: violet;\n    }\n"])));
 
 /***/ }),
 

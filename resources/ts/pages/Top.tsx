@@ -12,21 +12,19 @@ import { MouseStalker } from "../components/atoms/MouseStalker";
 export const Top = () => {
     return (
         <>
-            <Header />
-            <div id="stalkerArea">
-                <MouseStalker/>
-                <StyledPage id="title">
-                    <SiteTitle />
-                </StyledPage>
-                <StyledPage id="gallery">
-                    <HoverLink to={'http://google.com'}>text</HoverLink>
-                    <HoverImage imgURL={img1} />
-                    <HoverImage imgURL={img2} />
-                    <HoverImage imgURL={img3} />
-                </StyledPage>
-                <StyledPage id="nft"></StyledPage>
-                <StyledPage id="bio"></StyledPage>
-            </div>
+            <MouseStalker/>
+            <Header /> 
+            <StyledPage id="title">
+                <SiteTitle />
+            </StyledPage>
+            <StyledPage id="gallery">
+                <HoverLink to={'http://google.com'}>text</HoverLink>
+                <HoverImage imgURL={img1} />
+                <HoverImage imgURL={img2} />
+                <HoverImage imgURL={img3} />
+            </StyledPage>
+            <StyledPage id="nft"></StyledPage>
+            <StyledPage id="bio"></StyledPage>
         </>
     )
 }
@@ -34,16 +32,16 @@ export const Top = () => {
 const StyledPage = styled.div`
     height: 100vh;
 
-    &:nth-of-type(2) {
+    &:nth-of-type(3) {
         background: red;
     }
-    &:nth-of-type(3) {
+    &:nth-of-type(4) {
         background: blue;
     }
-    &:nth-of-type(4) {
+    &:nth-of-type(5) {
         background: green;
     }
-    &:nth-of-type(5) {
+    &:nth-of-type(6) {
         background: violet;
     }
 `

@@ -17,6 +17,4 @@ export const HoverImage = (props: HoverImageProps) => {
 
 const StyledImage = styled.img`
     width: calc(100vw * 350 / 1280);
-
-
 `
