@@ -10,9 +10,6 @@ export const SiteTitle: React.FC = () => {
         let x = (xCenter - e.pageX) / parallaxVal;
         let y = (yCenter - e.pageY) / parallaxVal;
 
-        console.log("X" + e.pageX)
-        console.log("Y" + e.pageY)
-
         if(!targetRef.current) {
             return
         }
@@ -56,8 +53,7 @@ interface Props {
 }
 
 const StyledPararaxArea = styled.div<Props>`
-    position: relative;
-    // background-color: #f8f8f8;
+    position: absolute;
     height: 100vh;
     width: 100vw;
     display: flex;

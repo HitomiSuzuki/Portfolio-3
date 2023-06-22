@@ -1,17 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import { SiteTitle } from './components/atoms/SiteTitle';
-import { HoverLink } from './components/atoms/HoverLink';
+import { Top } from './pages/Top';
+
 
 const container = document.getElementById('app')!;
 const root = createRoot(container);
 
+
+
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <SiteTitle />
-            <HoverLink to={'http://google.com'}>text</HoverLink>
+            <Top />
         </BrowserRouter>
     </React.StrictMode>
 )
+
