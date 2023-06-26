@@ -9,13 +9,24 @@ import nextArrow from '../../static/Arrow12.png';
 
 type CarouselProps = {
     imgArray: string[];
+    isMain?: boolean;
 }
 
 
 export const Carousel = (props: CarouselProps) => {
-    const {imgArray} = props;
+    const {imgArray, isMain} = props;
 
     $(function(){
+        isMain ? 
+        $('.slider').not('.slick-initialized').slick({
+            dots: false,
+            speed: 500,
+            autoplay: true,
+            autoplaySpeed: 5000,
+            arrows: false,
+            swipe: true
+        })
+        :
         $('.slider').not('.slick-initialized').slick({
             dots: false,
             speed: 500,
@@ -23,7 +34,7 @@ export const Carousel = (props: CarouselProps) => {
             autoplaySpeed: 5000,
             arrows: true,
             swipe: true
-        });
+        })
     });
 
     return(
@@ -42,11 +53,6 @@ export const Carousel = (props: CarouselProps) => {
 const StyledCarouselWrapper = styled.div`
     height: 100vh;
     padding: 150px 0 120px;
-    display: none;
-
-    @media(max-width: 599px) {
-        display: block;
-    }
 
     .slick-arrow {
         right: 30px;

@@ -4638,9 +4638,17 @@ __webpack_require__(/*! slick-carousel/slick/slick-theme.css */ "./node_modules/
 var Arrow11_png_1 = __importDefault(__webpack_require__(/*! ../../static/Arrow11.png */ "./resources/ts/static/Arrow11.png"));
 var Arrow12_png_1 = __importDefault(__webpack_require__(/*! ../../static/Arrow12.png */ "./resources/ts/static/Arrow12.png"));
 var Carousel = function Carousel(props) {
-  var imgArray = props.imgArray;
+  var imgArray = props.imgArray,
+    isMain = props.isMain;
   (0, jquery_1["default"])(function () {
-    (0, jquery_1["default"])('.slider').not('.slick-initialized').slick({
+    isMain ? (0, jquery_1["default"])('.slider').not('.slick-initialized').slick({
+      dots: false,
+      speed: 500,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      arrows: false,
+      swipe: true
+    }) : (0, jquery_1["default"])('.slider').not('.slick-initialized').slick({
       dots: false,
       speed: 500,
       autoplay: true,
@@ -4660,7 +4668,7 @@ var Carousel = function Carousel(props) {
   }));
 };
 exports.Carousel = Carousel;
-var StyledCarouselWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 100vh;\n    padding: 150px 0 120px;\n    display: none;\n\n    @media(max-width: 599px) {\n        display: block;\n    }\n\n    .slick-arrow {\n        right: 30px;\n        left: auto;\n        &::before {\n            content: '';\n            width: 46px;\n            display: block;\n            height: 17px;\n            background-repeat: no-repeat;\n        }\n    }\n\n    .slick-prev {\n        top: 100px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n\n    .slick-next {\n        top: 130px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n"])), Arrow11_png_1["default"], Arrow12_png_1["default"]);
+var StyledCarouselWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 100vh;\n    padding: 150px 0 120px;\n\n    .slick-arrow {\n        right: 30px;\n        left: auto;\n        &::before {\n            content: '';\n            width: 46px;\n            display: block;\n            height: 17px;\n            background-repeat: no-repeat;\n        }\n    }\n\n    .slick-prev {\n        top: 100px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n\n    .slick-next {\n        top: 130px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n"])), Arrow11_png_1["default"], Arrow12_png_1["default"]);
 var StyledCarouselImageWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 100%;\n    height: calc(100vh - 240px);\n"])));
 var StyledCarouselImage = styled_components_1["default"].img(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    max-width: 100%;\n    max-height: 100%;\n    margin: 0 auto;\n"])));
 
@@ -4720,8 +4728,39 @@ var StyledHeaderAnchorLink = (0, styled_components_1["default"])(react_anchor_li
 "use strict";
 
 
-var _templateObject;
+var _templateObject, _templateObject2;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -4731,52 +4770,34 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.HoverImage = void 0;
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
 var HoverImage = function HoverImage(props) {
   var imgURL = props.imgURL;
+  (0, react_1.useEffect)(function () {
+    var scrollAnimationElm = document.querySelectorAll('.fadeIn');
+    console.log(scrollAnimationElm);
+    var scrollAnimationFunc = function scrollAnimationFunc() {
+      for (var i = 0; i < scrollAnimationElm.length; i++) {
+        var triggerMargin = 30;
+        console.log(window.innerHeight);
+        console.log(scrollAnimationElm[i].getBoundingClientRect().top);
+        if (window.innerHeight > scrollAnimationElm[i].getBoundingClientRect().top + triggerMargin) {
+          scrollAnimationElm[i].classList.add('visible');
+        }
+      }
+    };
+    window.addEventListener('load', scrollAnimationFunc);
+    window.addEventListener('scroll', scrollAnimationFunc);
+  }, []);
   return react_1["default"].createElement(StyledImage, {
     src: imgURL,
-    className: 'stalkerTarget'
+    className: 'stalkerTarget fadeIn'
   });
 };
 exports.HoverImage = HoverImage;
-var StyledImage = styled_components_1["default"].img(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: calc(100vw * 350 / 1280);\n"])));
-
-/***/ }),
-
-/***/ "./resources/ts/components/atoms/HoverLink.tsx":
-/*!*****************************************************!*\
-  !*** ./resources/ts/components/atoms/HoverLink.tsx ***!
-  \*****************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _templateObject;
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.HoverLink = void 0;
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
-var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
-var HoverLink = function HoverLink(props) {
-  var children = props.children,
-    to = props.to;
-  return react_1["default"].createElement(StyledLink, {
-    to: to
-  }, children);
-};
-exports.HoverLink = HoverLink;
-var StyledLink = (0, styled_components_1["default"])(react_router_dom_1.Link)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    text-decoration: none;\n    color: black;\n    font-size: 30px;\n    position: relative;\n    &::after {\n        content: '';\n        position: absolute;\n        bottom: -5px;\n        left: -20px;\n        width: 110%;\n        height: 4px;\n        background: black;\n        transition: all .3s;\n        transform: scale(0, 1);\n        transform-origin: left top;\n    }\n\n    &:hover::after {\n        transform: scale(1, 1);\n    }\n"])));
+var StyledImage = styled_components_1["default"].img(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: calc(100vw * 350 / 1280);\n    transition: 0.8s ease-in-out;\n    transform: translateY(30px);\n    opacity: 0;\n    \n    &.visible {\n        transform: translateY(0);\n        opacity: 1.0;\n    }\n"])));
+var StyledHoverImage = (0, styled_components_1["default"])(exports.HoverImage)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n"])));
 
 /***/ }),
 
@@ -4977,10 +4998,66 @@ var SiteTitle = function SiteTitle() {
   }), react_1["default"].createElement(StyledO, null), react_1["default"].createElement(StyledText, null, "yama"));
 };
 exports.SiteTitle = SiteTitle;
-var StyledPararaxArea = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: absolute;\n    height: 100vh;\n    width: 100vw;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n"])));
-var StyledJsPararax = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: absolute;\n    width: 20px;\n    height: 20px;\n    z-index: 1;\n    border-radius: 20px;\n    background-color: black;\n    transition: all .3s linear .001s;\n    bottom: 150px;\n    right: 270px;\n    &:hover  {\n        background-color: blue;\n    }\n"])));
-var StyledO = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    bottom: 100px;\n    right: 220px;\n    width: 100px;\n    height: 100px;\n    border-radius: 100px;\n    border: 10px solid black;\n"])));
-var StyledText = styled_components_1["default"].p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    font-size: 50px;\n    position: absolute;\n    right: 70px;\n    bottom: 36px;\n    font-weight: 900;\n"])));
+var StyledPararaxArea = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    z-index: 100;\n    position: absolute;\n    height: 100vh;\n    width: 100vw;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n"])));
+var StyledJsPararax = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: absolute;\n    width: 20px;\n    height: 20px;\n    z-index: 1;\n    border-radius: 20px;\n    background-color: white;\n    transition: all .3s linear .001s;\n    bottom: 150px;\n    right: 270px;\n    box-shadow: 0 0 10px black;\n    &:hover  {\n        background-color: lightblue;\n    }\n"])));
+var StyledO = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    bottom: 100px;\n    right: 220px;\n    width: 100px;\n    height: 100px;\n    border-radius: 100px;\n    border: 10px solid white;\n    box-shadow: 0 0 10px black, inset 0 0 10px black;\n"])));
+var StyledText = styled_components_1["default"].p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    font-size: 50px;\n    position: absolute;\n    right: 70px;\n    bottom: 36px;\n    font-weight: 900;\n    color: white;\n    filter: drop-shadow(0 0 5px black);\n"])));
+
+/***/ }),
+
+/***/ "./resources/ts/components/atoms/TopCarousel.tsx":
+/*!*******************************************************!*\
+  !*** ./resources/ts/components/atoms/TopCarousel.tsx ***!
+  \*******************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _templateObject, _templateObject2;
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.TopCarousel = void 0;
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var jquery_1 = __importDefault(__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"));
+__webpack_require__(/*! slick-carousel */ "./node_modules/slick-carousel/slick/slick.js");
+__webpack_require__(/*! slick-carousel/slick/slick.css */ "./node_modules/slick-carousel/slick/slick.css");
+__webpack_require__(/*! slick-carousel/slick/slick-theme.css */ "./node_modules/slick-carousel/slick/slick-theme.css");
+var TopCarousel = function TopCarousel(props) {
+  var imgArray = props.imgArray;
+  (0, jquery_1["default"])(function () {
+    (0, jquery_1["default"])('.slider').not('.slick-initialized').slick({
+      dots: false,
+      speed: 500,
+      autoplay: true,
+      autoplaySpeed: 5000,
+      arrows: false,
+      swipe: true,
+      fade: true
+    });
+  });
+  return react_1["default"].createElement(StyledCarouselWrapper, {
+    className: "slider"
+  }, imgArray.map(function (img, i) {
+    return react_1["default"].createElement(StyledCarouselImageWrapper, {
+      key: i,
+      img: img
+    });
+  }));
+};
+exports.TopCarousel = TopCarousel;
+var StyledCarouselWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 100vh;\n    margin: 0;\n"])));
+var StyledCarouselImageWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center;\n    height: 100vh;\n    margin: 0;\n    ", ";\n"])), function (props) {
+  return "background-image: url(".concat(props.img, ")");
+});
 
 /***/ }),
 
@@ -5065,6 +5142,56 @@ var ModalCloseButton = styled_components_1["default"].div(_templateObject2 || (_
 
 /***/ }),
 
+/***/ "./resources/ts/components/molecules/HoverImages.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/ts/components/molecules/HoverImages.tsx ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _templateObject, _templateObject2;
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.HoverImages = void 0;
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var HoverImage_1 = __webpack_require__(/*! ../atoms/HoverImage */ "./resources/ts/components/atoms/HoverImage.tsx");
+var img1_jpg_1 = __importDefault(__webpack_require__(/*! ../../static/img1.jpg */ "./resources/ts/static/img1.jpg"));
+var img2_jpg_1 = __importDefault(__webpack_require__(/*! ../../static/img2.jpg */ "./resources/ts/static/img2.jpg"));
+var img3_jpg_1 = __importDefault(__webpack_require__(/*! ../../static/img3.jpg */ "./resources/ts/static/img3.jpg"));
+var img4_jpg_1 = __importDefault(__webpack_require__(/*! ../../static/img4.jpg */ "./resources/ts/static/img4.jpg"));
+var img5_jpg_1 = __importDefault(__webpack_require__(/*! ../../static/img5.jpg */ "./resources/ts/static/img5.jpg"));
+var img6_jpg_1 = __importDefault(__webpack_require__(/*! ../../static/img6.jpg */ "./resources/ts/static/img6.jpg"));
+var HoverImages = function HoverImages() {
+  return react_1["default"].createElement(StyledHoverImagesWrapper, null, react_1["default"].createElement(StyledImageWrapper, null, react_1["default"].createElement(HoverImage_1.HoverImage, {
+    imgURL: img1_jpg_1["default"]
+  }), react_1["default"].createElement(HoverImage_1.HoverImage, {
+    imgURL: img2_jpg_1["default"]
+  })), react_1["default"].createElement(StyledImageWrapper, null, react_1["default"].createElement(HoverImage_1.HoverImage, {
+    imgURL: img3_jpg_1["default"]
+  })), react_1["default"].createElement(StyledImageWrapper, null, react_1["default"].createElement(HoverImage_1.HoverImage, {
+    imgURL: img4_jpg_1["default"]
+  }), react_1["default"].createElement(HoverImage_1.HoverImage, {
+    imgURL: img5_jpg_1["default"]
+  })), react_1["default"].createElement(StyledImageWrapper, null, react_1["default"].createElement(HoverImage_1.HoverImage, {
+    imgURL: img6_jpg_1["default"]
+  })));
+};
+exports.HoverImages = HoverImages;
+var StyledHoverImagesWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    padding-top: 80px;\n"])));
+var StyledImageWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: relative;\n\n    &:nth-of-type(2n + 1) {\n        display: flex;\n        justify-content: space-between;\n        align-items: center;\n\n        img {\n            &:nth-of-type(2n + 1)  {\n                position: relative;\n                top: -80px;\n            }\n            &:nth-of-type(2n) {\n                position: relative;\n                bottom: -80px;\n            }\n        }\n    }\n\n    &:nth-of-type(2n) {\n        text-align: center;\n    }\n"])));
+
+/***/ }),
+
 /***/ "./resources/ts/index.tsx":
 /*!********************************!*\
   !*** ./resources/ts/index.tsx ***!
@@ -5101,7 +5228,7 @@ root.render(react_1["default"].createElement(react_1["default"].StrictMode, null
 "use strict";
 
 
-var _templateObject;
+var _templateObject, _templateObject2;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
@@ -5115,41 +5242,43 @@ exports.Top = void 0;
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
 var SiteTitle_1 = __webpack_require__(/*! ../components/atoms/SiteTitle */ "./resources/ts/components/atoms/SiteTitle.tsx");
-var HoverLink_1 = __webpack_require__(/*! ../components/atoms/HoverLink */ "./resources/ts/components/atoms/HoverLink.tsx");
 var Header_1 = __webpack_require__(/*! ../components/atoms/Header */ "./resources/ts/components/atoms/Header.tsx");
-var HoverImage_1 = __webpack_require__(/*! ../components/atoms/HoverImage */ "./resources/ts/components/atoms/HoverImage.tsx");
-var img1_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img1.jpg */ "./resources/ts/static/img1.jpg"));
-var img2_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img2.jpg */ "./resources/ts/static/img2.jpg"));
-var img3_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img3.jpg */ "./resources/ts/static/img3.jpg"));
 var MouseStalker_1 = __webpack_require__(/*! ../components/atoms/MouseStalker */ "./resources/ts/components/atoms/MouseStalker.tsx");
 var Carousel_1 = __webpack_require__(/*! ../components/atoms/Carousel */ "./resources/ts/components/atoms/Carousel.tsx");
 var CarouselModal_1 = __webpack_require__(/*! ../components/molecules/CarouselModal */ "./resources/ts/components/molecules/CarouselModal.tsx");
+var HoverImages_1 = __webpack_require__(/*! ../components/molecules/HoverImages */ "./resources/ts/components/molecules/HoverImages.tsx");
+var img1_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img1.jpg */ "./resources/ts/static/img1.jpg"));
+var img2_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img2.jpg */ "./resources/ts/static/img2.jpg"));
+var img3_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img3.jpg */ "./resources/ts/static/img3.jpg"));
+var img4_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img4.jpg */ "./resources/ts/static/img4.jpg"));
+var img5_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img5.jpg */ "./resources/ts/static/img5.jpg"));
+var img6_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img6.jpg */ "./resources/ts/static/img6.jpg"));
+var img7_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img7.jpg */ "./resources/ts/static/img7.jpg"));
+var img8_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img8.jpg */ "./resources/ts/static/img8.jpg"));
+var TopCarousel_1 = __webpack_require__(/*! ../components/atoms/TopCarousel */ "./resources/ts/components/atoms/TopCarousel.tsx");
 var Top = function Top() {
+  var MainImgArray = [img1_jpg_1["default"], img2_jpg_1["default"], img3_jpg_1["default"], img4_jpg_1["default"], img5_jpg_1["default"], img6_jpg_1["default"], img7_jpg_1["default"], img8_jpg_1["default"]];
+  var GalleryImgArray = [img1_jpg_1["default"], img2_jpg_1["default"], img3_jpg_1["default"], img4_jpg_1["default"]];
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(MouseStalker_1.MouseStalker, null), react_1["default"].createElement(Header_1.Header, null), react_1["default"].createElement(StyledPage, {
     id: "title"
-  }, react_1["default"].createElement(SiteTitle_1.SiteTitle, null)), react_1["default"].createElement(StyledPage, {
-    id: "gallery"
-  }, react_1["default"].createElement(HoverLink_1.HoverLink, {
-    to: 'http://google.com'
-  }, "text"), react_1["default"].createElement(HoverImage_1.HoverImage, {
-    imgURL: img1_jpg_1["default"]
-  }), react_1["default"].createElement(HoverImage_1.HoverImage, {
-    imgURL: img2_jpg_1["default"]
-  }), react_1["default"].createElement(HoverImage_1.HoverImage, {
-    imgURL: img3_jpg_1["default"]
-  }), react_1["default"].createElement(Carousel_1.Carousel, {
-    imgArray: [img1_jpg_1["default"], img2_jpg_1["default"], img3_jpg_1["default"]]
+  }, react_1["default"].createElement(SiteTitle_1.SiteTitle, null), react_1["default"].createElement(TopCarousel_1.TopCarousel, {
+    imgArray: MainImgArray
   })), react_1["default"].createElement(StyledPage, {
+    id: "gallery"
+  }, react_1["default"].createElement(HoverImages_1.HoverImages, null), react_1["default"].createElement(MobileWrapper, null, react_1["default"].createElement(Carousel_1.Carousel, {
+    imgArray: GalleryImgArray
+  }))), react_1["default"].createElement(StyledPage, {
     id: "nft"
-  }, react_1["default"].createElement(CarouselModal_1.CarouselModal, {
+  }, react_1["default"].createElement(MobileWrapper, null, react_1["default"].createElement(CarouselModal_1.CarouselModal, {
     imgArray: [img1_jpg_1["default"], img2_jpg_1["default"], img3_jpg_1["default"]],
     currentImg: img1_jpg_1["default"]
-  })), react_1["default"].createElement(StyledPage, {
+  }))), react_1["default"].createElement(StyledPage, {
     id: "bio"
   }));
 };
 exports.Top = Top;
-var StyledPage = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 100vh;\n\n    &:nth-of-type(3) {\n        background: red;\n    }\n    &:nth-of-type(4) {\n        background: blue;\n    }\n    &:nth-of-type(5) {\n        background: green;\n    }\n    &:nth-of-type(6) {\n        background: violet;\n    }\n"])));
+var StyledPage = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 100vh;\n    margin: 0 40px 0 60px;\n\n    &:nth-of-type(3) {\n        margin: 0 0 0 50px;\n    }\n    &:nth-of-type(4) {\n        background: blue;\n    }\n    &:nth-of-type(5) {\n        background: green;\n    }\n    &:nth-of-type(6) {\n        background: violet;\n    }\n"])));
+var MobileWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    @media(max-width: 599px) {\n        display: block;\n    }   \n"])));
 
 /***/ }),
 
@@ -5411,7 +5540,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img1.jpg?f6f3ebd83421c623f9ba1bd67140c559");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img1.jpg?89c95710e21364f456cffbb8a1ae8487");
 
 /***/ }),
 
@@ -5426,7 +5555,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img2.jpg?89c95710e21364f456cffbb8a1ae8487");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img2.jpg?f6f3ebd83421c623f9ba1bd67140c559");
 
 /***/ }),
 
@@ -5442,6 +5571,81 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img3.jpg?a6e8f135117741fb3f24f0968dac209d");
+
+/***/ }),
+
+/***/ "./resources/ts/static/img4.jpg":
+/*!**************************************!*\
+  !*** ./resources/ts/static/img4.jpg ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img4.jpg?0814752c9f026925c51f6b8dace26dfa");
+
+/***/ }),
+
+/***/ "./resources/ts/static/img5.jpg":
+/*!**************************************!*\
+  !*** ./resources/ts/static/img5.jpg ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img5.jpg?b589cfa39f01146d3aa2eb865eb36b74");
+
+/***/ }),
+
+/***/ "./resources/ts/static/img6.jpg":
+/*!**************************************!*\
+  !*** ./resources/ts/static/img6.jpg ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img6.jpg?f56da4c8d8e9250f50f4c8ac847af012");
+
+/***/ }),
+
+/***/ "./resources/ts/static/img7.jpg":
+/*!**************************************!*\
+  !*** ./resources/ts/static/img7.jpg ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img7.jpg?505a4b9ecbc850391df10abf542aa279");
+
+/***/ }),
+
+/***/ "./resources/ts/static/img8.jpg":
+/*!**************************************!*\
+  !*** ./resources/ts/static/img8.jpg ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img8.jpg?decea0fcec6d4c0f0ef089035a155e26");
 
 /***/ }),
 

@@ -53,6 +53,7 @@ interface Props {
 }
 
 const StyledPararaxArea = styled.div<Props>`
+    z-index: 100;
     position: absolute;
     height: 100vh;
     width: 100vw;
@@ -68,12 +69,13 @@ const StyledJsPararax = styled.div`
     height: 20px;
     z-index: 1;
     border-radius: 20px;
-    background-color: black;
+    background-color: white;
     transition: all .3s linear .001s;
     bottom: 150px;
     right: 270px;
+    box-shadow: 0 0 10px black;
     &:hover  {
-        background-color: blue;
+        background-color: lightblue;
     }
 `
 
@@ -84,7 +86,8 @@ const StyledO = styled.div`
     width: 100px;
     height: 100px;
     border-radius: 100px;
-    border: 10px solid black;
+    border: 10px solid white;
+    box-shadow: 0 0 10px black, inset 0 0 10px black;
 `
 
 const StyledText = styled.p`
@@ -93,4 +96,6 @@ const StyledText = styled.p`
     right: 70px;
     bottom: 36px;
     font-weight: 900;
+    color: white;
+    filter: drop-shadow(0 0 5px black);
 `
