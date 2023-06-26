@@ -4801,6 +4801,41 @@ var StyledHoverImage = (0, styled_components_1["default"])(exports.HoverImage)(_
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/HoverLink.tsx":
+/*!*****************************************************!*\
+  !*** ./resources/ts/components/atoms/HoverLink.tsx ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _templateObject;
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.HoverLink = void 0;
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+var HoverLink = function HoverLink(props) {
+  var children = props.children,
+    to = props.to;
+  return react_1["default"].createElement(StyledLink, {
+    to: to
+  }, children);
+};
+exports.HoverLink = HoverLink;
+var StyledLink = (0, styled_components_1["default"])(react_router_dom_1.Link)(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: block;\n    margin: 50px 0 0;\n    text-decoration: none;\n    color: black;\n    font-size: 30px;\n    position: relative;\n    text-align: center;\n    &::after {\n        content: '';\n        position: absolute;\n        bottom: -5px;\n        left: -20px;\n        width: 110%;\n        height: 4px;\n        background: black;\n        transition: all .3s;\n        transform: scale(0, 1);\n        transform-origin: left top;\n    }\n\n    &:hover::after {\n        transform: scale(1, 1);\n    }\n"])));
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/MouseStalker.tsx":
 /*!********************************************************!*\
   !*** ./resources/ts/components/atoms/MouseStalker.tsx ***!
@@ -4905,6 +4940,95 @@ var MouseStalker = function MouseStalker() {
 };
 exports.MouseStalker = MouseStalker;
 var StyledStalker = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: absolute;\n    width: 25px;\n    height: 25px;\n    background: rgba(255, 255, 255, 0.5);\n    border: 1px solid rgb(74, 74, 74);\n    border-radius: 50%;\n    transition: all 0.3s;\n    transition-timing-function: ease-out;\n    pointer-events: none;\n    z-index: 10;\n\n    &.hover {\n        background-color: rgba(255, 255, 255, 0.7);\n    }\n"])));
+
+/***/ }),
+
+/***/ "./resources/ts/components/atoms/NFT.tsx":
+/*!***********************************************!*\
+  !*** ./resources/ts/components/atoms/NFT.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.NFT = void 0;
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var NFT = function NFT() {
+  var fadeinFromLeft = (0, react_1.useRef)(null);
+  var fadeInFromRight = (0, react_1.useRef)(null);
+  var fadeInItemArray = [fadeinFromLeft, fadeInFromRight];
+  var fadeInFunc = function fadeInFunc() {
+    fadeInItemArray.map(function (item) {
+      var _a;
+      if (!item.current) {
+        return;
+      }
+      var fadeInElmTop = (_a = item.current) === null || _a === void 0 ? void 0 : _a.getBoundingClientRect().top;
+      var windowHeight = window.innerHeight;
+      if (window.innerHeight > fadeInElmTop + 300) {
+        item.current.classList.add('after');
+      } else {
+        item.current.classList.remove('after');
+      }
+    });
+  };
+  window.addEventListener('scroll', fadeInFunc);
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(StyledNFTWrapper, {
+    id: "target"
+  }, react_1["default"].createElement(StyledNFTTextInner, null, react_1["default"].createElement(StyledNFTText, {
+    ref: fadeinFromLeft
+  }, "Selling")), react_1["default"].createElement(StyledNFTTextInner, null, react_1["default"].createElement(StyledNFTText, {
+    ref: fadeInFromRight
+  }, "NFT"))));
+};
+exports.NFT = NFT;
+var StyledNFTWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n   \n\n"])));
+var StyledNFTInner = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: relative;\n    display: flex;\n    &:nth-of-child(2n) {\n        justify-content: flex-end;\n    }\n"])));
+var StyledNFTTextInner = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    &:nth-of-type(2n + 1) {\n        p {\n            transform: translateX(-500px);\n            &::before {\n                transform-origin: left top;\n                left: 0;\n            }\n            \n        }\n    }\n\n    &:nth-of-type(2n) {\n        \n        height: 285px;\n        justify-content: end;\n        p {\n            transform: translateX(500px);\n            position: absolute;\n            padding-right: 50px;\n            right: 0;\n            &::before {\n                transform-origin: right top;\n                right: 0;\n            }\n        }\n    }\n"])));
+var StyledNFTText = styled_components_1["default"].p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    font-size: 190px;\n    position: relative;\n    transition: transform 1s;\n    margin: 0;\n\n    &::before {\n        content: '';\n        position: absolute;\n        bottom: 60px;\n        width: 130%;\n        height: 20px;\n        background: black;\n        transition: all 1s;\n        transform: scale(0, 1);\n        \n    }\n\n    &.after {\n        transform: translate(0) !important;\n        &::before {\n            transform: scale(1, 1);\n        }\n        &::after {\n            transform: scale(1, 1);\n        }\n    }\n"])));
 
 /***/ }),
 
@@ -5242,6 +5366,7 @@ exports.Top = void 0;
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
 var SiteTitle_1 = __webpack_require__(/*! ../components/atoms/SiteTitle */ "./resources/ts/components/atoms/SiteTitle.tsx");
+var HoverLink_1 = __webpack_require__(/*! ../components/atoms/HoverLink */ "./resources/ts/components/atoms/HoverLink.tsx");
 var Header_1 = __webpack_require__(/*! ../components/atoms/Header */ "./resources/ts/components/atoms/Header.tsx");
 var MouseStalker_1 = __webpack_require__(/*! ../components/atoms/MouseStalker */ "./resources/ts/components/atoms/MouseStalker.tsx");
 var Carousel_1 = __webpack_require__(/*! ../components/atoms/Carousel */ "./resources/ts/components/atoms/Carousel.tsx");
@@ -5251,13 +5376,10 @@ var img1_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img1.jpg */ "
 var img2_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img2.jpg */ "./resources/ts/static/img2.jpg"));
 var img3_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img3.jpg */ "./resources/ts/static/img3.jpg"));
 var img4_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img4.jpg */ "./resources/ts/static/img4.jpg"));
-var img5_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img5.jpg */ "./resources/ts/static/img5.jpg"));
-var img6_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img6.jpg */ "./resources/ts/static/img6.jpg"));
-var img7_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img7.jpg */ "./resources/ts/static/img7.jpg"));
-var img8_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img8.jpg */ "./resources/ts/static/img8.jpg"));
 var TopCarousel_1 = __webpack_require__(/*! ../components/atoms/TopCarousel */ "./resources/ts/components/atoms/TopCarousel.tsx");
+var NFT_1 = __webpack_require__(/*! ../components/atoms/NFT */ "./resources/ts/components/atoms/NFT.tsx");
 var Top = function Top() {
-  var MainImgArray = [img1_jpg_1["default"], img2_jpg_1["default"], img3_jpg_1["default"], img4_jpg_1["default"], img5_jpg_1["default"], img6_jpg_1["default"], img7_jpg_1["default"], img8_jpg_1["default"]];
+  var MainImgArray = [img1_jpg_1["default"], img2_jpg_1["default"], img3_jpg_1["default"]];
   var GalleryImgArray = [img1_jpg_1["default"], img2_jpg_1["default"], img3_jpg_1["default"], img4_jpg_1["default"]];
   return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(MouseStalker_1.MouseStalker, null), react_1["default"].createElement(Header_1.Header, null), react_1["default"].createElement(StyledPage, {
     id: "title"
@@ -5265,11 +5387,15 @@ var Top = function Top() {
     imgArray: MainImgArray
   })), react_1["default"].createElement(StyledPage, {
     id: "gallery"
-  }, react_1["default"].createElement(HoverImages_1.HoverImages, null), react_1["default"].createElement(MobileWrapper, null, react_1["default"].createElement(Carousel_1.Carousel, {
+  }, react_1["default"].createElement(HoverImages_1.HoverImages, null), react_1["default"].createElement(HoverLink_1.HoverLink, {
+    to: '/'
+  }, "visit gallery"), react_1["default"].createElement(MobileWrapper, null, react_1["default"].createElement(Carousel_1.Carousel, {
     imgArray: GalleryImgArray
   }))), react_1["default"].createElement(StyledPage, {
     id: "nft"
-  }, react_1["default"].createElement(MobileWrapper, null, react_1["default"].createElement(CarouselModal_1.CarouselModal, {
+  }, react_1["default"].createElement(NFT_1.NFT, null), react_1["default"].createElement(HoverLink_1.HoverLink, {
+    to: '/'
+  }, "click here"), react_1["default"].createElement(MobileWrapper, null, react_1["default"].createElement(CarouselModal_1.CarouselModal, {
     imgArray: [img1_jpg_1["default"], img2_jpg_1["default"], img3_jpg_1["default"]],
     currentImg: img1_jpg_1["default"]
   }))), react_1["default"].createElement(StyledPage, {
@@ -5277,8 +5403,8 @@ var Top = function Top() {
   }));
 };
 exports.Top = Top;
-var StyledPage = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 100vh;\n    margin: 0 40px 0 60px;\n\n    &:nth-of-type(3) {\n        margin: 0 0 0 50px;\n    }\n    &:nth-of-type(4) {\n        background: blue;\n    }\n    &:nth-of-type(5) {\n        background: green;\n    }\n    &:nth-of-type(6) {\n        background: violet;\n    }\n"])));
-var MobileWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    @media(max-width: 599px) {\n        display: block;\n    }   \n"])));
+var StyledPage = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    margin: 0 40px 0 60px;\n\n    &#title {\n        margin: 0 0 0 50px;\n    }\n    &:nth-of-type(4) {\n        background: blue;\n    }\n    &:nth-of-type(5) {\n        background: green;\n    }\n    &:nth-of-type(6) {\n        background: violet;\n    }\n"])));
+var MobileWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: none;\n    @media(max-width: 599px) {\n        display: block;\n    }   \n"])));
 
 /***/ }),
 
@@ -5616,36 +5742,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img6.jpg?f56da4c8d8e9250f50f4c8ac847af012");
-
-/***/ }),
-
-/***/ "./resources/ts/static/img7.jpg":
-/*!**************************************!*\
-  !*** ./resources/ts/static/img7.jpg ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img7.jpg?505a4b9ecbc850391df10abf542aa279");
-
-/***/ }),
-
-/***/ "./resources/ts/static/img8.jpg":
-/*!**************************************!*\
-  !*** ./resources/ts/static/img8.jpg ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img8.jpg?decea0fcec6d4c0f0ef089035a155e26");
 
 /***/ }),
 

@@ -17,9 +17,10 @@ import img6 from '../static/img6.jpg';
 import img7 from '../static/img7.jpg';
 import img8 from '../static/img8.jpg';
 import { TopCarousel } from "../components/atoms/TopCarousel";
+import { NFT } from "../components/atoms/NFT";
 
 export const Top = () => {
-    const MainImgArray = [img1, img2, img3, img4, img5, img6, img7, img8]
+    const MainImgArray = [img1, img2, img3]
     const GalleryImgArray = [img1, img2, img3, img4]
 
     return (
@@ -32,11 +33,14 @@ export const Top = () => {
             </StyledPage>
             <StyledPage id="gallery">
                 <HoverImages />
+                <HoverLink to={'/'}>visit gallery</HoverLink>
                 <MobileWrapper>
                     <Carousel imgArray={GalleryImgArray}/>
                 </MobileWrapper>
             </StyledPage>
             <StyledPage id="nft">
+                <NFT />
+                <HoverLink to={'/'}>click here</HoverLink>
                 <MobileWrapper>
                     <CarouselModal imgArray={[img1, img2, img3]} currentImg={img1} />
                 </MobileWrapper>
@@ -47,10 +51,9 @@ export const Top = () => {
 }
 
 const StyledPage = styled.div`
-    height: 100vh;
     margin: 0 40px 0 60px;
 
-    &:nth-of-type(3) {
+    &#title {
         margin: 0 0 0 50px;
     }
     &:nth-of-type(4) {
@@ -65,6 +68,7 @@ const StyledPage = styled.div`
 `
 
 const MobileWrapper = styled.div`
+    display: none;
     @media(max-width: 599px) {
         display: block;
     }   

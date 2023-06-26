@@ -14,10 +14,13 @@ export const HoverLink = (props: {children: string, to: string}) => {
 
 
 const StyledLink = styled(Link)`
+    display: block;
+    margin: 50px 0 0;
     text-decoration: none;
     color: black;
     font-size: 30px;
     position: relative;
+    text-align: center;
     &::after {
         content: '';
         position: absolute;
