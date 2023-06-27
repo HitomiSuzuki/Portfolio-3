@@ -16,8 +16,11 @@ import img5 from '../static/img5.jpg';
 import img6 from '../static/img6.jpg';
 import img7 from '../static/img7.jpg';
 import img8 from '../static/img8.jpg';
+import me from '../static/me.jpg';
 import { TopCarousel } from "../components/atoms/TopCarousel";
 import { NFT } from "../components/atoms/NFT";
+import { BioText } from "../components/atoms/BioText";
+import { Image } from "../components/atoms/Image";
 
 export const Top = () => {
     const MainImgArray = [img1, img2, img3]
@@ -27,43 +30,66 @@ export const Top = () => {
         <>
             <MouseStalker/>
             <Header /> 
-            <StyledPage id="title">
+            <StyledSection id="title">
                 <SiteTitle />
                 <TopCarousel imgArray={MainImgArray}/>
-            </StyledPage>
-            <StyledPage id="gallery">
+            </StyledSection>
+            <StyledSection id="gallery">
                 <HoverImages />
                 <HoverLink to={'/'}>visit gallery</HoverLink>
                 <MobileWrapper>
                     <Carousel imgArray={GalleryImgArray}/>
                 </MobileWrapper>
-            </StyledPage>
-            <StyledPage id="nft">
+            </StyledSection>
+            <StyledSection id="nft">
                 <NFT />
                 <HoverLink to={'/'}>click here</HoverLink>
                 <MobileWrapper>
                     <CarouselModal imgArray={[img1, img2, img3]} currentImg={img1} />
                 </MobileWrapper>
-            </StyledPage>
-            <StyledPage id="bio"></StyledPage>
+            </StyledSection>
+            <StyledSection id="bio">
+                <Image imgURL={me} />
+                <StyledBioTextWrapper>
+                    <BioText key={1}>1991年7月 三重県四日市市生まれ</BioText>
+                    <BioText key={2}>秋田県立国際教養大学中退</BioText>
+                    <BioText key={3}>株式会社amptech(~2022)</BioText>
+                    <BioText key={4}>株式会社フリースタイル(~2023)</BioText>
+                </StyledBioTextWrapper>
+            </StyledSection>
+            <StyledSection id="footer">
+                <div>
+                    <Image imgURL={img3} />
+                    <p>Hitomi OYAMA</p>
+                </div>
+            </StyledSection>
         </>
     )
 }
 
-const StyledPage = styled.div`
-    margin: 0 40px 0 60px;
+const StyledSection = styled.section`
+    text-align: center;
+    background: yellow;
 
     &#title {
-        margin: 0 0 0 50px;
+        padding: 0 0 0 50px;
     }
-    &:nth-of-type(4) {
-        background: blue;
+    &#bio {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 200px 0;
     }
-    &:nth-of-type(5) {
-        background: green;
+    &#nft {
+        padding: 150px  60px 0;
     }
-    &:nth-of-type(6) {
-        background: violet;
+    &#gallery {
+        padding: 100px 60px 0;
+    }
+    &#footer {
+        padding: 300px 60px 100px;
+        display: flex;
+        justify-content: end;
     }
 `
 
@@ -72,4 +98,9 @@ const MobileWrapper = styled.div`
     @media(max-width: 599px) {
         display: block;
     }   
+`
+
+const StyledBioTextWrapper = styled.div`
+    text-align: left;
+    margin-left: 30px;
 `

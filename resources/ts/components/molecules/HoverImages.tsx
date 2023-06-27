@@ -17,18 +17,18 @@ export const HoverImages = () => {
     return (
         <StyledHoverImagesWrapper>
             <StyledImageWrapper>
-                <HoverImage imgURL={img1} />
-                <HoverImage imgURL={img2} />
+                <HoverImage imgURL={img1} to={'/'} />
+                <HoverImage imgURL={img2} to={'/'} />
             </StyledImageWrapper>
             <StyledImageWrapper>
-                <HoverImage imgURL={img3} />
+                <HoverImage imgURL={img3} to={'/'} />
             </StyledImageWrapper>
             <StyledImageWrapper>
-                <HoverImage imgURL={img4} />
-                <HoverImage imgURL={img5} />
+                <HoverImage imgURL={img4} to={'/'} />
+                <HoverImage imgURL={img5} to={'/'} />
             </StyledImageWrapper>
             <StyledImageWrapper>
-                <HoverImage imgURL={img6} />
+                <HoverImage imgURL={img6} to={'/'} />
             </StyledImageWrapper>
         </StyledHoverImagesWrapper>
     )

@@ -8,14 +8,14 @@ export const HoverLink = (props: {children: string, to: string}) => {
     const {children, to} = props
 
     return (
-        <StyledLink to={to}>{children}</StyledLink>
+        <StyledLink to={to} className="stalkerTarget">{children}</StyledLink>
     )
 }
 
 
 const StyledLink = styled(Link)`
-    display: block;
-    margin: 50px 0 0;
+    display: inline-block;
+    margin: 80px 0 0;
     text-decoration: none;
     color: black;
     font-size: 30px;
@@ -25,8 +25,8 @@ const StyledLink = styled(Link)`
         content: '';
         position: absolute;
         bottom: -5px;
-        left: -20px;
-        width: 110%;
+        left: -40px;
+        width: 100%;
         height: 4px;
         background: black;
         transition: all .3s;

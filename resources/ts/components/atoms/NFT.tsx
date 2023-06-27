@@ -57,6 +57,8 @@ const StyledNFTInner = styled.div`
 
 const StyledNFTTextInner = styled.div`
     display: flex;
+    position: relative;
+    overflow: hidden;
     &:nth-of-type(2n + 1) {
         p {
             transform: translateX(-500px);
@@ -90,6 +92,7 @@ const StyledNFTText = styled.p`
     position: relative;
     transition: transform 1s;
     margin: 0;
+    transform: scale(0, 1);
 
     &::before {
         content: '';
@@ -104,6 +107,7 @@ const StyledNFTText = styled.p`
     }
 
     &.after {
+        transform: scale(1, 1);
         transform: translate(0) !important;
         &::before {
             transform: scale(1, 1);

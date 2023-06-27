@@ -17,16 +17,6 @@ export const Carousel = (props: CarouselProps) => {
     const {imgArray, isMain} = props;
 
     $(function(){
-        isMain ? 
-        $('.slider').not('.slick-initialized').slick({
-            dots: false,
-            speed: 500,
-            autoplay: true,
-            autoplaySpeed: 5000,
-            arrows: false,
-            swipe: true
-        })
-        :
         $('.slider').not('.slick-initialized').slick({
             dots: false,
             speed: 500,

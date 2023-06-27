@@ -50,8 +50,6 @@ export const MouseStalker = () => {
 
     useEffect(() => {
         const targets = Array.from(document.getElementsByClassName('stalkerTarget')); //リンクなど
-
-        console.log("targets" + targets);
         targets?.forEach((target) => {
             target.addEventListener('mouseenter', HoverFunction);
         })

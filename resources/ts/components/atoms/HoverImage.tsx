@@ -1,22 +1,21 @@
 import React, {useEffect} from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 
 type HoverImageProps = {
     imgURL: string;
+    to: string;
 }
 
 export const HoverImage = (props: HoverImageProps) => {
-    const {imgURL} = props;
+    const {imgURL, to} = props;
 
     useEffect(() => {
         const scrollAnimationElm = document.querySelectorAll('.fadeIn');
-        console.log(scrollAnimationElm)
         const scrollAnimationFunc = () => {
             for(let i = 0; i < scrollAnimationElm.length; i ++) {
                 const triggerMargin = 30;
-                console.log(window.innerHeight);
-                console.log(scrollAnimationElm[i].getBoundingClientRect().top)
                 if(window.innerHeight > scrollAnimationElm[i].getBoundingClientRect().top + triggerMargin) {
                     scrollAnimationElm[i].classList.add('visible');
                 }
@@ -32,8 +31,9 @@ export const HoverImage = (props: HoverImageProps) => {
 
     
     return (
-
-        <StyledImage src={imgURL} className='stalkerTarget fadeIn'></StyledImage>
+        <Link to={to}>
+            <StyledImage src={imgURL} className='stalkerTarget fadeIn'></StyledImage>
+        </Link>
     )
 }
 

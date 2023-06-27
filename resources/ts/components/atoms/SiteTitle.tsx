@@ -26,7 +26,6 @@ export const SiteTitle: React.FC = () => {
 
         // パララックスさせる要素にstyleの指定
         targetRef.current.style.transform = `translate(${-x}px, ${-y}px)`;
-
     }
     
     //パララックスを行うエリア取得
@@ -34,8 +33,8 @@ export const SiteTitle: React.FC = () => {
     // パララックスのターゲット取得
     const targetRef = useRef<HTMLDivElement>(null);
     // ウィンドウの中心の取得
-    const xCenter = window.innerWidth - 280;
-    const yCenter = window.innerHeight - 160;
+    const xCenter = window.innerWidth - 800;
+    const yCenter = window.innerHeight - 400;
     // パララックスで移動させる距離
     const parallaxVal = 10; //中心からマウスの距離の10分１移動
     
@@ -56,7 +55,7 @@ const StyledPararaxArea = styled.div<Props>`
     z-index: 100;
     position: absolute;
     height: 100vh;
-    width: 100vw;
+    width: calc(100vw - 60px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,19 +69,20 @@ const StyledJsPararax = styled.div`
     z-index: 1;
     border-radius: 20px;
     background-color: white;
+    -webkit-transition: all .3s linear .001s;
     transition: all .3s linear .001s;
-    bottom: 150px;
-    right: 270px;
     box-shadow: 0 0 10px black;
+    right: 800px;
+    top: 400px;
     &:hover  {
-        background-color: lightblue;
+        background: black;
+        box-shadow: 0 0 10px white;
     }
 `
 
 const StyledO = styled.div`
-    position: absolute;
-    bottom: 100px;
-    right: 220px;
+    position: relative;
+    right: 90px;
     width: 100px;
     height: 100px;
     border-radius: 100px;
@@ -92,10 +92,11 @@ const StyledO = styled.div`
 
 const StyledText = styled.p`
     font-size: 50px;
-    position: absolute;
-    right: 70px;
-    bottom: 36px;
+    position: relative;
+    right: 80px;
+    bottom: -24px;
     font-weight: 900;
     color: white;
+    -webkit-filter: drop-shadow(0 0 5px black);
     filter: drop-shadow(0 0 5px black);
 `
