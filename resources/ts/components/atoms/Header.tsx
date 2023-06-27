@@ -8,8 +8,8 @@ export const Header = () => {
     return (
         <StyledHeaderWrapper>
             <StyledHeaderLink to="/" className='stalkerTarget'>Gallery</StyledHeaderLink>
-            <StyledHeaderAnchorLink href="#nft" offset="50" className='stalkerTarget'>NFT</StyledHeaderAnchorLink>
-            <StyledHeaderAnchorLink href="#bio" offset="50" className='stalkerTarget'>Biography</StyledHeaderAnchorLink>
+            <StyledHeaderAnchorLink href="#nft" offset="0" className='stalkerTarget'>NFT</StyledHeaderAnchorLink>
+            <StyledHeaderAnchorLink href="#bio" offset="0" className='stalkerTarget'>Biography</StyledHeaderAnchorLink>
         </StyledHeaderWrapper>
     )
 }
@@ -22,6 +22,12 @@ const StyledHeaderWrapper = styled.div`
     left: 0;
     padding: 10px;
     background-color: black;
+    z-index: 999;
+
+    @media(max-width: 599px) {
+        width: 100vw;
+        height: 30px;
+    }
 `
 
 const StyledHeaderLink = styled(Link)`
@@ -29,6 +35,10 @@ const StyledHeaderLink = styled(Link)`
     padding: 15px 0;
     color: white;
     text-decoration: none;
+    @media(max-width: 599px) {
+        writing-mode: horizontal-tb;
+        padding: 0 15px;
+    }
 `
 
 const StyledHeaderAnchorLink = styled(AnchorLink)`
@@ -36,4 +46,8 @@ const StyledHeaderAnchorLink = styled(AnchorLink)`
     padding: 15px 0;
     color: white;
     text-decoration: none;
+    @media(max-width: 599px) {
+        writing-mode: horizontal-tb;
+        padding: 0 15px;
+    }
 `

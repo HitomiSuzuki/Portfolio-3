@@ -35,8 +35,10 @@ export const Top = () => {
                 <TopCarousel imgArray={MainImgArray}/>
             </StyledSection>
             <StyledSection id="gallery">
-                <HoverImages />
-                <HoverLink to={'/'}>visit gallery</HoverLink>
+                <PCWrapper>
+                    <HoverImages />
+                    <HoverLink to={'/'}>visit gallery</HoverLink>
+                </PCWrapper>
                 <MobileWrapper>
                     <Carousel imgArray={GalleryImgArray}/>
                 </MobileWrapper>
@@ -44,9 +46,9 @@ export const Top = () => {
             <StyledSection id="nft">
                 <NFT />
                 <HoverLink to={'/'}>click here</HoverLink>
-                <MobileWrapper>
+                {/* <MobileWrapper>
                     <CarouselModal imgArray={[img1, img2, img3]} currentImg={img1} />
-                </MobileWrapper>
+                </MobileWrapper> */}
             </StyledSection>
             <StyledSection id="bio">
                 <Image imgURL={me} />
@@ -60,7 +62,7 @@ export const Top = () => {
             <StyledSection id="footer">
                 <div>
                     <Image imgURL={img3} />
-                    <p>Hitomi OYAMA</p>
+                    <StyledFooterText>Hitomi OYAMA</StyledFooterText>
                 </div>
             </StyledSection>
         </>
@@ -73,23 +75,44 @@ const StyledSection = styled.section`
 
     &#title {
         padding: 0 0 0 50px;
+        @media(max-width: 599px) {
+            padding: 0;
+        } 
+    }
+    &#gallery {
+        padding: 100px 60px 0;
+        @media(max-width: 599px) {
+            padding: 0;
+        } 
+    }
+    &#nft {
+        padding: 150px  60px 0;
+        @media(max-width: 599px) {
+            padding: 70px 0 0;
+        }   
     }
     &#bio {
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        padding: 200px 0;
-    }
-    &#nft {
-        padding: 150px  60px 0;
-    }
-    &#gallery {
-        padding: 100px 60px 0;
+        padding: 200px 60px 0;
+        @media(max-width: 599px) {
+            display: block;
+            padding: 100px 0 0;
+            img {
+                width: 80%;
+            }
+        }
     }
     &#footer {
         padding: 300px 60px 100px;
         display: flex;
         justify-content: end;
+        @media(max-width: 599px) {
+            display: block;
+            text-align: center;
+            padding: 200px 0 0;
+        } 
     }
 `
 
@@ -99,8 +122,22 @@ const MobileWrapper = styled.div`
         display: block;
     }   
 `
+const PCWrapper = styled.div`
+    display: block;
+    @media(max-width: 599px) {
+        display: none;
+    }   
+`
 
 const StyledBioTextWrapper = styled.div`
     text-align: left;
     margin-left: 30px;
+    @media(max-width: 599px) {
+        margin-left:0;
+    } 
+`
+
+const StyledFooterText = styled.p`
+    margin:0;
+    padding-bottom: 150px;
 `

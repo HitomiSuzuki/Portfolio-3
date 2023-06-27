@@ -9,36 +9,44 @@ import nextArrow from '../../static/Arrow12.png';
 
 type CarouselProps = {
     imgArray: string[];
-    isMain?: boolean;
 }
 
 
 export const Carousel = (props: CarouselProps) => {
-    const {imgArray, isMain} = props;
+    const {imgArray} = props;
 
     $(function(){
-        $('.slider').not('.slick-initialized').slick({
+        $('.mobileSlider').not('.slick-initialized').slick({
             dots: false,
             speed: 500,
             autoplay: true,
             autoplaySpeed: 5000,
             arrows: true,
-            swipe: true
+            swipe: true,
         })
     });
 
     return(
-        <StyledCarouselWrapper className="slider">
-            {imgArray.map((img, i) => {
-                return (
-                    <StyledCarouselImageWrapper key={i}>
-                        <StyledCarouselImage src={img}></StyledCarouselImage>
-                    </StyledCarouselImageWrapper>
-                )
-            })}
-        </StyledCarouselWrapper>
+        <>
+            <StyledCarouselBg>
+                <StyledCarouselWrapper className="mobileSlider">
+                    {imgArray.map((img, i) => {
+                        return (
+                            <StyledCarouselImageWrapper key={i}>
+                                <StyledCarouselImage src={img}></StyledCarouselImage>
+                            </StyledCarouselImageWrapper>
+                        )
+                    })}
+                </StyledCarouselWrapper>
+            </StyledCarouselBg>
+        </>
     )
 }
+
+const StyledCarouselBg = styled.div`
+    background: black;
+    height: 100vh;
+`
 
 const StyledCarouselWrapper = styled.div`
     height: 100vh;
@@ -57,14 +65,14 @@ const StyledCarouselWrapper = styled.div`
     }
 
     .slick-prev {
-        top: 100px;
+        top: 90px;
         &::before {
             background-image: url(${prevArrow}); 
         }
     }
 
     .slick-next {
-        top: 130px;
+        top: 120px;
         &::before {
             background-image: url(${nextArrow}); 
         }
@@ -73,7 +81,7 @@ const StyledCarouselWrapper = styled.div`
 
 const StyledCarouselImageWrapper = styled.div`
     width: 100%;
-    height: calc(100vh - 240px);
+    height: calc(100vh - 270px);
 `
 
 const StyledCarouselImage = styled.img`

@@ -4723,7 +4723,7 @@ var BioText = function BioText(props) {
   }, children));
 };
 exports.BioText = BioText;
-var StyledBioText = styled_components_1["default"].p(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    background: black;\n    color: white;\n    margin-top: 10px;\n    display: inline-block;\n    padding: 0 60px 0 30px;\n"])));
+var StyledBioText = styled_components_1["default"].p(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    background: black;\n    color: white;\n    margin: 20px 0 0;\n    display: inline-block;\n    padding: 0 60px 0 30px;\n\n    @media(max-width: 599px) {\n        display: block;\n        text-align: center;\n    }\n"])));
 
 /***/ }),
 
@@ -4736,7 +4736,7 @@ var StyledBioText = styled_components_1["default"].p(_templateObject || (_templa
 "use strict";
 
 
-var _templateObject, _templateObject2, _templateObject3;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
@@ -4756,10 +4756,9 @@ __webpack_require__(/*! slick-carousel/slick/slick-theme.css */ "./node_modules/
 var Arrow11_png_1 = __importDefault(__webpack_require__(/*! ../../static/Arrow11.png */ "./resources/ts/static/Arrow11.png"));
 var Arrow12_png_1 = __importDefault(__webpack_require__(/*! ../../static/Arrow12.png */ "./resources/ts/static/Arrow12.png"));
 var Carousel = function Carousel(props) {
-  var imgArray = props.imgArray,
-    isMain = props.isMain;
+  var imgArray = props.imgArray;
   (0, jquery_1["default"])(function () {
-    (0, jquery_1["default"])('.slider').not('.slick-initialized').slick({
+    (0, jquery_1["default"])('.mobileSlider').not('.slick-initialized').slick({
       dots: false,
       speed: 500,
       autoplay: true,
@@ -4768,20 +4767,21 @@ var Carousel = function Carousel(props) {
       swipe: true
     });
   });
-  return react_1["default"].createElement(StyledCarouselWrapper, {
-    className: "slider"
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(StyledCarouselBg, null, react_1["default"].createElement(StyledCarouselWrapper, {
+    className: "mobileSlider"
   }, imgArray.map(function (img, i) {
     return react_1["default"].createElement(StyledCarouselImageWrapper, {
       key: i
     }, react_1["default"].createElement(StyledCarouselImage, {
       src: img
     }));
-  }));
+  }))));
 };
 exports.Carousel = Carousel;
-var StyledCarouselWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    height: 100vh;\n    padding: 150px 0 120px;\n\n    .slick-arrow {\n        right: 30px;\n        left: auto;\n        &::before {\n            content: '';\n            width: 46px;\n            display: block;\n            height: 17px;\n            background-repeat: no-repeat;\n        }\n    }\n\n    .slick-prev {\n        top: 100px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n\n    .slick-next {\n        top: 130px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n"])), Arrow11_png_1["default"], Arrow12_png_1["default"]);
-var StyledCarouselImageWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 100%;\n    height: calc(100vh - 240px);\n"])));
-var StyledCarouselImage = styled_components_1["default"].img(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    max-width: 100%;\n    max-height: 100%;\n    margin: 0 auto;\n"])));
+var StyledCarouselBg = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    background: black;\n    height: 100vh;\n"])));
+var StyledCarouselWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    height: 100vh;\n    padding: 150px 0 120px;\n\n    .slick-arrow {\n        right: 30px;\n        left: auto;\n        &::before {\n            content: '';\n            width: 46px;\n            display: block;\n            height: 17px;\n            background-repeat: no-repeat;\n        }\n    }\n\n    .slick-prev {\n        top: 90px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n\n    .slick-next {\n        top: 120px;\n        &::before {\n            background-image: url(", "); \n        }\n    }\n"])), Arrow11_png_1["default"], Arrow12_png_1["default"]);
+var StyledCarouselImageWrapper = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    width: 100%;\n    height: calc(100vh - 270px);\n"])));
+var StyledCarouselImage = styled_components_1["default"].img(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    max-width: 100%;\n    max-height: 100%;\n    margin: 0 auto;\n"])));
 
 /***/ }),
 
@@ -4815,18 +4815,18 @@ var Header = function Header() {
     className: 'stalkerTarget'
   }, "Gallery"), react_1["default"].createElement(StyledHeaderAnchorLink, {
     href: "#nft",
-    offset: "50",
+    offset: "0",
     className: 'stalkerTarget'
   }, "NFT"), react_1["default"].createElement(StyledHeaderAnchorLink, {
     href: "#bio",
-    offset: "50",
+    offset: "0",
     className: 'stalkerTarget'
   }, "Biography"));
 };
 exports.Header = Header;
-var StyledHeaderWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 30px;\n    height: 100vh;\n    position: fixed;\n    top: 0;\n    left: 0;\n    padding: 10px;\n    background-color: black;\n"])));
-var StyledHeaderLink = (0, styled_components_1["default"])(react_router_dom_1.Link)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    writing-mode: vertical-rl;\n    padding: 15px 0;\n    color: white;\n    text-decoration: none;\n"])));
-var StyledHeaderAnchorLink = (0, styled_components_1["default"])(react_anchor_link_smooth_scroll_1["default"])(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    writing-mode: vertical-rl;\n    padding: 15px 0;\n    color: white;\n    text-decoration: none;\n"])));
+var StyledHeaderWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 30px;\n    height: 100vh;\n    position: fixed;\n    top: 0;\n    left: 0;\n    padding: 10px;\n    background-color: black;\n    z-index: 999;\n\n    @media(max-width: 599px) {\n        width: 100vw;\n        height: 30px;\n    }\n"])));
+var StyledHeaderLink = (0, styled_components_1["default"])(react_router_dom_1.Link)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    writing-mode: vertical-rl;\n    padding: 15px 0;\n    color: white;\n    text-decoration: none;\n    @media(max-width: 599px) {\n        writing-mode: horizontal-tb;\n        padding: 0 15px;\n    }\n"])));
+var StyledHeaderAnchorLink = (0, styled_components_1["default"])(react_anchor_link_smooth_scroll_1["default"])(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    writing-mode: vertical-rl;\n    padding: 15px 0;\n    color: white;\n    text-decoration: none;\n    @media(max-width: 599px) {\n        writing-mode: horizontal-tb;\n        padding: 0 15px;\n    }\n"])));
 
 /***/ }),
 
@@ -5172,8 +5172,8 @@ var NFT = function NFT() {
 exports.NFT = NFT;
 var StyledNFTWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n   \n\n"])));
 var StyledNFTInner = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: relative;\n    display: flex;\n    &:nth-of-child(2n) {\n        justify-content: flex-end;\n    }\n"])));
-var StyledNFTTextInner = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    position: relative;\n    overflow: hidden;\n    &:nth-of-type(2n + 1) {\n        p {\n            transform: translateX(-500px);\n            &::before {\n                transform-origin: left top;\n                left: 0;\n            }\n            \n        }\n    }\n\n    &:nth-of-type(2n) {\n        \n        height: 285px;\n        justify-content: end;\n        p {\n            transform: translateX(500px);\n            position: absolute;\n            padding-right: 50px;\n            right: 0;\n            &::before {\n                transform-origin: right top;\n                right: 0;\n            }\n        }\n    }\n"])));
-var StyledNFTText = styled_components_1["default"].p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    font-size: 190px;\n    position: relative;\n    transition: transform 1s;\n    margin: 0;\n    transform: scale(0, 1);\n\n    &::before {\n        content: '';\n        position: absolute;\n        bottom: 60px;\n        width: 130%;\n        height: 20px;\n        background: black;\n        transition: all 1s;\n        transform: scale(0, 1);\n        \n    }\n\n    &.after {\n        transform: scale(1, 1);\n        transform: translate(0) !important;\n        &::before {\n            transform: scale(1, 1);\n        }\n        &::after {\n            transform: scale(1, 1);\n        }\n    }\n"])));
+var StyledNFTTextInner = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    position: relative;\n    overflow: hidden;\n    &:nth-of-type(2n + 1) {\n        p {\n            transform: translateX(-500px);\n            &::before {\n                transform-origin: left top;\n                left: 0;\n            }\n            \n        }\n    }\n\n    &:nth-of-type(2n) {\n        \n        height: 285px;\n        justify-content: end;\n        @media(max-width: 599px) {\n            height: 150px;\n        } \n        p {\n            transform: translateX(500px);\n            position: absolute;\n            padding-right: 50px;\n            right: 0;\n            &::before {\n                transform-origin: right top;\n                right: 0;\n            }\n        }\n    }\n"])));
+var StyledNFTText = styled_components_1["default"].p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    font-size: 190px;\n    position: relative;\n    transition: transform 1s;\n    margin: 0;\n    transform: scale(0, 1);\n\n    @media(max-width: 599px) {\n        font-size: 120px;\n    } \n\n    &::before {\n        content: '';\n        position: absolute;\n        bottom: 60px;\n        width: 130%;\n        height: 20px;\n        background: black;\n        transition: all 1s;\n        transform: scale(0, 1);\n        @media(max-width: 599px) {\n            height: 15px;\n            bottom: 30px;\n        } \n        \n    }\n\n    &.after {\n        transform: scale(1, 1);\n        transform: translate(0) !important;\n        &::before {\n            transform: scale(1, 1);\n        }\n        &::after {\n            transform: scale(1, 1);\n        }\n    }\n\n    \n"])));
 
 /***/ }),
 
@@ -5268,9 +5268,9 @@ var SiteTitle = function SiteTitle() {
 };
 exports.SiteTitle = SiteTitle;
 var StyledPararaxArea = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    z-index: 100;\n    position: absolute;\n    height: 100vh;\n    width: calc(100vw - 60px);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n\n"])));
-var StyledJsPararax = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: absolute;\n    width: 20px;\n    height: 20px;\n    z-index: 1;\n    border-radius: 20px;\n    background-color: white;\n    -webkit-transition: all .3s linear .001s;\n    transition: all .3s linear .001s;\n    box-shadow: 0 0 10px black;\n    right: 800px;\n    top: 400px;\n    &:hover+div  {\n        background: black;\n        box-shadow: 0 0 10px yellow;\n    }\n"])));
-var StyledO = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: relative;\n    right: 90px;\n    width: 100px;\n    height: 100px;\n    border-radius: 100px;\n    border: 10px solid white;\n    box-shadow: 0 0 10px black, inset 0 0 10px black;\n    transition: all .3s linear .001s;\n    &:hover  {\n        background: black;\n        box-shadow: 0 0 10px yellow;\n    }\n"])));
-var StyledText = styled_components_1["default"].p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    font-size: 50px;\n    position: relative;\n    right: 80px;\n    bottom: -24px;\n    font-weight: 900;\n    color: white;\n    -webkit-filter: drop-shadow(0 0 5px black);\n    filter: drop-shadow(0 0 5px black);\n"])));
+var StyledJsPararax = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: relative;\n    width: 20px;\n    height: 20px;\n    z-index: 1;\n    border-radius: 20px;\n    background-color: white;\n    -webkit-transition: all .3s linear .001s;\n    transition: all .3s linear .001s;\n    box-shadow: 0 0 10px black;\n    right: -60px;\n    top: 0;\n    &:hover+div  {\n        background: black;\n        box-shadow: 0 0 10px yellow;\n    }\n"])));
+var StyledO = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: relative;\n    right: 10px;\n    width: 100px;\n    height: 100px;\n    border-radius: 100px;\n    border: 10px solid white;\n    box-shadow: 0 0 10px black, inset 0 0 10px black;\n    transition: all .3s linear .001s;\n    &:hover  {\n        background: black;\n        box-shadow: 0 0 10px yellow;\n    }\n"])));
+var StyledText = styled_components_1["default"].p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    font-size: 50px;\n    position: relative;\n    right: 10px;\n    bottom: -24px;\n    font-weight: 900;\n    color: white;\n    -webkit-filter: drop-shadow(0 0 5px black);\n    filter: drop-shadow(0 0 5px black);\n"])));
 
 /***/ }),
 
@@ -5327,87 +5327,6 @@ var StyledCarouselWrapper = styled_components_1["default"].div(_templateObject |
 var StyledCarouselImageWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    background-repeat: no-repeat;\n    background-size: cover;\n    background-position: center;\n    height: 100vh;\n    margin: 0;\n    ", ";\n"])), function (props) {
   return "background-image: url(".concat(props.img, ")");
 });
-
-/***/ }),
-
-/***/ "./resources/ts/components/molecules/CarouselModal.tsx":
-/*!*************************************************************!*\
-  !*** ./resources/ts/components/molecules/CarouselModal.tsx ***!
-  \*************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _templateObject, _templateObject2;
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  var desc = Object.getOwnPropertyDescriptor(m, k);
-  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-    desc = {
-      enumerable: true,
-      get: function get() {
-        return m[k];
-      }
-    };
-  }
-  Object.defineProperty(o, k2, desc);
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  __setModuleDefault(result, mod);
-  return result;
-};
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.CarouselModal = void 0;
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
-var Carousel_1 = __webpack_require__(/*! ../atoms/Carousel */ "./resources/ts/components/atoms/Carousel.tsx");
-var close_png_1 = __importDefault(__webpack_require__(/*! ../../static/close.png */ "./resources/ts/static/close.png"));
-var CarouselModal = function CarouselModal(props) {
-  var modalBg = (0, react_1.useRef)(null);
-  var closeModal = function closeModal() {
-    if (!modalBg.current) {
-      return;
-    }
-    modalBg.current.classList.add('close');
-  };
-  var imgArray = props.imgArray,
-    currentImg = props.currentImg;
-  return react_1["default"].createElement(ModalBg, {
-    ref: modalBg
-  }, react_1["default"].createElement(ModalCloseButton, {
-    onClick: function onClick() {
-      return closeModal();
-    }
-  }), react_1["default"].createElement(Carousel_1.Carousel, {
-    imgArray: imgArray
-  }));
-};
-exports.CarouselModal = CarouselModal;
-var ModalBg = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 100vw;\n    height: 100vh;\n    background-color: rgba(0,0,0,0.5);\n    position: relative;\n\n    &.close {\n        display: none;\n    }\n"])));
-var ModalCloseButton = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    &::before {\n        position: absolute;\n        content: '';\n        top 20px;\n        right: 0;\n        background-image: url(", ");\n        width: 70px;\n        height: 66px;\n        z-index: 100;\n    }\n"])), close_png_1["default"]);
 
 /***/ }),
 
@@ -5503,7 +5422,7 @@ root.render(react_1["default"].createElement(react_1["default"].StrictMode, null
 "use strict";
 
 
-var _templateObject, _templateObject2, _templateObject3;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
@@ -5521,7 +5440,6 @@ var HoverLink_1 = __webpack_require__(/*! ../components/atoms/HoverLink */ "./re
 var Header_1 = __webpack_require__(/*! ../components/atoms/Header */ "./resources/ts/components/atoms/Header.tsx");
 var MouseStalker_1 = __webpack_require__(/*! ../components/atoms/MouseStalker */ "./resources/ts/components/atoms/MouseStalker.tsx");
 var Carousel_1 = __webpack_require__(/*! ../components/atoms/Carousel */ "./resources/ts/components/atoms/Carousel.tsx");
-var CarouselModal_1 = __webpack_require__(/*! ../components/molecules/CarouselModal */ "./resources/ts/components/molecules/CarouselModal.tsx");
 var HoverImages_1 = __webpack_require__(/*! ../components/molecules/HoverImages */ "./resources/ts/components/molecules/HoverImages.tsx");
 var img1_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img1.jpg */ "./resources/ts/static/img1.jpg"));
 var img2_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img2.jpg */ "./resources/ts/static/img2.jpg"));
@@ -5541,18 +5459,15 @@ var Top = function Top() {
     imgArray: MainImgArray
   })), react_1["default"].createElement(StyledSection, {
     id: "gallery"
-  }, react_1["default"].createElement(HoverImages_1.HoverImages, null), react_1["default"].createElement(HoverLink_1.HoverLink, {
+  }, react_1["default"].createElement(PCWrapper, null, react_1["default"].createElement(HoverImages_1.HoverImages, null), react_1["default"].createElement(HoverLink_1.HoverLink, {
     to: '/'
-  }, "visit gallery"), react_1["default"].createElement(MobileWrapper, null, react_1["default"].createElement(Carousel_1.Carousel, {
+  }, "visit gallery")), react_1["default"].createElement(MobileWrapper, null, react_1["default"].createElement(Carousel_1.Carousel, {
     imgArray: GalleryImgArray
   }))), react_1["default"].createElement(StyledSection, {
     id: "nft"
   }, react_1["default"].createElement(NFT_1.NFT, null), react_1["default"].createElement(HoverLink_1.HoverLink, {
     to: '/'
-  }, "click here"), react_1["default"].createElement(MobileWrapper, null, react_1["default"].createElement(CarouselModal_1.CarouselModal, {
-    imgArray: [img1_jpg_1["default"], img2_jpg_1["default"], img3_jpg_1["default"]],
-    currentImg: img1_jpg_1["default"]
-  }))), react_1["default"].createElement(StyledSection, {
+  }, "click here")), react_1["default"].createElement(StyledSection, {
     id: "bio"
   }, react_1["default"].createElement(Image_1.Image, {
     imgURL: me_jpg_1["default"]
@@ -5568,12 +5483,14 @@ var Top = function Top() {
     id: "footer"
   }, react_1["default"].createElement("div", null, react_1["default"].createElement(Image_1.Image, {
     imgURL: img3_jpg_1["default"]
-  }), react_1["default"].createElement("p", null, "Hitomi OYAMA"))));
+  }), react_1["default"].createElement(StyledFooterText, null, "Hitomi OYAMA"))));
 };
 exports.Top = Top;
-var StyledSection = styled_components_1["default"].section(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    text-align: center;\n    background: yellow;\n\n    &#title {\n        padding: 0 0 0 50px;\n    }\n    &#bio {\n        display: flex;\n        justify-content: center;\n        align-items: flex-start;\n        padding: 200px 0;\n    }\n    &#nft {\n        padding: 150px  60px 0;\n    }\n    &#gallery {\n        padding: 100px 60px 0;\n    }\n    &#footer {\n        padding: 300px 60px 100px;\n        display: flex;\n        justify-content: end;\n    }\n"])));
+var StyledSection = styled_components_1["default"].section(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    text-align: center;\n    background: yellow;\n\n    &#title {\n        padding: 0 0 0 50px;\n        @media(max-width: 599px) {\n            padding: 0;\n        } \n    }\n    &#gallery {\n        padding: 100px 60px 0;\n        @media(max-width: 599px) {\n            padding: 0;\n        } \n    }\n    &#nft {\n        padding: 150px  60px 0;\n        @media(max-width: 599px) {\n            padding: 70px 0 0;\n        }   \n    }\n    &#bio {\n        display: flex;\n        justify-content: center;\n        align-items: flex-start;\n        padding: 200px 60px 0;\n        @media(max-width: 599px) {\n            display: block;\n            padding: 100px 0 0;\n            img {\n                width: 80%;\n            }\n        }\n    }\n    &#footer {\n        padding: 300px 60px 100px;\n        display: flex;\n        justify-content: end;\n        @media(max-width: 599px) {\n            display: block;\n            text-align: center;\n            padding: 200px 0 0;\n        } \n    }\n"])));
 var MobileWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    display: none;\n    @media(max-width: 599px) {\n        display: block;\n    }   \n"])));
-var StyledBioTextWrapper = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    text-align: left;\n    margin-left: 30px;\n"])));
+var PCWrapper = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: block;\n    @media(max-width: 599px) {\n        display: none;\n    }   \n"])));
+var StyledBioTextWrapper = styled_components_1["default"].div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    text-align: left;\n    margin-left: 30px;\n    @media(max-width: 599px) {\n        margin-left:0;\n    } \n"])));
+var StyledFooterText = styled_components_1["default"].p(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    margin:0;\n    padding-bottom: 150px;\n"])));
 
 /***/ }),
 
@@ -5806,21 +5723,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Arrow12.png?73b8cbeb17b47ef8d9d686a8550c3f2e");
-
-/***/ }),
-
-/***/ "./resources/ts/static/close.png":
-/*!***************************************!*\
-  !*** ./resources/ts/static/close.png ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/close.png?5137083c19649075db251e9dab1c7870");
 
 /***/ }),
 

@@ -63,7 +63,7 @@ const StyledPararaxArea = styled.div<Props>`
 `
 
 const StyledJsPararax = styled.div`
-    position: absolute;
+    position: relative;
     width: 20px;
     height: 20px;
     z-index: 1;
@@ -72,8 +72,8 @@ const StyledJsPararax = styled.div`
     -webkit-transition: all .3s linear .001s;
     transition: all .3s linear .001s;
     box-shadow: 0 0 10px black;
-    right: 800px;
-    top: 400px;
+    right: -60px;
+    top: 0;
     &:hover+div  {
         background: black;
         box-shadow: 0 0 10px yellow;
@@ -82,7 +82,7 @@ const StyledJsPararax = styled.div`
 
 const StyledO = styled.div`
     position: relative;
-    right: 90px;
+    right: 10px;
     width: 100px;
     height: 100px;
     border-radius: 100px;
@@ -98,7 +98,7 @@ const StyledO = styled.div`
 const StyledText = styled.p`
     font-size: 50px;
     position: relative;
-    right: 80px;
+    right: 10px;
     bottom: -24px;
     font-weight: 900;
     color: white;

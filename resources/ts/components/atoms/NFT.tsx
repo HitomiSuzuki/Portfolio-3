@@ -74,6 +74,9 @@ const StyledNFTTextInner = styled.div`
         
         height: 285px;
         justify-content: end;
+        @media(max-width: 599px) {
+            height: 150px;
+        } 
         p {
             transform: translateX(500px);
             position: absolute;
@@ -94,6 +97,10 @@ const StyledNFTText = styled.p`
     margin: 0;
     transform: scale(0, 1);
 
+    @media(max-width: 599px) {
+        font-size: 120px;
+    } 
+
     &::before {
         content: '';
         position: absolute;
@@ -103,6 +110,10 @@ const StyledNFTText = styled.p`
         background: black;
         transition: all 1s;
         transform: scale(0, 1);
+        @media(max-width: 599px) {
+            height: 15px;
+            bottom: 30px;
+        } 
         
     }
 
@@ -116,4 +127,6 @@ const StyledNFTText = styled.p`
             transform: scale(1, 1);
         }
     }
+
+    
 `

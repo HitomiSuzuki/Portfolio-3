@@ -77,7 +77,12 @@ export const BioText = (props: BioTextProps) => {
 const StyledBioText = styled.p`
     background: black;
     color: white;
-    margin-top: 10px;
+    margin: 20px 0 0;
     display: inline-block;
     padding: 0 60px 0 30px;
+
+    @media(max-width: 599px) {
+        display: block;
+        text-align: center;
+    }
 `
