@@ -74,9 +74,9 @@ const StyledJsPararax = styled.div`
     box-shadow: 0 0 10px black;
     right: 800px;
     top: 400px;
-    &:hover  {
+    &:hover+div  {
         background: black;
-        box-shadow: 0 0 10px white;
+        box-shadow: 0 0 10px yellow;
     }
 `
 
@@ -88,6 +88,11 @@ const StyledO = styled.div`
     border-radius: 100px;
     border: 10px solid white;
     box-shadow: 0 0 10px black, inset 0 0 10px black;
+    transition: all .3s linear .001s;
+    &:hover  {
+        background: black;
+        box-shadow: 0 0 10px yellow;
+    }
 `
 
 const StyledText = styled.p`
