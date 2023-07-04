@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import img1 from '../static/img1.jpg';
@@ -13,11 +13,18 @@ import img8 from '../static/img8.jpg';
 
 export const Gallery = () => {
     const artworkDisplay = useRef<HTMLImageElement>(null);
+    let [artworkUrl, setArtworkUrl] = useState<string>('');
+    let [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const clickArtworkName = (imgURL: string) => {
         if(!artworkDisplay.current) {
             return
         }
         artworkDisplay.current.src = imgURL;
+        setArtworkUrl(imgURL);
+    }
+
+    const toggleModal = () => {
+        setIsModalOpen(!isModalOpen);
     }
 
     return (
@@ -37,15 +44,35 @@ export const Gallery = () => {
 
             <StyledArtworkWrapper>
                 <StyledArtworkDisplay src='' ref={artworkDisplay}></StyledArtworkDisplay>
+                {artworkUrl !== '' ? <StyledArtworkLargerButton onClick={() => toggleModal()}/>: ''}
             </StyledArtworkWrapper>
+
+            {isModalOpen ? (
+                <StyledModalWrapper>
+                    <StyledModalBg onClick={() => toggleModal()}/>
+                    <StyledLargeArtworkWrapper>
+                        <StyledLargeArtwork src={artworkUrl} />
+                    </StyledLargeArtworkWrapper>
+                    <StyledArtworkSmallerButton  onClick={() => toggleModal()}/>
+                </StyledModalWrapper>
+            ): ''}
         </StyledGalleryWrapper>
     )
 }
 
 const StyledGalleryWrapper = styled.div`
     display: flex;
-    margin: 150px 0 0;
-    border-top: 1px solid black;
+    padding: 150px 0 0;
+    background-color: yellow;
+    &::after {
+        content: '';
+        width: 100vw;
+        height: 2px;
+        position: absolute;
+        top: 150px;
+        left: 0;
+        background-color: black;
+    }
 `
 
 const StyledBackToTopLink = styled(Link)`
@@ -58,12 +85,12 @@ const StyledArtworkList = styled.ul`
     list-style: none;
     margin: 0;
     padding: 30px 30px 0 0;
-    width: 300px;
+    width: 30%;
     text-align: right;
     position: relative;
     &::after {
         content: '';
-        width: 1px;
+        width: 2px;
         height: 100vh;
         position: absolute;
         top: -150px;
@@ -78,11 +105,87 @@ const StyledArtworkItem = styled.li`
 `
 
 const StyledArtworkWrapper = styled.div`
+    display: flex;
     width: 400px;
     height: calc(100vh - 150px);
     overflow: scroll;
 `
 
 const StyledArtworkDisplay = styled.img<{ref: React.RefObject<HTMLImageElement>}>`
+    width: calc(400px - 32px);
+    position: relative;
+    left: 10px;
+    object-fit: contain;
+    object-position: left top;
+`
+
+const StyledArtworkLargerButton = styled.span`
+    position: relative;
+    left: 10px;
+    width: 22px;
+    height: 22px;
+    &::before {
+        content: '';
+        width: 2px;
+        height: 22px;
+        position: absolute;
+        top: 0;
+        left: 10px;
+        background-color: black;
+    }
+    &::after {
+        content: '';
+        height: 2px;
+        width: 22px;
+        position: absolute;
+        top: 10px;
+        left: 0;
+        background-color: black;
+    }
+`
+
+const StyledModalWrapper = styled.div`
+    z-index: 100;
+`
+
+const StyledModalBg = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: black;
+    width: 100vw;
+    height: 100vh;
+`
+
+const StyledLargeArtworkWrapper = styled.div`
+    width: 80vw;
+    height: calc(100vh - 75px);
+    position: absolute;
+    top: 75px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    -webkit-transform: translate(-50%, 0);
+    -ms-transform: translate(-50%, 0);
+    overflow: scroll;
+`
+
+const StyledLargeArtwork = styled.img`
     width: 100%;
+    object-fit: contain;
+    object-position: top;
+`
+
+const StyledArtworkSmallerButton = styled.span`
+    position: absolute;
+    right: calc(10% - 2px);
+    bottom: 30px;
+    &::before {
+        content: '';
+        width: 22px;
+        height: 2px;
+        position: absolute;
+        top: 0;
+        left: 10px;
+        background-color: white;
+    }
 `

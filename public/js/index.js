@@ -5433,8 +5433,14 @@ root.render(react_1["default"].createElement(react_1["default"].StrictMode, null
 "use strict";
 
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
   var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -5488,11 +5494,23 @@ var img7_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img7.jpg */ "
 var img8_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img8.jpg */ "./resources/ts/static/img8.jpg"));
 var Gallery = function Gallery() {
   var artworkDisplay = (0, react_1.useRef)(null);
+  var _ref = (0, react_1.useState)(''),
+    _ref2 = _slicedToArray(_ref, 2),
+    artworkUrl = _ref2[0],
+    setArtworkUrl = _ref2[1];
+  var _ref3 = (0, react_1.useState)(false),
+    _ref4 = _slicedToArray(_ref3, 2),
+    isModalOpen = _ref4[0],
+    setIsModalOpen = _ref4[1];
   var clickArtworkName = function clickArtworkName(imgURL) {
     if (!artworkDisplay.current) {
       return;
     }
     artworkDisplay.current.src = imgURL;
+    setArtworkUrl(imgURL);
+  };
+  var toggleModal = function toggleModal() {
+    setIsModalOpen(!isModalOpen);
   };
   return react_1["default"].createElement(StyledGalleryWrapper, null, react_1["default"].createElement(StyledBackToTopLink, {
     to: '/'
@@ -5531,15 +5549,35 @@ var Gallery = function Gallery() {
   }, "8")), react_1["default"].createElement(StyledArtworkWrapper, null, react_1["default"].createElement(StyledArtworkDisplay, {
     src: '',
     ref: artworkDisplay
-  })));
+  }), artworkUrl !== '' ? react_1["default"].createElement(StyledArtworkLargerButton, {
+    onClick: function onClick() {
+      return toggleModal();
+    }
+  }) : ''), isModalOpen ? react_1["default"].createElement(StyledModalWrapper, null, react_1["default"].createElement(StyledModalBg, {
+    onClick: function onClick() {
+      return toggleModal();
+    }
+  }), react_1["default"].createElement(StyledLargeArtworkWrapper, null, react_1["default"].createElement(StyledLargeArtwork, {
+    src: artworkUrl
+  })), react_1["default"].createElement(StyledArtworkSmallerButton, {
+    onClick: function onClick() {
+      return toggleModal();
+    }
+  })) : '');
 };
 exports.Gallery = Gallery;
-var StyledGalleryWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: flex;\n    margin: 150px 0 0;\n    border-top: 1px solid black;\n"])));
+var StyledGalleryWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: flex;\n    padding: 150px 0 0;\n    background-color: yellow;\n    &::after {\n        content: '';\n        width: 100vw;\n        height: 2px;\n        position: absolute;\n        top: 150px;\n        left: 0;\n        background-color: black;\n    }\n"])));
 var StyledBackToTopLink = (0, styled_components_1["default"])(react_router_dom_1.Link)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: absolute;\n    top: 20px;\n    left: 20px;\n"])));
-var StyledArtworkList = styled_components_1["default"].ul(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    list-style: none;\n    margin: 0;\n    padding: 30px 30px 0 0;\n    width: 300px;\n    text-align: right;\n    position: relative;\n    &::after {\n        content: '';\n        width: 1px;\n        height: 100vh;\n        position: absolute;\n        top: -150px;\n        right: 0;\n        background-color: black;\n    }\n"])));
+var StyledArtworkList = styled_components_1["default"].ul(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    list-style: none;\n    margin: 0;\n    padding: 30px 30px 0 0;\n    width: 30%;\n    text-align: right;\n    position: relative;\n    &::after {\n        content: '';\n        width: 2px;\n        height: 100vh;\n        position: absolute;\n        top: -150px;\n        right: 0;\n        background-color: black;\n    }\n"])));
 var StyledArtworkItem = styled_components_1["default"].li(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    padding-bottom: 20px;\n    \n"])));
-var StyledArtworkWrapper = styled_components_1["default"].div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    width: 400px;\n    height: calc(100vh - 150px);\n    overflow: scroll;\n"])));
-var StyledArtworkDisplay = styled_components_1["default"].img(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    width: 100%;\n"])));
+var StyledArtworkWrapper = styled_components_1["default"].div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    display: flex;\n    width: 400px;\n    height: calc(100vh - 150px);\n    overflow: scroll;\n"])));
+var StyledArtworkDisplay = styled_components_1["default"].img(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    width: calc(400px - 32px);\n    position: relative;\n    left: 10px;\n    object-fit: contain;\n    object-position: left top;\n"])));
+var StyledArtworkLargerButton = styled_components_1["default"].span(_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n    position: relative;\n    left: 10px;\n    width: 22px;\n    height: 22px;\n    &::before {\n        content: '';\n        width: 2px;\n        height: 22px;\n        position: absolute;\n        top: 0;\n        left: 10px;\n        background-color: black;\n    }\n    &::after {\n        content: '';\n        height: 2px;\n        width: 22px;\n        position: absolute;\n        top: 10px;\n        left: 0;\n        background-color: black;\n    }\n"])));
+var StyledModalWrapper = styled_components_1["default"].div(_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n    z-index: 100;\n"])));
+var StyledModalBg = styled_components_1["default"].div(_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n    position: absolute;\n    top: 0;\n    left: 0;\n    background: black;\n    width: 100vw;\n    height: 100vh;\n"])));
+var StyledLargeArtworkWrapper = styled_components_1["default"].div(_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n    width: 80vw;\n    height: calc(100vh - 75px);\n    position: absolute;\n    top: 75px;\n    left: 50%;\n    transform: translate(-50%, 0);\n    -webkit-transform: translate(-50%, 0);\n    -ms-transform: translate(-50%, 0);\n    overflow: scroll;\n"])));
+var StyledLargeArtwork = styled_components_1["default"].img(_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n    width: 100%;\n    object-fit: contain;\n    object-position: top;\n"])));
+var StyledArtworkSmallerButton = styled_components_1["default"].span(_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n    position: absolute;\n    right: calc(10% - 2px);\n    bottom: 30px;\n    &::before {\n        content: '';\n        width: 22px;\n        height: 2px;\n        position: absolute;\n        top: 0;\n        left: 10px;\n        background-color: white;\n    }\n"])));
 
 /***/ }),
 
