@@ -4669,6 +4669,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports.BioText = void 0;
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var gsap_1 = __importDefault(__webpack_require__(/*! gsap */ "./node_modules/gsap/index.js"));
 var all_1 = __webpack_require__(/*! gsap/all */ "./node_modules/gsap/all.js");
 var BioText = function BioText(props) {
   var children = props.children,
@@ -4702,10 +4703,10 @@ var BioText = function BioText(props) {
       bioTextContent.innerHTML = returnText;
     };
     spanWrapText();
-    all_1.gsap.registerPlugin(all_1.ScrollTrigger);
+    gsap_1["default"].registerPlugin(all_1.ScrollTrigger);
     var bioTextContentSpans = Array.from(bioTextContent.querySelectorAll('span'));
     if (bioTextContentSpans) {
-      var tl = all_1.gsap.timeline({
+      var tl = gsap_1["default"].timeline({
         scrollTrigger: {
           trigger: bioTextContentSpans,
           start: 'top 60%'
@@ -4811,7 +4812,7 @@ var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_mod
 var react_anchor_link_smooth_scroll_1 = __importDefault(__webpack_require__(/*! react-anchor-link-smooth-scroll */ "./node_modules/react-anchor-link-smooth-scroll/lib/anchor-link.js"));
 var Header = function Header() {
   return react_1["default"].createElement(StyledHeaderWrapper, null, react_1["default"].createElement(StyledHeaderLink, {
-    to: "/",
+    to: "/gallery",
     className: 'stalkerTarget'
   }, "Gallery"), react_1["default"].createElement(StyledHeaderAnchorLink, {
     href: "#nft",
@@ -5407,9 +5408,138 @@ var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/r
 var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 var client_1 = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 var Top_1 = __webpack_require__(/*! ./pages/Top */ "./resources/ts/pages/Top.tsx");
+var Gallery_1 = __webpack_require__(/*! ./pages/Gallery */ "./resources/ts/pages/Gallery.tsx");
 var container = document.getElementById('app');
 var root = (0, client_1.createRoot)(container);
-root.render(react_1["default"].createElement(react_1["default"].StrictMode, null, react_1["default"].createElement(react_router_dom_1.BrowserRouter, null, react_1["default"].createElement(Top_1.Top, null))));
+var router = (0, react_router_dom_1.createBrowserRouter)([{
+  path: "/",
+  element: react_1["default"].createElement(Top_1.Top, null)
+}, {
+  path: "gallery",
+  element: react_1["default"].createElement(Gallery_1.Gallery, null)
+}]);
+root.render(react_1["default"].createElement(react_1["default"].StrictMode, null, react_1["default"].createElement(react_router_dom_1.RouterProvider, {
+  router: router
+})));
+
+/***/ }),
+
+/***/ "./resources/ts/pages/Gallery.tsx":
+/*!****************************************!*\
+  !*** ./resources/ts/pages/Gallery.tsx ***!
+  \****************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6;
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.Gallery = void 0;
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
+var img1_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img1.jpg */ "./resources/ts/static/img1.jpg"));
+var img2_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img2.jpg */ "./resources/ts/static/img2.jpg"));
+var img3_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img3.jpg */ "./resources/ts/static/img3.jpg"));
+var img4_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img4.jpg */ "./resources/ts/static/img4.jpg"));
+var img5_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img5.jpg */ "./resources/ts/static/img5.jpg"));
+var img6_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img6.jpg */ "./resources/ts/static/img6.jpg"));
+var img7_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img7.jpg */ "./resources/ts/static/img7.jpg"));
+var img8_jpg_1 = __importDefault(__webpack_require__(/*! ../static/img8.jpg */ "./resources/ts/static/img8.jpg"));
+var Gallery = function Gallery() {
+  var artworkDisplay = (0, react_1.useRef)(null);
+  var clickArtworkName = function clickArtworkName(imgURL) {
+    if (!artworkDisplay.current) {
+      return;
+    }
+    artworkDisplay.current.src = imgURL;
+  };
+  return react_1["default"].createElement(StyledGalleryWrapper, null, react_1["default"].createElement(StyledBackToTopLink, {
+    to: '/'
+  }, "back to top"), react_1["default"].createElement(StyledArtworkList, null, react_1["default"].createElement(StyledArtworkItem, {
+    onClick: function onClick() {
+      return clickArtworkName(img1_jpg_1["default"]);
+    }
+  }, "1"), react_1["default"].createElement(StyledArtworkItem, {
+    onClick: function onClick() {
+      return clickArtworkName(img2_jpg_1["default"]);
+    }
+  }, "2"), react_1["default"].createElement(StyledArtworkItem, {
+    onClick: function onClick() {
+      return clickArtworkName(img3_jpg_1["default"]);
+    }
+  }, "3"), react_1["default"].createElement(StyledArtworkItem, {
+    onClick: function onClick() {
+      return clickArtworkName(img4_jpg_1["default"]);
+    }
+  }, "4"), react_1["default"].createElement(StyledArtworkItem, {
+    onClick: function onClick() {
+      return clickArtworkName(img5_jpg_1["default"]);
+    }
+  }, "5"), react_1["default"].createElement(StyledArtworkItem, {
+    onClick: function onClick() {
+      return clickArtworkName(img6_jpg_1["default"]);
+    }
+  }, "6"), react_1["default"].createElement(StyledArtworkItem, {
+    onClick: function onClick() {
+      return clickArtworkName(img7_jpg_1["default"]);
+    }
+  }, "7"), react_1["default"].createElement(StyledArtworkItem, {
+    onClick: function onClick() {
+      return clickArtworkName(img8_jpg_1["default"]);
+    }
+  }, "8")), react_1["default"].createElement(StyledArtworkWrapper, null, react_1["default"].createElement(StyledArtworkDisplay, {
+    src: '',
+    ref: artworkDisplay
+  })));
+};
+exports.Gallery = Gallery;
+var StyledGalleryWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: flex;\n    margin: 150px 0 0;\n    border-top: 1px solid black;\n"])));
+var StyledBackToTopLink = (0, styled_components_1["default"])(react_router_dom_1.Link)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: absolute;\n    top: 20px;\n    left: 20px;\n"])));
+var StyledArtworkList = styled_components_1["default"].ul(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    list-style: none;\n    margin: 0;\n    padding: 30px 30px 0 0;\n    width: 300px;\n    text-align: right;\n    position: relative;\n    &::after {\n        content: '';\n        width: 1px;\n        height: 100vh;\n        position: absolute;\n        top: -150px;\n        right: 0;\n        background-color: black;\n    }\n"])));
+var StyledArtworkItem = styled_components_1["default"].li(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    padding-bottom: 20px;\n    \n"])));
+var StyledArtworkWrapper = styled_components_1["default"].div(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    width: 400px;\n    height: calc(100vh - 150px);\n    overflow: scroll;\n"])));
+var StyledArtworkDisplay = styled_components_1["default"].img(_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n    width: 100%;\n"])));
 
 /***/ }),
 
@@ -5816,6 +5946,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/ts/static/img7.jpg":
+/*!**************************************!*\
+  !*** ./resources/ts/static/img7.jpg ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img7.jpg?505a4b9ecbc850391df10abf542aa279");
+
+/***/ }),
+
+/***/ "./resources/ts/static/img8.jpg":
+/*!**************************************!*\
+  !*** ./resources/ts/static/img8.jpg ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/img8.jpg?decea0fcec6d4c0f0ef089035a155e26");
+
+/***/ }),
+
 /***/ "./resources/ts/static/me.jpg":
 /*!************************************!*\
   !*** ./resources/ts/static/me.jpg ***!
@@ -5908,7 +6068,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gsap-core.js */ "./node_modules/gsap/gsap-core.js");
 /*!
- * CSSPlugin 3.12.1
+ * CSSPlugin 3.12.2
  * https://greensock.com
  *
  * Copyright 2008-2023, GreenSock. All rights reserved.
@@ -7474,7 +7634,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ CSSRulePlugin)
 /* harmony export */ });
 /*!
- * CSSRulePlugin 3.12.1
+ * CSSRulePlugin 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -7524,7 +7684,7 @@ var gsap,
 };
 
 var CSSRulePlugin = {
-  version: "3.12.1",
+  version: "3.12.2",
   name: "cssRule",
   init: function init(target, value, tween, index, targets) {
     if (!_checkRegister() || typeof target.cssText === "undefined") {
@@ -7624,7 +7784,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/paths.js */ "./node_modules/gsap/utils/paths.js");
 /*!
- * CustomEase 3.12.1
+ * CustomEase 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -7992,7 +8152,7 @@ var CustomEase = /*#__PURE__*/function () {
   return CustomEase;
 }();
 _getGSAP() && gsap.registerPlugin(CustomEase);
-CustomEase.version = "3.12.1";
+CustomEase.version = "3.12.2";
 
 
 /***/ }),
@@ -8015,7 +8175,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
 /*!
- * Draggable 3.12.1
+ * Draggable 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -10559,7 +10719,7 @@ var Draggable = /*#__PURE__*/function (_EventDispatcher) {
 
       if (InertiaPlugin && type !== "soft") {
         InertiaPlugin.untrack(scrollProxy || target, xyMode ? "x,y" : rotationMode ? "rotation" : "top,left");
-        self.tween && self.kill();
+        self.tween && self.tween.kill();
       }
 
       scrollProxy && scrollProxy.disable();
@@ -10705,7 +10865,7 @@ _setDefaults(Draggable.prototype, {
 });
 
 Draggable.zIndex = 1000;
-Draggable.version = "3.12.1";
+Draggable.version = "3.12.2";
 _getGSAP() && gsap.registerPlugin(Draggable);
 
 
@@ -10727,7 +10887,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ EasePack)
 /* harmony export */ });
 /*!
- * EasePack 3.12.1
+ * EasePack 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -10933,7 +11093,7 @@ var EasePack = {
 
 for (var p in EasePack) {
   EasePack[p].register = _initCore;
-  EasePack[p].version = "3.12.1";
+  EasePack[p].version = "3.12.2";
 }
 
 _getGSAP() && gsap.registerPlugin(SlowMo);
@@ -10954,7 +11114,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ EaselPlugin)
 /* harmony export */ });
 /*!
- * EaselPlugin 3.12.1
+ * EaselPlugin 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -11225,7 +11385,7 @@ var gsap,
 };
 
 var EaselPlugin = {
-  version: "3.12.1",
+  version: "3.12.2",
   name: "easel",
   init: function init(target, value, tween, index, targets) {
     if (!_coreInitted) {
@@ -11311,7 +11471,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_matrix_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/matrix.js */ "./node_modules/gsap/utils/matrix.js");
 /*!
- * Flip 3.12.1
+ * Flip 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -12809,7 +12969,7 @@ var Flip = /*#__PURE__*/function () {
 
   return Flip;
 }();
-Flip.version = "3.12.1"; // function whenImagesLoad(el, func) {
+Flip.version = "3.12.2"; // function whenImagesLoad(el, func) {
 // 	let pending = [],
 // 		onLoad = e => {
 // 			pending.splice(pending.indexOf(e.target), 1);
@@ -12840,7 +13000,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_paths_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/paths.js */ "./node_modules/gsap/utils/paths.js");
 /* harmony import */ var _utils_matrix_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/matrix.js */ "./node_modules/gsap/utils/matrix.js");
 /*!
- * MotionPathPlugin 3.12.1
+ * MotionPathPlugin 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -13058,7 +13218,7 @@ _segmentToRawPath = function _segmentToRawPath(plugin, segment, target, x, y, sl
 };
 
 var MotionPathPlugin = {
-  version: "3.12.1",
+  version: "3.12.2",
   name: "motionPath",
   register: function register(core, Plugin, propTween) {
     gsap = core;
@@ -13236,7 +13396,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /*!
- * Observer 3.12.1
+ * Observer 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -13368,7 +13528,7 @@ var gsap,
       offset = sc === _vertical.sc ? 1 : 2;
 
   !~i && (i = _scrollers.push(element) - 1);
-  _scrollers[i + offset] || element.addEventListener("scroll", _onScroll); // clear the cache when a scroll occurs
+  _scrollers[i + offset] || _addListener(element, "scroll", _onScroll); // clear the cache when a scroll occurs
 
   var prev = _scrollers[i + offset],
       func = prev || (_scrollers[i + offset] = _scrollCacheFunc(_getProxyProp(element, s), true) || (_isViewport(element) ? sc : _scrollCacheFunc(function (value) {
@@ -13893,7 +14053,7 @@ var Observer = /*#__PURE__*/function () {
 
   return Observer;
 }();
-Observer.version = "3.12.1";
+Observer.version = "3.12.2";
 
 Observer.create = function (vars) {
   return new Observer(vars);
@@ -13929,7 +14089,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ PixiPlugin)
 /* harmony export */ });
 /*!
- * PixiPlugin 3.12.1
+ * PixiPlugin 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -14042,7 +14202,7 @@ _applyMatrix = function _applyMatrix(m, m2) {
 },
     _applyBrightnessToMatrix = function _applyBrightnessToMatrix(brightness, matrix) {
   var filterClass = _filterClass("ColorMatrixFilter"),
-      temp = filterClass();
+      temp = new filterClass();
 
   temp.matrix = matrix;
   temp.brightness(brightness, true);
@@ -14305,7 +14465,7 @@ for (i = 0; i < _xyContexts.length; i++) {
 }
 
 var PixiPlugin = {
-  version: "3.12.1",
+  version: "3.12.2",
   name: "pixi",
   register: function register(core, Plugin, propTween) {
     gsap = core;
@@ -14405,7 +14565,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ ScrollToPlugin)
 /* harmony export */ });
 /*!
- * ScrollToPlugin 3.12.1
+ * ScrollToPlugin 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -14532,7 +14692,7 @@ var gsap,
 };
 
 var ScrollToPlugin = {
-  version: "3.12.1",
+  version: "3.12.2",
   name: "scrollTo",
   rawVars: 1,
   register: function register(core) {
@@ -14690,7 +14850,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Observer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Observer.js */ "./node_modules/gsap/Observer.js");
 /*!
- * ScrollTrigger 3.12.1
+ * ScrollTrigger 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -14731,6 +14891,8 @@ var gsap,
     _fixIOSBug,
     _context,
     _scrollRestoration,
+    _div100vh,
+    _100vh,
     _limitCallbacks,
     // if true, we'll only trigger callbacks if the active state toggles, so if you scroll immediately past both the start and end positions of a ScrollTrigger (thus inactive to inactive), neither its onEnter nor onLeave will be called. This is useful during startup.
 _startup = 1,
@@ -14771,10 +14933,13 @@ _pointerDownHandler = function _pointerDownHandler() {
     _isViewport = function _isViewport(e) {
   return !!~_root.indexOf(e);
 },
+    _getViewportDimension = function _getViewportDimension(dimensionProperty) {
+  return (dimensionProperty === "Height" ? _100vh : _win["inner" + dimensionProperty]) || _docEl["client" + dimensionProperty] || _body["client" + dimensionProperty];
+},
     _getBoundsFunc = function _getBoundsFunc(element) {
   return (0,_Observer_js__WEBPACK_IMPORTED_MODULE_0__._getProxyProp)(element, "getBoundingClientRect") || (_isViewport(element) ? function () {
     _winOffsets.width = _win.innerWidth;
-    _winOffsets.height = _win.innerHeight;
+    _winOffsets.height = _100vh;
     return _winOffsets;
   } : function () {
     return _getBounds(element);
@@ -14787,7 +14952,7 @@ _pointerDownHandler = function _pointerDownHandler() {
   return (a = (0,_Observer_js__WEBPACK_IMPORTED_MODULE_0__._getProxyProp)(scroller, "getBoundingClientRect")) ? function () {
     return a()[d];
   } : function () {
-    return (isViewport ? _win["inner" + d2] : scroller["client" + d2]) || 0;
+    return (isViewport ? _getViewportDimension(d2) : scroller["client" + d2]) || 0;
   };
 },
     _getOffsetsFunc = function _getOffsetsFunc(element, isViewport) {
@@ -14800,7 +14965,7 @@ _pointerDownHandler = function _pointerDownHandler() {
       d2 = _ref2.d2,
       d = _ref2.d,
       a = _ref2.a;
-  return Math.max(0, (s = "scroll" + d2) && (a = (0,_Observer_js__WEBPACK_IMPORTED_MODULE_0__._getProxyProp)(element, s)) ? a() - _getBoundsFunc(element)()[d] : _isViewport(element) ? (_docEl[s] || _body[s]) - (_win["inner" + d2] || _docEl["client" + d2] || _body["client" + d2]) : element[s] - element["offset" + d2]);
+  return Math.max(0, (s = "scroll" + d2) && (a = (0,_Observer_js__WEBPACK_IMPORTED_MODULE_0__._getProxyProp)(element, s)) ? a() - _getBoundsFunc(element)()[d] : _isViewport(element) ? (_docEl[s] || _body[s]) - _getViewportDimension(d2) : element[s] - element["offset" + d2]);
 },
     _iterateAutoRefresh = function _iterateAutoRefresh(func, events) {
   for (var i = 0; i < _autoRefresh.length; i += 3) {
@@ -15139,12 +15304,21 @@ _revertRecorded = function _revertRecorded(media) {
     });
   }
 },
+    _refresh100vh = function _refresh100vh() {
+  _body.appendChild(_div100vh);
+
+  _100vh = _div100vh.offsetHeight || _win.innerHeight;
+
+  _body.removeChild(_div100vh);
+},
     _refreshAll = function _refreshAll(force, skipRevert) {
   if (_lastScrollTime && !force) {
     _addListener(ScrollTrigger, "scrollEnd", _softRefresh);
 
     return;
   }
+
+  _refresh100vh();
 
   _refreshingAll = ScrollTrigger.isRefreshing = true;
 
@@ -15946,7 +16120,8 @@ var ScrollTrigger = /*#__PURE__*/function () {
       !_refreshingAll && onRefreshInit && onRefreshInit(self);
       _refreshing = self;
 
-      if (tweenTo.tween) {
+      if (tweenTo.tween && !position) {
+        // we skip this if a position is passed in because typically that's from .setPositions() and it's best to allow in-progress snapping to continue.
         tweenTo.tween.kill();
         tweenTo.tween = 0;
       }
@@ -16192,8 +16367,8 @@ var ScrollTrigger = /*#__PURE__*/function () {
       lastRefresh = _getTime();
 
       if (snapDelayedCall) {
-        lastSnap = -1;
-        self.isActive && scrollFunc(start + change * prevProgress); // just so snapping gets re-enabled, clear out any recorded last value
+        lastSnap = -1; // just so snapping gets re-enabled, clear out any recorded last value
+        // self.isActive && scrollFunc(start + change * prevProgress); // previously this line was here to ensure that when snapping kicks in, it's from the previous progress but in some cases that's not desirable, like an all-page ScrollTrigger when new content gets added to the page, that'd totally change the progress.
 
         snapDelayedCall.restart(true);
       }
@@ -16420,8 +16595,7 @@ var ScrollTrigger = /*#__PURE__*/function () {
 
         _addListener(scroller, "resize", _onResize);
 
-        _addListener(isViewport ? _doc : scroller, "scroll", _onScroll);
-
+        isViewport || _addListener(scroller, "scroll", _onScroll);
         onRefreshInit && _addListener(ScrollTrigger, "refreshInit", onRefreshInit);
 
         if (reset !== false) {
@@ -16491,7 +16665,7 @@ var ScrollTrigger = /*#__PURE__*/function () {
 
           _removeListener(scroller, "resize", _onResize);
 
-          _removeListener(scroller, "scroll", _onScroll);
+          isViewport || _removeListener(scroller, "scroll", _onScroll);
         }
       }
     };
@@ -16635,6 +16809,12 @@ var ScrollTrigger = /*#__PURE__*/function () {
 
       if (_body) {
         _enabled = 1;
+        _div100vh = document.createElement("div"); // to solve mobile browser address bar show/hide resizing, we shouldn't rely on window.innerHeight. Instead, use a <div> with its height set to 100vh and measure that since that's what the scrolling is based on anyway and it's not affected by address bar showing/hiding.
+
+        _div100vh.style.height = "100vh";
+        _div100vh.style.position = "absolute";
+
+        _refresh100vh();
 
         _rafBugFix();
 
@@ -16815,7 +16995,7 @@ var ScrollTrigger = /*#__PURE__*/function () {
 
   return ScrollTrigger;
 }();
-ScrollTrigger.version = "3.12.1";
+ScrollTrigger.version = "3.12.2";
 
 ScrollTrigger.saveStyles = function (targets) {
   return targets ? _toArray(targets).forEach(function (target) {
@@ -17292,7 +17472,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _utils_strings_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/strings.js */ "./node_modules/gsap/utils/strings.js");
 /*!
- * TextPlugin 3.12.1
+ * TextPlugin 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -17311,7 +17491,7 @@ var gsap,
 };
 
 var TextPlugin = {
-  version: "3.12.1",
+  version: "3.12.2",
   name: "text",
   init: function init(target, value, tween) {
     typeof value !== "object" && (value = {
@@ -17667,7 +17847,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
 /*!
- * GSAP 3.12.1
+ * GSAP 3.12.2
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
@@ -18063,8 +18243,8 @@ _totalTimeToTime = (clampedTotalTime, duration, repeat, repeatDelay, yoyo) => {
 _postAddChecks = function _postAddChecks(timeline, child) {
   var t;
 
-  if (child._time || child._initted && !child._dur) {
-    //in case, for example, the _start is moved on a tween that has already rendered. Imagine it's at its end state, then the startTime is moved WAY later (after the end of this timeline), it should render at its beginning.
+  if (child._time || !child._dur && child._initted || child._start < timeline._time && (child._dur || !child.add)) {
+    // in case, for example, the _start is moved on a tween that has already rendered, or if it's being inserted into a timeline BEFORE where the playhead is currently. Imagine it's at its end state, then the startTime is moved WAY later (after the end of this timeline), it should render at its beginning. Special case: if it's a timeline (has .add() method) and no duration, we can skip rendering because the user may be populating it AFTER adding it to a parent timeline (unconventional, but possible, and we wouldn't want it to get removed if the parent's autoRemoveChildren is true).
     t = _parentToChildTotalTime(timeline.rawTime(), child);
 
     if (!child._dur || _clamp(0, child.totalDuration(), t) - child._tTime > _tinyNum) {
@@ -19521,7 +19701,7 @@ var Animation = /*#__PURE__*/function () {
       animation = animation._dp;
     }
 
-    return !this.parent && this._sat ? this._sat.vars.immediateRender ? -1 : this._sat.globalTime(rawTime) : time; // the _startAt tweens for .fromTo() and .from() that have immediateRender should always be FIRST in the timeline (important for context.revert()). "_sat" stands for _startAtTween, referring to the parent tween that created the _startAt. We must discern if that tween had immediateRender so that we can know whether or not to prioritize it in revert().
+    return !this.parent && this._sat ? this._sat.vars.immediateRender ? -Infinity : this._sat.globalTime(rawTime) : time; // the _startAt tweens for .fromTo() and .from() that have immediateRender should always be FIRST in the timeline (important for context.revert()). "_sat" stands for _startAtTween, referring to the parent tween that created the _startAt. We must discern if that tween had immediateRender so that we can know whether or not to prioritize it in revert().
   };
 
   _proto.repeat = function repeat(value) {
@@ -19842,7 +20022,8 @@ var Timeline = /*#__PURE__*/function (_Animation) {
           var rewinding = yoyo && prevIteration & 1,
               doesWrap = rewinding === (yoyo && iteration & 1);
           iteration < prevIteration && (rewinding = !rewinding);
-          prevTime = rewinding ? 0 : dur;
+          prevTime = rewinding ? 0 : tTime % dur ? dur : tTime; // if the playhead is landing exactly at the end of an iteration, use that totalTime rather than only the duration, otherwise it'll skip the 2nd render since it's effectively at the same time.
+
           this._lock = 1;
           this.render(prevTime || (isYoyo ? 0 : _roundPrecise(iteration * cycleDuration)), suppressEvents, !dur)._lock = 0;
           this._tTime = tTime; // if a user gets the iteration() inside the onRepeat, for example, it should be accurate.
@@ -20630,7 +20811,7 @@ _forceAllPropTweens,
           immediateRender: immediateRender,
           //zero-duration tweens render immediately by default, but if we're not specifically instructed to render this tween immediately, we should skip this and merely _init() to record the starting values (rendering them immediately would push them to completion which is wasteful in that case - we'd have to render(-1) immediately after)
           stagger: 0,
-          parent: parent //ensures that nested tweens that had a stagger are handled properly, like gsap.from(".class", {y:gsap.utils.wrap([-100,100])})
+          parent: parent //ensures that nested tweens that had a stagger are handled properly, like gsap.from(".class", {y: gsap.utils.wrap([-100,100]), stagger: 0.5})
 
         }, cleanVars);
         harnessVars && (p[harness.prop] = harnessVars); // in case someone does something like .from(..., {css:{}})
@@ -21651,13 +21832,13 @@ var Context = /*#__PURE__*/function () {
           t: t
         };
       }).sort(function (a, b) {
-        return b.g - a.g || -1;
+        return b.g - a.g || -Infinity;
       }).forEach(function (o) {
         return o.t.revert(revert);
       }); // note: all of the _startAt tweens should be reverted in reverse order that they were created, and they'll all have the same globalTime (-1) so the " || -1" in the sort keeps the order properly.
 
       this.data.forEach(function (e) {
-        return e instanceof Timeline ? e.data !== "nested" && e.kill() : !(e instanceof Tween) && e.revert && e.revert(revert);
+        return !(e instanceof Tween) && e.revert && e.revert(revert);
       });
 
       this._r.forEach(function (f) {
@@ -22097,7 +22278,7 @@ var gsap = _gsap.registerPlugin({
   }
 }, _buildModifierPlugin("roundProps", _roundModifier), _buildModifierPlugin("modifiers"), _buildModifierPlugin("snap", snap)) || _gsap; //to prevent the core plugins from being dropped via aggressive tree shaking, we must include them in the variable declaration in this way.
 
-Tween.version = Timeline.version = gsap.version = "3.12.1";
+Tween.version = Timeline.version = gsap.version = "3.12.2";
 _coreReady = 1;
 _windowExists() && _wake();
 var Power0 = _easeMap.Power0,
@@ -22125,6 +22306,52 @@ var Power0 = _easeMap.Power0,
 
 /***/ }),
 
+/***/ "./node_modules/gsap/index.js":
+/*!************************************!*\
+  !*** ./node_modules/gsap/index.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Back: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Back),
+/* harmony export */   Bounce: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Bounce),
+/* harmony export */   CSSPlugin: () => (/* reexport safe */ _CSSPlugin_js__WEBPACK_IMPORTED_MODULE_1__.CSSPlugin),
+/* harmony export */   Circ: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Circ),
+/* harmony export */   Cubic: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Cubic),
+/* harmony export */   Elastic: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Elastic),
+/* harmony export */   Expo: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Expo),
+/* harmony export */   Linear: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Linear),
+/* harmony export */   Power0: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Power0),
+/* harmony export */   Power1: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Power1),
+/* harmony export */   Power2: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Power2),
+/* harmony export */   Power3: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Power3),
+/* harmony export */   Power4: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Power4),
+/* harmony export */   Quad: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Quad),
+/* harmony export */   Quart: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Quart),
+/* harmony export */   Quint: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Quint),
+/* harmony export */   Sine: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Sine),
+/* harmony export */   SteppedEase: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.SteppedEase),
+/* harmony export */   Strong: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.Strong),
+/* harmony export */   TimelineLite: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.TimelineLite),
+/* harmony export */   TimelineMax: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.TimelineMax),
+/* harmony export */   TweenLite: () => (/* reexport safe */ _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.TweenLite),
+/* harmony export */   TweenMax: () => (/* binding */ TweenMaxWithCSS),
+/* harmony export */   "default": () => (/* binding */ gsapWithCSS),
+/* harmony export */   gsap: () => (/* binding */ gsapWithCSS)
+/* harmony export */ });
+/* harmony import */ var _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gsap-core.js */ "./node_modules/gsap/gsap-core.js");
+/* harmony import */ var _CSSPlugin_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CSSPlugin.js */ "./node_modules/gsap/CSSPlugin.js");
+
+
+var gsapWithCSS = _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.gsap.registerPlugin(_CSSPlugin_js__WEBPACK_IMPORTED_MODULE_1__.CSSPlugin) || _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.gsap,
+    // to protect from tree shaking
+TweenMaxWithCSS = gsapWithCSS.core.Tween;
+
+
+/***/ }),
+
 /***/ "./node_modules/gsap/utils/matrix.js":
 /*!*******************************************!*\
   !*** ./node_modules/gsap/utils/matrix.js ***!
@@ -22143,7 +22370,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getGlobalMatrix: () => (/* binding */ getGlobalMatrix)
 /* harmony export */ });
 /*!
- * matrix 3.12.1
+ * matrix 3.12.2
  * https://greensock.com
  *
  * Copyright 2008-2023, GreenSock. All rights reserved.
@@ -22594,7 +22821,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   transformRawPath: () => (/* binding */ transformRawPath)
 /* harmony export */ });
 /*!
- * paths 3.12.1
+ * paths 3.12.2
  * https://greensock.com
  *
  * Copyright 2008-2023, GreenSock. All rights reserved.
@@ -24098,7 +24325,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   splitInnerHTML: () => (/* binding */ splitInnerHTML)
 /* harmony export */ });
 /*!
- * strings: 3.12.1
+ * strings: 3.12.2
  * https://greensock.com
  *
  * Copyright 2008-2023, GreenSock. All rights reserved.

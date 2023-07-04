@@ -1,6 +1,7 @@
 import React, {useRef, useEffect} from "react";
 import styled from "styled-components";
-import { gsap, ScrollTrigger } from "gsap/all";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
 
 /**
  * @param {BioTextProps} props - プロパティ

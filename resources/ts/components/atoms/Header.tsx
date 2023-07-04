@@ -7,7 +7,7 @@ export const Header = () => {
 
     return (
         <StyledHeaderWrapper>
-            <StyledHeaderLink to="/" className='stalkerTarget'>Gallery</StyledHeaderLink>
+            <StyledHeaderLink to="/gallery" className='stalkerTarget'>Gallery</StyledHeaderLink>
             <StyledHeaderAnchorLink href="#nft" offset="0" className='stalkerTarget'>NFT</StyledHeaderAnchorLink>
             <StyledHeaderAnchorLink href="#bio" offset="0" className='stalkerTarget'>Biography</StyledHeaderAnchorLink>
         </StyledHeaderWrapper>

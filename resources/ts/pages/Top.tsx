@@ -46,9 +46,6 @@ export const Top = () => {
             <StyledSection id="nft">
                 <NFT />
                 <HoverLink to={'/'}>click here</HoverLink>
-                {/* <MobileWrapper>
-                    <CarouselModal imgArray={[img1, img2, img3]} currentImg={img1} />
-                </MobileWrapper> */}
             </StyledSection>
             <StyledSection id="bio">
                 <Image imgURL={me} />
