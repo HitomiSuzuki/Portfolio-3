@@ -61,6 +61,7 @@ export const Gallery = () => {
         setIsModalOpen(!isModalOpen);
     }
 
+    // 表示する画像のリスト（あとで差し替え）
     const artworkList = [
         {title: 'img1', URL: img1},
         {title: 'img2', URL: img2},

@@ -4682,6 +4682,7 @@ var BioText = function BioText(props) {
     }
     var spanWrapText = function spanWrapText() {
       var _a;
+      // 一文字ずつアニメーションさせるためにspanタグで囲む
       var splitText = (_a = bioTextContent.textContent) === null || _a === void 0 ? void 0 : _a.split('');
       if (splitText === undefined) {
         return;
@@ -4694,7 +4695,6 @@ var BioText = function BioText(props) {
           var _char = _step.value;
           returnText = returnText + "<span>".concat(_char, "</span>");
         }
-        // return returnText;
       } catch (err) {
         _iterator.e(err);
       } finally {
@@ -4702,6 +4702,7 @@ var BioText = function BioText(props) {
       }
       bioTextContent.innerHTML = returnText;
     };
+    // gsapでアニメーションを付与
     spanWrapText();
     gsap_1["default"].registerPlugin(all_1.ScrollTrigger);
     var bioTextContentSpans = Array.from(bioTextContent.querySelectorAll('span'));
@@ -5555,6 +5556,7 @@ var Gallery = function Gallery() {
   var toggleModal = function toggleModal() {
     setIsModalOpen(!isModalOpen);
   };
+  // 表示する画像のリスト（あとで差し替え）
   var artworkList = [{
     title: 'img1',
     URL: img1_jpg_1["default"]

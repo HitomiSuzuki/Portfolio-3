@@ -29,8 +29,7 @@ export const BioText = (props: BioTextProps) => {
         }
 
         const spanWrapText = () => {
-            
-    
+            // 一文字ずつアニメーションさせるためにspanタグで囲む
             const splitText = bioTextContent.textContent?.split('');
             if(splitText === undefined) {
                 return
@@ -39,11 +38,11 @@ export const BioText = (props: BioTextProps) => {
             for(const char of splitText) {
                 returnText = returnText + `<span>${char}</span>`;
             }
-            // return returnText;
             bioTextContent.innerHTML=returnText;
         }
     
     
+        // gsapでアニメーションを付与
         spanWrapText();
         gsap.registerPlugin(ScrollTrigger)
     
