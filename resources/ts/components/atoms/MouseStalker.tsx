@@ -23,7 +23,7 @@ export const MouseStalker = () => {
         stalker.current.style.transform = `translate(${x}px, ${y + scroll}px)`;
     }
 
-    //処理(リンクホバー)
+    //処理(リンクホバー時に大きくなる)
     const HoverFunction = (e: Event) => {
         if(!stalker.current) {
             return
@@ -32,7 +32,7 @@ export const MouseStalker = () => {
         stalker.current.style.height = "60px";
     }
 
-    //処理(リンクホバー)
+    //処理(リンクホバー外れた時に元のサイズに戻る)
     const HoverOutFunction = (e: Event) => {
         if(!stalker.current) {
             return
@@ -49,7 +49,7 @@ export const MouseStalker = () => {
     })
 
     useEffect(() => {
-        const targets = Array.from(document.getElementsByClassName('stalkerTarget')); //リンクなど
+        const targets = Array.from(document.getElementsByClassName('stalkerTarget')); //stalkerTagretクラスをつけた要素をターゲットとする
         targets?.forEach((target) => {
             target.addEventListener('mouseenter', HoverFunction);
         })

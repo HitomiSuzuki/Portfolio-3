@@ -7,28 +7,24 @@ import img3 from '../../static/img3.jpg'
 import img4 from '../../static/img4.jpg'
 import img5 from '../../static/img5.jpg'
 import img6 from '../../static/img6.jpg'
-import img7 from '../../static/img7.jpg'
-import img8 from '../../static/img8.jpg'
 
 export const HoverImages = () => {
-
     
-
     return (
         <StyledHoverImagesWrapper>
             <StyledImageWrapper>
-                <HoverImage imgURL={img1} to={'/'} />
-                <HoverImage imgURL={img2} to={'/'} />
+                <HoverImage imgURL={img1} to={"/gallery"} state={{ imgURL: img1 }} />
+                <HoverImage imgURL={img2} to={"/gallery"} state={{ imgURL: img2 }} />
             </StyledImageWrapper>
             <StyledImageWrapper>
-                <HoverImage imgURL={img3} to={'/'} />
+                <HoverImage imgURL={img3} to={"/gallery"} state={{ imgURL: img3 }} />
             </StyledImageWrapper>
             <StyledImageWrapper>
-                <HoverImage imgURL={img4} to={'/'} />
-                <HoverImage imgURL={img5} to={'/'} />
+                <HoverImage imgURL={img4} to={"/gallery"} state={{ imgURL: img4 }} />
+                <HoverImage imgURL={img5} to={"/gallery"} state={{ imgURL: img5 }} />
             </StyledImageWrapper>
             <StyledImageWrapper>
-                <HoverImage imgURL={img6} to={'/'} />
+                <HoverImage imgURL={img6} to={"/gallery"} state={{ imgURL: img6 }} />
             </StyledImageWrapper>
         </StyledHoverImagesWrapper>
     )

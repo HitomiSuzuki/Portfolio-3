@@ -3,8 +3,18 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 
 
+/**
+ * @param {BioTextProps} props - プロパティ
+ * @property {string} children - テキストとなる小要素
+ * @property {string} to - リンク先URL
+ */
 
-export const HoverLink = (props: {children: string, to: string}) => {
+type HoverLinkProps = {
+    children: string;
+    to: string;
+}
+
+export const HoverLink = (props: HoverLinkProps) => {
     const {children, to} = props
 
     return (

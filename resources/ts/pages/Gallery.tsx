@@ -1,6 +1,7 @@
-import React, {useRef, useState} from "react";
+import React, {useRef, useState, useEffect, createRef, RefObject} from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 import img1 from '../static/img1.jpg';
 import img2 from '../static/img2.jpg';
 import img3 from '../static/img3.jpg';
@@ -10,41 +11,97 @@ import img6 from '../static/img6.jpg';
 import img7 from '../static/img7.jpg';
 import img8 from '../static/img8.jpg';
 
+interface State {
+    imgURL: string;
+}
 
 export const Gallery = () => {
-    const artworkDisplay = useRef<HTMLImageElement>(null);
-    let [artworkUrl, setArtworkUrl] = useState<string>('');
-    let [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    const clickArtworkName = (imgURL: string) => {
+    //トップページから画像クリックで来た場合に、クリックされた画像要素を把握
+    const location = useLocation();
+    let initialImgURL = '';
+
+     // ページを開いた時に画像をセットする
+     useEffect(() => {
+        if(location.state !== null) {
+            initialImgURL = location.state.imgURL;
+        }
+    
+        console.log(initialImgURL)
         if(!artworkDisplay.current) {
             return
         }
-        artworkDisplay.current.src = imgURL;
-        setArtworkUrl(imgURL);
+        if(initialImgURL !== "") {
+            artworkDisplay.current.src = initialImgURL;
+        }
+        
+    }, [])
+    
+
+    // 画像を表示する要素
+    const artworkDisplay = useRef<HTMLImageElement>(null);
+
+    // 現在表示されている画像
+    let [artworkUrl, setArtworkUrl] = useState<string>(initialImgURL);
+
+    // モーダルが開いているか
+    let [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+   
+    // アートワークタイトルがクリックされた時
+    const clickArtworkName = (currentImgURL: string) => {
+        if(!artworkDisplay.current) {
+            return
+        }
+        artworkDisplay.current.src = currentImgURL;
+        setArtworkUrl(currentImgURL);
     }
 
+    // モーダル開閉
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
     }
+
+    const artworkList = [
+        {title: 'img1', URL: img1},
+        {title: 'img2', URL: img2},
+        {title: 'img3', URL: img3},
+        {title: 'img4', URL: img4},
+        {title: 'img5', URL: img5},
+        {title: 'img6', URL: img6},
+        {title: 'img7', URL: img7},
+        {title: 'img8', URL: img8},
+    ]
+    
 
     return (
         <StyledGalleryWrapper>
             <StyledBackToTopLink to='/'>back to top</StyledBackToTopLink>
             <StyledArtworkList>
-                <StyledArtworkItem onClick={() => clickArtworkName(img1)}>1</StyledArtworkItem>
-                <StyledArtworkItem onClick={() => clickArtworkName(img2)}>2</StyledArtworkItem>
-                <StyledArtworkItem onClick={() => clickArtworkName(img3)}>3</StyledArtworkItem>
-                <StyledArtworkItem onClick={() => clickArtworkName(img4)}>4</StyledArtworkItem>
-                <StyledArtworkItem onClick={() => clickArtworkName(img5)}>5</StyledArtworkItem>
-                <StyledArtworkItem onClick={() => clickArtworkName(img6)}>6</StyledArtworkItem>
-                <StyledArtworkItem onClick={() => clickArtworkName(img7)}>7</StyledArtworkItem>
-                <StyledArtworkItem onClick={() => clickArtworkName(img8)}>8</StyledArtworkItem>
+                {artworkList.map((item, index) => {
+                    return (
+                            <StyledArtworkItem onClick={() => clickArtworkName(item.URL)}>{index}</StyledArtworkItem>
+                    )
+                })}
                 
             </StyledArtworkList>
 
             <StyledArtworkWrapper>
-                <StyledArtworkDisplay src='' ref={artworkDisplay}></StyledArtworkDisplay>
-                {artworkUrl !== '' ? <StyledArtworkLargerButton onClick={() => toggleModal()}/>: ''}
+                {isMobile ? 
+                    <>
+                    <StyledArtworkDisplay src='' ref={artworkDisplay}></StyledArtworkDisplay>
+                    {artworkUrl !== '' ? <StyledArtworkLargerButton onClick={() => toggleModal()}/>: ''}
+                    </>
+                : 
+                    <StyledArtworks>
+                        {artworkList.map((item) => {
+                        return (
+                            <StyledArtwork title={item.title}><img src={item.URL} /></StyledArtwork>
+                        )
+                    })}
+                        
+                    </StyledArtworks>
+                }
+                
             </StyledArtworkWrapper>
 
             {isModalOpen ? (
@@ -79,6 +136,8 @@ const StyledBackToTopLink = styled(Link)`
     position: absolute;
     top: 20px;
     left: 20px;
+    text-decoration: none;
+    color: black;
 `
 
 const StyledArtworkList = styled.ul`
@@ -159,9 +218,9 @@ const StyledModalBg = styled.div`
 
 const StyledLargeArtworkWrapper = styled.div`
     width: 80vw;
-    height: calc(100vh - 75px);
+    height: calc(100vh - 20px);
     position: absolute;
-    top: 75px;
+    top: 20px;
     left: 50%;
     transform: translate(-50%, 0);
     -webkit-transform: translate(-50%, 0);
@@ -188,4 +247,22 @@ const StyledArtworkSmallerButton = styled.span`
         left: 10px;
         background-color: white;
     }
+`
+
+const StyledArtworks = styled.ul`
+    margin: 0;
+    list-style: none;
+    padding: 0;
+`
+
+const StyledArtwork = styled.li`
+    height: 300px;
+    width: auto;
+
+    img {
+        height: 100%;
+        object-fit: contain;
+        object-position: top;
+    }
+
 `

@@ -6,23 +6,23 @@ import { ScrollTrigger } from "gsap/all";
 /**
  * @param {BioTextProps} props - プロパティ
  * @property {string} children - テキストとなる小要素
- * @property {number} key - ユニークなキー
+ * @property {number} key - ユニークなキー(refを作るのに使う)
  */
 type BioTextProps = {
     children: string;
-    key: number;
+    keyNumber: number;
 }
 
 export const BioText = (props: BioTextProps) => {
-    const {children, key} = props;
+    const {children, keyNumber} = props;
 
     const bioText = {
-        [key]: useRef<HTMLParagraphElement>(null)
+        [keyNumber]: useRef<HTMLParagraphElement>(null)
     }
     
 
     useEffect(() => {
-        const bioTextContent = bioText[key].current
+        const bioTextContent = bioText[keyNumber].current
 
         if(!bioTextContent) {
             return
@@ -70,7 +70,7 @@ export const BioText = (props: BioTextProps) => {
 
     return (
         <div>
-        <StyledBioText ref={bioText[key]}>{children}</StyledBioText>
+        <StyledBioText ref={bioText[keyNumber]}>{children}</StyledBioText>
         </div>
     )
 }

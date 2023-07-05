@@ -14,11 +14,12 @@ export const SiteTitle: React.FC = () => {
             return
         }
 
+        // マウスが円を出ないように調整
         if(x > 30 || x < -30) {
             targetRef.current.style.transform = `translate(0px, 0px)`;
             return
         }
-
+        // マウスが円を出ないように調整
         if(y > 30 || y < -30) {
             targetRef.current.style.transform = `translate(0px, 0px)`;
             return

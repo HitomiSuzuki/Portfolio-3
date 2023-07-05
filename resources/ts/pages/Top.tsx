@@ -3,19 +3,13 @@ import styled from "styled-components";
 import { SiteTitle } from '../components/atoms/SiteTitle';
 import { HoverLink } from '../components/atoms/HoverLink';
 import { Header } from '../components/atoms/Header';
-import { HoverImage } from '../components/atoms/HoverImage';
 import { MouseStalker } from "../components/atoms/MouseStalker";
 import { Carousel } from "../components/atoms/Carousel";
-import { CarouselModal } from "../components/molecules/CarouselModal";
 import { HoverImages } from "../components/molecules/HoverImages";
 import img1 from '../static/img1.jpg';
 import img2 from '../static/img2.jpg';
 import img3 from '../static/img3.jpg';
 import img4 from '../static/img4.jpg';
-import img5 from '../static/img5.jpg';
-import img6 from '../static/img6.jpg';
-import img7 from '../static/img7.jpg';
-import img8 from '../static/img8.jpg';
 import me from '../static/me.jpg';
 import { TopCarousel } from "../components/atoms/TopCarousel";
 import { NFT } from "../components/atoms/NFT";
@@ -37,7 +31,7 @@ export const Top = () => {
             <StyledSection id="gallery">
                 <PCWrapper>
                     <HoverImages />
-                    <HoverLink to={'/'}>visit gallery</HoverLink>
+                    <HoverLink to={'/gallery'}>visit gallery</HoverLink>
                 </PCWrapper>
                 <MobileWrapper>
                     <Carousel imgArray={GalleryImgArray}/>
@@ -45,15 +39,15 @@ export const Top = () => {
             </StyledSection>
             <StyledSection id="nft">
                 <NFT />
-                <HoverLink to={'/'}>click here</HoverLink>
+                <HoverLink to={'https://opensea.io/ja/he_t0ld_me'}>click here</HoverLink>
             </StyledSection>
             <StyledSection id="bio">
                 <Image imgURL={me} />
                 <StyledBioTextWrapper>
-                    <BioText key={1}>1991年7月 三重県四日市市生まれ</BioText>
-                    <BioText key={2}>秋田県立国際教養大学中退</BioText>
-                    <BioText key={3}>株式会社amptech(~2022)</BioText>
-                    <BioText key={4}>株式会社フリースタイル(~2023)</BioText>
+                    <BioText keyNumber={1}>1991年7月 三重県四日市市生まれ</BioText>
+                    <BioText keyNumber={2}>秋田県立国際教養大学中退</BioText>
+                    <BioText keyNumber={3}>株式会社amptech(~2022)</BioText>
+                    <BioText keyNumber={4}>株式会社フリースタイル(~2023)</BioText>
                 </StyledBioTextWrapper>
             </StyledSection>
             <StyledSection id="footer">
@@ -77,13 +71,13 @@ const StyledSection = styled.section`
         } 
     }
     &#gallery {
-        padding: 100px 60px 0;
+        padding: 100px 50px 0 80px;
         @media(max-width: 599px) {
             padding: 0;
         } 
     }
     &#nft {
-        padding: 150px  60px 0;
+        padding: 150px  0 0 50px;
         @media(max-width: 599px) {
             padding: 70px 0 0;
         }   

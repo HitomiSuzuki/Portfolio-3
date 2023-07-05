@@ -3,13 +3,21 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 
+/**
+ * @param {BioTextProps} props - プロパティ
+ * @property {string} state - 現在の画像URL
+ * @property {string} to - リンク先URL
+ */
+
 type HoverImageProps = {
     imgURL: string;
     to: string;
+    state: {imgURL: string }
+    
 }
 
 export const HoverImage = (props: HoverImageProps) => {
-    const {imgURL, to} = props;
+    const {imgURL, to, state} = props;
 
     useEffect(() => {
         const scrollAnimationElm = document.querySelectorAll('.fadeIn');
@@ -31,7 +39,7 @@ export const HoverImage = (props: HoverImageProps) => {
 
     
     return (
-        <Link to={to}>
+        <Link to={to} state={state}>
             <StyledImage src={imgURL} className='stalkerTarget fadeIn'></StyledImage>
         </Link>
     )

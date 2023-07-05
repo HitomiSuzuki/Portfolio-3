@@ -3,6 +3,12 @@ import styled from "styled-components";
 import { Carousel } from "../atoms/Carousel";
 import close from "../../static/close.png";
 
+/**
+ * @param {BioTextProps} props - プロパティ
+ * @property {string[]} imgArray - 画像の配列
+ * @property {string} currentImg - 現在表示されている画像
+ */
+
 type CarouselModalType = {
     imgArray: string[],
     currentImg: string

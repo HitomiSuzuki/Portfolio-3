@@ -5,6 +5,11 @@ import 'slick-carousel';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
+/**
+ * @param {BioTextProps} props - プロパティ
+ * @property {string[]} imgArray - 画像の配列
+ */
+
 type CarouselProps = {
     imgArray: string[];
 }

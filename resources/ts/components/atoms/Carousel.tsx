@@ -7,6 +7,11 @@ import 'slick-carousel/slick/slick-theme.css';
 import prevArrow from '../../static/Arrow11.png';
 import nextArrow from '../../static/Arrow12.png';
 
+
+/**
+ * @param {BioTextProps} props - プロパティ
+ * @property {string[]} imgArray - 画像の配列
+ */
 type CarouselProps = {
     imgArray: string[];
 }
