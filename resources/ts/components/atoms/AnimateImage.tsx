@@ -9,14 +9,14 @@ import { Link } from "react-router-dom";
  * @property {string} to - リンク先URL
  */
 
-type HoverImageProps = {
+type AnimateImageProps = {
     imgURL: string;
     to: string;
     state: {imgURL: string }
     
 }
 
-export const HoverImage = (props: HoverImageProps) => {
+export const AnimateImage = (props: AnimateImageProps) => {
     const {imgURL, to, state} = props;
 
     useEffect(() => {
@@ -57,5 +57,5 @@ const StyledImage = styled.img`
     }
 `
 
-const StyledHoverImage = styled(HoverImage)`
+const StyledHoverImage = styled(AnimateImage)`
 `

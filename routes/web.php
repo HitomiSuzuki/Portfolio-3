@@ -19,3 +19,17 @@ Route::get('/', function () {
 Route::get('/gallery', function () {
     return view('index');
 });
+Route::get('/login', function () {
+    return view('index');
+});
+Route::get('new', function () {
+    return view('index');
+});
+Route::get('artworks', function () {
+    return view('index');
+});
+
+
+// Route::get('/', function () {
+//     return view('index');
+// })->middleware('auth');

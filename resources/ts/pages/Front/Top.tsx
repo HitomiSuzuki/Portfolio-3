@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import { SiteTitle } from '../components/atoms/SiteTitle';
-import { HoverLink } from '../components/atoms/HoverLink';
-import { Header } from '../components/atoms/Header';
-import { MouseStalker } from "../components/atoms/MouseStalker";
-import { Carousel } from "../components/atoms/Carousel";
-import { HoverImages } from "../components/molecules/HoverImages";
-import img1 from '../static/img1.jpg';
-import img2 from '../static/img2.jpg';
-import img3 from '../static/img3.jpg';
-import img4 from '../static/img4.jpg';
-import me from '../static/me.jpg';
-import { TopCarousel } from "../components/atoms/TopCarousel";
-import { NFT } from "../components/atoms/NFT";
-import { BioText } from "../components/atoms/BioText";
-import { Image } from "../components/atoms/Image";
+import { SiteTitle } from '../../components/atoms/SiteTitle';
+import { HoverLink } from '../../components/atoms/HoverLink';
+import { Header } from '../../components/atoms/Header';
+import { MouseStalker } from "../../components/atoms/MouseStalker";
+import { Carousel } from "../../components/atoms/Carousel";
+import { AnimateImages } from "../../components/molecules/AnimateImages";
+import img1 from '../../static/img1.jpg';
+import img2 from '../../static/img2.jpg';
+import img3 from '../../static/img3.jpg';
+import img4 from '../../static/img4.jpg';
+import me from '../../static/me.jpg';
+import { TopCarousel } from "../../components/atoms/TopCarousel";
+import { NFT } from "../../components/atoms/NFT";
+import { BioText } from "../../components/atoms/BioText";
+import { Image } from "../../components/atoms/Image";
 
 export const Top = () => {
     const MainImgArray = [img1, img2, img3]
@@ -30,7 +30,7 @@ export const Top = () => {
             </StyledSection>
             <StyledSection id="gallery">
                 <PCWrapper>
-                    <HoverImages />
+                    <AnimateImages />
                     <HoverLink to={'/gallery'}>visit gallery</HoverLink>
                 </PCWrapper>
                 <MobileWrapper>

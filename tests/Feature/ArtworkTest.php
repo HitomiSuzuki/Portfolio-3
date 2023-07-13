@@ -5,10 +5,21 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Artwork;
+use App\Models\User;
 
 class ArtworkTest extends TestCase
 {
     use RefreshDatabase;
+
+    // ログイン状態をつくる
+    public function setUp(): void 
+    {
+        parent::setUp();
+
+        $user = User::factory()->create();
+        $this->actingAs($user);
+    }
+
     /**
      * @test
      */

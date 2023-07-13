@@ -16,6 +16,7 @@ type BioTextProps = {
 export const BioText = (props: BioTextProps) => {
     const {children, keyNumber} = props;
 
+    
     const bioText = {
         [keyNumber]: useRef<HTMLParagraphElement>(null)
     }

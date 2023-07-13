@@ -1,60 +1,83 @@
-import React from "react";
+import React, {useRef, createRef, RefObject} from "react";
 import styled from "styled-components";
-import { HoverImage } from "../atoms/HoverImage";
-import img1 from '../../static/img1.jpg'
-import img2 from '../../static/img2.jpg'
-import img3 from '../../static/img3.jpg'
-import img4 from '../../static/img4.jpg'
-import img5 from '../../static/img5.jpg'
-import img6 from '../../static/img6.jpg'
+import img1 from '../../static/img1.jpg';
 
-export const HoverImages = () => {
+type HoverImageProps = {
+    images: string[];
+}
+
+export const HoverImages = (props: HoverImageProps) => {
+    const{images} = props;
+
     
+  const targetOverlays: RefObject<HTMLDivElement>[] = []
+  
+  images.forEach((_, index) => {
+    targetOverlays[index] = createRef<HTMLDivElement>()
+  })
+
+
+    const toggleOverlay = (i: number) => {
+        targetOverlays[i].current?.classList.contains('show') ? targetOverlays[i].current?.classList.remove('show') :targetOverlays[i].current?.classList.add('show');
+    }
+
     return (
-        <StyledHoverImagesWrapper>
-            <StyledImageWrapper>
-                <HoverImage imgURL={img1} to={"/gallery"} state={{ imgURL: img1 }} />
-                <HoverImage imgURL={img2} to={"/gallery"} state={{ imgURL: img2 }} />
-            </StyledImageWrapper>
-            <StyledImageWrapper>
-                <HoverImage imgURL={img3} to={"/gallery"} state={{ imgURL: img3 }} />
-            </StyledImageWrapper>
-            <StyledImageWrapper>
-                <HoverImage imgURL={img4} to={"/gallery"} state={{ imgURL: img4 }} />
-                <HoverImage imgURL={img5} to={"/gallery"} state={{ imgURL: img5 }} />
-            </StyledImageWrapper>
-            <StyledImageWrapper>
-                <HoverImage imgURL={img6} to={"/gallery"} state={{ imgURL: img6 }} />
-            </StyledImageWrapper>
-        </StyledHoverImagesWrapper>
+        <StyledHoverImageList>
+            {images.map((img, i) => {
+                return (
+                    <StyledHoverImageItem  onMouseEnter={() => toggleOverlay(i)} onMouseLeave={() => toggleOverlay(i)}>
+                        <StyledHoverImage src={img}/>
+                        <StyledHoverImageOverlay ref={targetOverlays[i]}>
+                            <StyledDeleteButton type="button" onClick={() => console.log('YO')}>Delete</StyledDeleteButton>
+                        </StyledHoverImageOverlay>
+                    </StyledHoverImageItem>
+                )
+            })}
+        </StyledHoverImageList>
     )
 }
 
-
-const StyledHoverImagesWrapper = styled.div`
-    padding-top: 80px;
+const StyledHoverImageList = styled.ul`
+    list-style: none;
+    margin: 200px 110px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 `
-const StyledImageWrapper = styled.div`
+
+const StyledHoverImageItem = styled.li`
     position: relative;
+    width: 22%;
+    height: calc((100vw - 220px) / 100 * 22);
+    overflow: hidden;
+    margin: 20px 1.5% ;
+`
 
-    &:nth-of-type(2n + 1) {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+const StyledHoverImage = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+`
 
-        img {
-            &:nth-of-type(2n + 1)  {
-                position: relative;
-                top: -80px;
-            }
-            &:nth-of-type(2n) {
-                position: relative;
-                bottom: -80px;
-            }
-        }
+const StyledHoverImageOverlay = styled.div`
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transition: all 0.1s ease-in-out;
+    background: green;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    &.show {
+        top: 0;
     }
+`
 
-    &:nth-of-type(2n) {
-        text-align: center;
-    }
+const StyledDeleteButton = styled.button`
+    display: block;
+    margin: 0 auto;
 `
