@@ -16,7 +16,7 @@ type BioTextProps = {
 export const BioText = (props: BioTextProps) => {
     const {children, keyNumber} = props;
 
-    
+    // 複数要素が並ぶので数字を渡す
     const bioText = {
         [keyNumber]: useRef<HTMLParagraphElement>(null)
     }

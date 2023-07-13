@@ -4951,6 +4951,7 @@ var all_1 = __webpack_require__(/*! gsap/all */ "./node_modules/gsap/all.js");
 var BioText = function BioText(props) {
   var children = props.children,
     keyNumber = props.keyNumber;
+  // 複数要素が並ぶので数字を渡す
   var bioText = _defineProperty({}, keyNumber, (0, react_1.useRef)(null));
   (0, react_1.useEffect)(function () {
     var bioTextContent = bioText[keyNumber].current;
@@ -5064,6 +5065,56 @@ var StyledCarouselImage = styled_components_1["default"].img(_templateObject4 ||
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/Deletemodal.tsx":
+/*!*******************************************************!*\
+  !*** ./resources/ts/components/atoms/Deletemodal.tsx ***!
+  \*******************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.DeleteModal = void 0;
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var DeleteModal = function DeleteModal(props) {
+  var currentImage = props.currentImage,
+    setShowModal = props.setShowModal;
+  var deleteItem = function deleteItem() {
+    //画像削除処理を書く
+  };
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(StyledDeleteModalBg, {
+    onClick: function onClick() {
+      return setShowModal(false);
+    }
+  }), react_1["default"].createElement(StyledDeleteModalWrapper, null, "You are going to delete ", currentImage.title, ". ", react_1["default"].createElement("br", null), " Are you sure ?", react_1["default"].createElement(StyledButtonWrapper, null, react_1["default"].createElement(StyledDeleteModalButton, {
+    onClick: function onClick() {
+      return setShowModal(false);
+    }
+  }, "cancel"), react_1["default"].createElement(StyledDeleteModalButton, {
+    onClick: function onClick() {
+      return deleteItem();
+    }
+  }, "delete"))));
+};
+exports.DeleteModal = DeleteModal;
+var StyledDeleteModalBg = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 100vw;\n    height: 100vh;\n    position: fixed;\n    background: black;\n    opacity: 0.6;\n    top: 0;\n    left: 0;\n"])));
+var StyledDeleteModalWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: absolute;\n    width: 80%;\n    max-width: 300px;\n    height: 200px;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    -webkit-transform: translate(-50%, -50%);\n    -ms-transform: translate(-50%, -50%);\n    background: lightgray;\n    padding: 100px;\n"])));
+var StyledButtonWrapper = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n    width: 100%;\n    margin-top: 50px;\n"])));
+var StyledDeleteModalButton = styled_components_1["default"].button(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    width: 45%;\n    height: 30px;\n    cursor: pointer;\n    &:hover {\n        opacity: 0.8;\n    }\n"])));
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/Header.tsx":
 /*!**************************************************!*\
   !*** ./resources/ts/components/atoms/Header.tsx ***!
@@ -5105,6 +5156,110 @@ var Header = function Header() {
 exports.Header = Header;
 var StyledHeaderWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 30px;\n    height: 100vh;\n    position: fixed;\n    top: 0;\n    left: 0;\n    padding: 10px;\n    background-color: black;\n    z-index: 999;\n\n    @media(max-width: 599px) {\n        width: 100vw;\n        height: 30px;\n    }\n"])));
 var StyledHeaderAnchorLink = (0, styled_components_1["default"])(react_anchor_link_smooth_scroll_1["default"])(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    writing-mode: vertical-rl;\n    padding: 15px 0;\n    color: white;\n    text-decoration: none;\n    @media(max-width: 599px) {\n        writing-mode: horizontal-tb;\n        padding: 0 15px;\n    }\n"])));
+
+/***/ }),
+
+/***/ "./resources/ts/components/atoms/HoverImage.tsx":
+/*!******************************************************!*\
+  !*** ./resources/ts/components/atoms/HoverImage.tsx ***!
+  \******************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.HoverImage = void 0;
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var HoverImage = function HoverImage(props) {
+  var image = props.image,
+    setCurrentImage = props.setCurrentImage,
+    setShowModal = props.setShowModal;
+  // 親要素の中で配列になるので、Refに数字を割り当てる
+  var targetOverlay = _defineProperty({}, image.id, (0, react_1.useRef)(null));
+  // オーバーレイを表示非表示
+  var toggleOverlay = function toggleOverlay() {
+    var _a, _b, _c;
+    ((_a = targetOverlay[image.id].current) === null || _a === void 0 ? void 0 : _a.classList.contains('show')) ? (_b = targetOverlay[image.id].current) === null || _b === void 0 ? void 0 : _b.classList.remove('show') : (_c = targetOverlay[image.id].current) === null || _c === void 0 ? void 0 : _c.classList.add('show');
+  };
+  // モーダルを表示非表示
+  var showModal = function showModal() {
+    // 親要素から渡されたsetStateたち
+    setCurrentImage({
+      title: image.title,
+      src: image.src,
+      id: image.id
+    });
+    setShowModal(true);
+  };
+  return react_1["default"].createElement(StyledHoverImageItem, {
+    onMouseEnter: function onMouseEnter() {
+      return toggleOverlay();
+    },
+    onMouseLeave: function onMouseLeave() {
+      return toggleOverlay();
+    }
+  }, react_1["default"].createElement(StyledHoverImage, {
+    src: image.src
+  }), react_1["default"].createElement(StyledHoverImageOverlay, {
+    ref: targetOverlay[image.id]
+  }, react_1["default"].createElement(StyledDeleteButton, {
+    type: "button",
+    onClick: function onClick() {
+      return showModal();
+    }
+  }, "Delete")));
+};
+exports.HoverImage = HoverImage;
+var StyledHoverImageItem = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: relative;\n    width: 100%;\n    aspect-ratio: 1;\n    overflow: hidden;\n"])));
+var StyledHoverImage = styled_components_1["default"].img(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    object-position: center center;\n"])));
+var StyledHoverImageOverlay = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    top: -100%;\n    left: 0;\n    transition: all 0.1s ease-in-out;\n    background: green;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n\n    &.show {\n        top: 0;\n    }\n"])));
+var StyledDeleteButton = styled_components_1["default"].button(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: block;\n    margin: 0 auto;\n"])));
 
 /***/ }),
 
@@ -5471,6 +5626,115 @@ var StyledText = styled_components_1["default"].p(_templateObject4 || (_template
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/TitleInput.tsx":
+/*!******************************************************!*\
+  !*** ./resources/ts/components/atoms/TitleInput.tsx ***!
+  \******************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+var _templateObject, _templateObject2;
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.TitleInput = void 0;
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var TitleInput = function TitleInput(props) {
+  var img = props.img;
+  var _ref = (0, react_1.useState)(false),
+    _ref2 = _slicedToArray(_ref, 2),
+    editable = _ref2[0],
+    setEditable = _ref2[1];
+  var _ref3 = (0, react_1.useState)(img.title),
+    _ref4 = _slicedToArray(_ref3, 2),
+    title = _ref4[0],
+    setTitle = _ref4[1];
+  // 親要素の中で配列になるので数字を渡しておく
+  var input = _defineProperty({}, img.id, (0, react_1.useRef)(null));
+  // 文字編集状態にする
+  var editText = function editText() {
+    setEditable(true);
+  };
+  // フォーカスアウトで文字を保存する
+  var saveText = function saveText() {
+    setEditable(false);
+    //文字列を保存するメソッドを書く
+  };
+  // setStateが遅れて起こるので、それに合わせてインプットにカーソルを当てる
+  (0, react_1.useEffect)(function () {
+    var _a;
+    (_a = input[img.id].current) === null || _a === void 0 ? void 0 : _a.focus();
+  }, [editable]);
+  return react_1["default"].createElement(react_1["default"].Fragment, null, editable ? react_1["default"].createElement(StyledTitleInput, {
+    ref: input[img.id],
+    onBlur: function onBlur() {
+      return saveText();
+    },
+    onChange: function onChange(e) {
+      return setTitle(e.target.value);
+    }
+  }) : react_1["default"].createElement(StyledTitleText, {
+    onClick: function onClick() {
+      return editText();
+    }
+  }, title));
+};
+exports.TitleInput = TitleInput;
+var StyledTitleInput = styled_components_1["default"].input(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    margin: 5px 0;\n    font-size: 12px;\n    height: 16px;\n    width: 93%;\n"])));
+var StyledTitleText = styled_components_1["default"].p(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    margin: 5px 0;\n    font-size: 12px;\n    height: 18px;\n    padding: 2px;\n"])));
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/TopCarousel.tsx":
 /*!*******************************************************!*\
   !*** ./resources/ts/components/atoms/TopCarousel.tsx ***!
@@ -5724,39 +5988,8 @@ var StyledErrorMessage = styled_components_1["default"].p(_templateObject4 || (_
 "use strict";
 
 
-var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5;
+var _templateObject, _templateObject2;
 function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  var desc = Object.getOwnPropertyDescriptor(m, k);
-  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-    desc = {
-      enumerable: true,
-      get: function get() {
-        return m[k];
-      }
-    };
-  }
-  Object.defineProperty(o, k2, desc);
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  __setModuleDefault(result, mod);
-  return result;
-};
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -5766,44 +5999,29 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.HoverImages = void 0;
-var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var HoverImage_1 = __webpack_require__(/*! ../atoms/HoverImage */ "./resources/ts/components/atoms/HoverImage.tsx");
+var TitleInput_1 = __webpack_require__(/*! ../atoms/TitleInput */ "./resources/ts/components/atoms/TitleInput.tsx");
 var HoverImages = function HoverImages(props) {
-  var images = props.images;
-  var targetOverlays = [];
-  images.forEach(function (_, index) {
-    targetOverlays[index] = (0, react_1.createRef)();
-  });
-  var toggleOverlay = function toggleOverlay(i) {
-    var _a, _b, _c;
-    ((_a = targetOverlays[i].current) === null || _a === void 0 ? void 0 : _a.classList.contains('show')) ? (_b = targetOverlays[i].current) === null || _b === void 0 ? void 0 : _b.classList.remove('show') : (_c = targetOverlays[i].current) === null || _c === void 0 ? void 0 : _c.classList.add('show');
-  };
+  var images = props.images,
+    setCurrentImage = props.setCurrentImage,
+    setShowModal = props.setShowModal;
   return react_1["default"].createElement(StyledHoverImageList, null, images.map(function (img, i) {
     return react_1["default"].createElement(StyledHoverImageItem, {
-      onMouseEnter: function onMouseEnter() {
-        return toggleOverlay(i);
-      },
-      onMouseLeave: function onMouseLeave() {
-        return toggleOverlay(i);
-      }
-    }, react_1["default"].createElement(StyledHoverImage, {
-      src: img
-    }), react_1["default"].createElement(StyledHoverImageOverlay, {
-      ref: targetOverlays[i]
-    }, react_1["default"].createElement(StyledDeleteButton, {
-      type: "button",
-      onClick: function onClick() {
-        return console.log('YO');
-      }
-    }, "Delete")));
+      key: i
+    }, react_1["default"].createElement(HoverImage_1.HoverImage, {
+      setCurrentImage: setCurrentImage,
+      setShowModal: setShowModal,
+      image: img
+    }), react_1["default"].createElement(TitleInput_1.TitleInput, {
+      img: img
+    }));
   }));
 };
 exports.HoverImages = HoverImages;
 var StyledHoverImageList = styled_components_1["default"].ul(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    list-style: none;\n    margin: 200px 110px;\n    padding: 0;\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: flex-start;\n"])));
-var StyledHoverImageItem = styled_components_1["default"].li(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: relative;\n    width: 22%;\n    height: calc((100vw - 220px) / 100 * 22);\n    overflow: hidden;\n    margin: 20px 1.5% ;\n"])));
-var StyledHoverImage = styled_components_1["default"].img(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    object-position: center center;\n"])));
-var StyledHoverImageOverlay = styled_components_1["default"].div(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    position: absolute;\n    top: 100%;\n    left: 0;\n    transition: all 0.1s ease-in-out;\n    background: green;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n\n    &.show {\n        top: 0;\n    }\n"])));
-var StyledDeleteButton = styled_components_1["default"].button(_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n    display: block;\n    margin: 0 auto;\n"])));
+var StyledHoverImageItem = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 22%;\n    margin: 20px 1.5%;\n"])));
 
 /***/ }),
 
@@ -5869,8 +6087,43 @@ root.render(react_1["default"].createElement(react_1["default"].StrictMode, null
 "use strict";
 
 
-var _templateObject, _templateObject2;
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
 var __importDefault = this && this.__importDefault || function (mod) {
   return mod && mod.__esModule ? mod : {
     "default": mod
@@ -5880,8 +6133,7 @@ Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
 exports.Artworks = void 0;
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var HoverImages_1 = __webpack_require__(/*! ../../components/molecules/HoverImages */ "./resources/ts/components/molecules/HoverImages.tsx");
 var img1_jpg_1 = __importDefault(__webpack_require__(/*! ../../static/img1.jpg */ "./resources/ts/static/img1.jpg"));
 var img2_jpg_1 = __importDefault(__webpack_require__(/*! ../../static/img2.jpg */ "./resources/ts/static/img2.jpg"));
@@ -5891,15 +6143,64 @@ var img5_jpg_1 = __importDefault(__webpack_require__(/*! ../../static/img5.jpg *
 var img6_jpg_1 = __importDefault(__webpack_require__(/*! ../../static/img6.jpg */ "./resources/ts/static/img6.jpg"));
 var img7_jpg_1 = __importDefault(__webpack_require__(/*! ../../static/img7.jpg */ "./resources/ts/static/img7.jpg"));
 var img8_jpg_1 = __importDefault(__webpack_require__(/*! ../../static/img8.jpg */ "./resources/ts/static/img8.jpg"));
+var Deletemodal_1 = __webpack_require__(/*! ../../components/atoms/Deletemodal */ "./resources/ts/components/atoms/Deletemodal.tsx");
 var Artworks = function Artworks() {
-  var images = [img1_jpg_1["default"], img2_jpg_1["default"], img3_jpg_1["default"], img4_jpg_1["default"], img5_jpg_1["default"], img6_jpg_1["default"], img7_jpg_1["default"], img8_jpg_1["default"]];
-  return react_1["default"].createElement(HoverImages_1.HoverImages, {
-    images: images
-  });
+  // 画像取得処理に後ほど書き換える
+  var images = [{
+    title: 'test1',
+    src: img1_jpg_1["default"],
+    id: 1
+  }, {
+    title: 'test2',
+    src: img2_jpg_1["default"],
+    id: 2
+  }, {
+    title: 'test3',
+    src: img3_jpg_1["default"],
+    id: 3
+  }, {
+    title: 'test4',
+    src: img4_jpg_1["default"],
+    id: 4
+  }, {
+    title: 'test5',
+    src: img5_jpg_1["default"],
+    id: 5
+  }, {
+    title: 'test6',
+    src: img6_jpg_1["default"],
+    id: 6
+  }, {
+    title: 'test7',
+    src: img7_jpg_1["default"],
+    id: 7
+  }, {
+    title: 'test8',
+    src: img8_jpg_1["default"],
+    id: 8
+  }];
+  var _ref = (0, react_1.useState)({
+      title: "",
+      src: "",
+      id: 0
+    }),
+    _ref2 = _slicedToArray(_ref, 2),
+    currentImage = _ref2[0],
+    setCurrentImage = _ref2[1];
+  var _ref3 = (0, react_1.useState)(false),
+    _ref4 = _slicedToArray(_ref3, 2),
+    showModal = _ref4[0],
+    setShowModal = _ref4[1];
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(HoverImages_1.HoverImages, {
+    images: images,
+    setCurrentImage: setCurrentImage,
+    setShowModal: setShowModal
+  }), showModal ? react_1["default"].createElement(Deletemodal_1.DeleteModal, {
+    currentImage: currentImage,
+    setShowModal: setShowModal
+  }) : "");
 };
 exports.Artworks = Artworks;
-var StyledHoverImageList = styled_components_1["default"].ul(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n    flex-wrap: wrap;\n"])));
-var StyledHoverImageItem = styled_components_1["default"].li(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral([""])));
 
 /***/ }),
 
