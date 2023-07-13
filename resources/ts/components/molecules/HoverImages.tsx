@@ -4,15 +4,13 @@ import { HoverImage } from "../atoms/HoverImage";
 import { TitleInput } from "../atoms/TitleInput";
 
 type HoverImageProps = {
-    images: {title: string, src: string, id: number}[];
+    images: {title: string, imgURL: string, id: number}[];
     setCurrentImage: React.Dispatch<React.SetStateAction<{title: string; src: string; id: number;}>>;
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const HoverImages = (props: HoverImageProps) => {
     const{images, setCurrentImage, setShowModal} = props;
- 
-
 
     return (
         <StyledHoverImageList>

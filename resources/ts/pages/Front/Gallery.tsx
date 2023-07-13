@@ -11,10 +11,6 @@ import img6 from '../../static/img6.jpg';
 import img7 from '../../static/img7.jpg';
 import img8 from '../../static/img8.jpg';
 
-interface State {
-    imgURL: string;
-}
-
 export const Gallery = () => {
     //トップページから画像クリックで来た場合に、クリックされた画像要素を把握
     const location = useLocation();

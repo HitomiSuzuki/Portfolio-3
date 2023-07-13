@@ -7,7 +7,7 @@ type Artwork = {
 
 // 作品取得処理
 const getArtwork = async () => {
-    const {data} = await axios.get<Artwork[]>('api/artwork');
+    const {data} = await axios.get('api/artwork');
     return data
 }
 

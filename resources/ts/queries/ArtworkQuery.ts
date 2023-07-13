@@ -1,5 +1,5 @@
 import * as api from '../api/ArtworkAPI';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient, useQuery } from 'react-query';
 import { toast } from 'react-toastify';
 
 const usePostArtwork = () => {
@@ -16,7 +16,13 @@ const usePostArtwork = () => {
     })
 }
 
+const useGetArtwork = () => {
+    const data = useQuery('artwork', () => api.getArtwork());
+    return data
+}
+
 export {
-    usePostArtwork
+    usePostArtwork,
+    useGetArtwork
 }
 

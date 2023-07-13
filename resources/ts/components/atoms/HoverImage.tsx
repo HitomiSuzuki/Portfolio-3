@@ -2,7 +2,7 @@ import React, {useRef, createRef, RefObject} from "react";
 import styled from "styled-components";
 
 type HoverImageProps = {
-    image: {title: string, src: string, id: number};
+    image: {title: string, imgURL: string, id: number};
     setCurrentImage: React.Dispatch<React.SetStateAction<{title: string; src: string; id: number;}>>;
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -23,14 +23,14 @@ export const HoverImage = (props: HoverImageProps) => {
     // モーダルを表示非表示
     const showModal = () => {
         // 親要素から渡されたsetStateたち
-        setCurrentImage({title: image.title, src: image.src, id: image.id})
+        setCurrentImage({title: image.title, src: image.imgURL, id: image.id})
         setShowModal(true);
     }
 
     return (
             
         <StyledHoverImageItem  onMouseEnter={() => toggleOverlay()} onMouseLeave={() => toggleOverlay()}>
-            <StyledHoverImage src={image.src}/>
+            <StyledHoverImage src={image.imgURL}/>
             <StyledHoverImageOverlay ref={targetOverlay[image.id]}>
                 <StyledDeleteButton type="button" onClick={() => showModal()}>Delete</StyledDeleteButton>
             </StyledHoverImageOverlay>
