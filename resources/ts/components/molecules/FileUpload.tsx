@@ -21,7 +21,10 @@ export const FileUpload = () => {
         // 新規にFormDataを作成して、画像とタイトルを格納する
         const file = new FormData()
         file.append('imgURL', image);
-        file.append('title', title);
+        if(image.type == 'image/jpeg') file.append('title', title + '.jpeg');
+        if(image.type == 'image/png') file.append('title', title + '.png');
+        if(image.type == 'image/jpg') file.append('title', title + '.jpg');
+        
 
         // ファイルが正しくセットされていたらpost
         if(!file) return;
