@@ -1,25 +1,29 @@
 import React, {useCallback, useState} from "react";
-import {useDropzone, FileRejection} from 'react-dropzone'
+import {useDropzone, FileRejection, FileWithPath} from 'react-dropzone'
 import styled from "styled-components";
 
 type DragAndDropProps = {
-    setImgURL:  React.Dispatch<React.SetStateAction<string>>;
+    setImgURL:  React.Dispatch<React.SetStateAction<FormData | undefined>>;
 }
 
 export const DragAndDrop = (props: DragAndDropProps) => {
     const {setImgURL} = props;
 
     // ファイル情報を保持
-    const [file, setFile] = useState<string>('');
+    const [file, setFile] = useState<FileWithPath>();
     // エラーメッセージを保持
     const [errorMsg, setErrorMsg] = useState<string>('');
 
     // ドラッグされたアイテムが画像だった場合の処理
-    const onDropAccepted = useCallback((acceptedFiles: File[]) => {
-      console.log(acceptedFiles);
+    const onDropAccepted = useCallback((acceptedFiles: FileWithPath[]) => {
       setErrorMsg('');
-      setFile(acceptedFiles.map((file: File) => URL.createObjectURL(file))[0]);
-      setImgURL(acceptedFiles.map((file: File) => URL.createObjectURL(file))[0]);
+      setFile(acceptedFiles[0]);
+      
+      
+      const formData = new FormData();
+      formData.append('imgURL', acceptedFiles[0]);
+      console.log(formData);
+      setImgURL(formData);
     }, [])
 
     // ドラッグされたアイテムが画像以外だった場合の処理
@@ -27,7 +31,6 @@ export const DragAndDrop = (props: DragAndDropProps) => {
         console.log('rejected files', files);
         setErrorMsg('読み取れない形式のファイルです');
       }, []);
-
 
     //ドラッグ&ドロップ時 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({
@@ -44,7 +47,7 @@ export const DragAndDrop = (props: DragAndDropProps) => {
     return (
         <>
         <StyledDragAndDropArea {...getRootProps()}>
-            <input {...getInputProps()} />
+            <input {...getInputProps()} name="image" type="file"/>
             {
             isDragActive ?
                 <StyledGuideText>Drop the files here ...</StyledGuideText> :
@@ -52,7 +55,7 @@ export const DragAndDrop = (props: DragAndDropProps) => {
             }
 
         </StyledDragAndDropArea>
-        {file !== '' ? <StyledDroppedItem src={file}></StyledDroppedItem> : ''}
+        {file !== undefined ? <StyledDroppedItem>{file.path}</StyledDroppedItem> : ''}
         {errorMsg !== '' ? <StyledErrorMessage>{errorMsg}</StyledErrorMessage> : ''}
         </>
     )
@@ -75,7 +78,7 @@ const StyledGuideText = styled.p`
     color: gray;
 `
 
-const StyledDroppedItem = styled.img`
+const StyledDroppedItem = styled.div`
   display: block;
   padding: 10px;
   border: 1px solid gray;

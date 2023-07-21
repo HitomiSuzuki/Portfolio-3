@@ -11,6 +11,7 @@ const usePostArtwork = () => {
             toast.success('登録に成功しました');
         },
         onError: () => {
+            console.log('err');
             toast.error('登録に失敗しました。')
         }
     })

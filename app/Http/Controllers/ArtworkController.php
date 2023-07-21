@@ -24,11 +24,30 @@ class ArtworkController extends Controller
      */
     public function store(StoreArtworkRequest $request)
     {
-        $artwork = Artwork::create($request->all());
 
-        return $artwork 
-            ? response()->json($artwork, 201)
-            : response()->json([], 500);
+        $test = 'ddddd';
+        ob_start();
+        var_dump($request->title);
+        $out = ob_get_contents();
+        ob_end_clean();
+        file_put_contents('log.php', $out, FILE_APPEND);
+
+        // ディレクトリ名
+        $dir = 'sample';
+
+        // sampleディレクトリに画像を保存
+        $request->imgURL->storeAs('public/' . $dir, $request->title);
+
+        // ファイル情報をDBに保存
+        $artwork = new Artwork();
+        $artwork->title = $request->title;
+        $artwork->imgURL = 'storage/' . $dir . '/' . $request->title;
+        $artwork->save();
+
+
+        return response()->json('Success');
+
+    
     }
 
     /**

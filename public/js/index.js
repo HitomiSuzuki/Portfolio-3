@@ -4715,24 +4715,27 @@ var getArtwork = function getArtwork() {
 };
 exports.getArtwork = getArtwork;
 // 作品投稿処理
-var postArtwork = function postArtwork(_ref) {
-  var title = _ref.title,
-    imgURL = _ref.imgURL;
+// const postArtwork = async({title, imgURL}: {title: string, imgURL: File | undefined}) => {
+//     const {data} = await axios.post<Artwork>(
+//         `/api/artwork`, {title, imgURL}
+//     )
+//     console.log("data" + data)
+//     console.log("title" + title)
+//     console.log("imgURL" + imgURL)
+//     return data
+// }
+var postArtwork = function postArtwork(imgURL) {
   return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-    var _yield$axios_1$defaul2, data;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
-          return axios_1["default"].post("/api/artwork", {
-            title: title,
-            imgURL: imgURL
-          });
+          // const {data} = await axios.post<FormData | undefined>(
+          //     `/api/artwork`, {imgURL}
+          // )
+          // console.log("data" + data)
+          console.log("imgURL" + imgURL);
+          return _context2.abrupt("return");
         case 2:
-          _yield$axios_1$defaul2 = _context2.sent;
-          data = _yield$axios_1$defaul2.data;
-          return _context2.abrupt("return", data);
-        case 5:
         case "end":
           return _context2.stop();
       }
@@ -6026,7 +6029,7 @@ var styled_components_1 = __importDefault(__webpack_require__(/*! styled-compone
 var DragAndDrop = function DragAndDrop(props) {
   var setImgURL = props.setImgURL;
   // ファイル情報を保持
-  var _ref = (0, react_1.useState)(''),
+  var _ref = (0, react_1.useState)(),
     _ref2 = _slicedToArray(_ref, 2),
     file = _ref2[0],
     setFile = _ref2[1];
@@ -6037,14 +6040,12 @@ var DragAndDrop = function DragAndDrop(props) {
     setErrorMsg = _ref4[1];
   // ドラッグされたアイテムが画像だった場合の処理
   var onDropAccepted = (0, react_1.useCallback)(function (acceptedFiles) {
-    console.log(acceptedFiles);
     setErrorMsg('');
-    setFile(acceptedFiles.map(function (file) {
-      return URL.createObjectURL(file);
-    })[0]);
-    setImgURL(acceptedFiles.map(function (file) {
-      return URL.createObjectURL(file);
-    })[0]);
+    setFile(acceptedFiles[0]);
+    var formData = new FormData();
+    formData.append('imgURL', acceptedFiles[0]);
+    console.log(formData);
+    setImgURL(formData);
   }, []);
   // ドラッグされたアイテムが画像以外だった場合の処理
   var onDropRejected = (0, react_1.useCallback)(function (files) {
@@ -6065,15 +6066,158 @@ var DragAndDrop = function DragAndDrop(props) {
     getRootProps = _ref5.getRootProps,
     getInputProps = _ref5.getInputProps,
     isDragActive = _ref5.isDragActive;
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(StyledDragAndDropArea, Object.assign({}, getRootProps()), react_1["default"].createElement("input", Object.assign({}, getInputProps())), isDragActive ? react_1["default"].createElement(StyledGuideText, null, "Drop the files here ...") : react_1["default"].createElement(StyledGuideText, null, "Drag 'n' drop some files here, or click to select files")), file !== '' ? react_1["default"].createElement(StyledDroppedItem, {
-    src: file
-  }) : '', errorMsg !== '' ? react_1["default"].createElement(StyledErrorMessage, null, errorMsg) : '');
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(StyledDragAndDropArea, Object.assign({}, getRootProps()), react_1["default"].createElement("input", Object.assign({}, getInputProps(), {
+    name: "image",
+    type: "file"
+  })), isDragActive ? react_1["default"].createElement(StyledGuideText, null, "Drop the files here ...") : react_1["default"].createElement(StyledGuideText, null, "Drag 'n' drop some files here, or click to select files")), file !== undefined ? react_1["default"].createElement(StyledDroppedItem, null, file.path) : '', errorMsg !== '' ? react_1["default"].createElement(StyledErrorMessage, null, errorMsg) : '');
 };
 exports.DragAndDrop = DragAndDrop;
 var StyledDragAndDropArea = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 80vw;\n    max-width: 440px;\n    height: 60vh;\n    max-height: 230px;\n    background-color: lightGray;\n    border: 2px dashed gray;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    margin: 0 auto;\n"])));
 var StyledGuideText = styled_components_1["default"].p(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    color: gray;\n"])));
-var StyledDroppedItem = styled_components_1["default"].img(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: block;\n  padding: 10px;\n  border: 1px solid gray;\n  max-width: 440px;\n  object-fit: content;\n  object-position: top;\n  margin: 30px auto 0;\n"])));
+var StyledDroppedItem = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  display: block;\n  padding: 10px;\n  border: 1px solid gray;\n  max-width: 440px;\n  object-fit: content;\n  object-position: top;\n  margin: 30px auto 0;\n"])));
 var StyledErrorMessage = styled_components_1["default"].p(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  margin: 30px 0 0;\n  text-align: center;\n"])));
+
+/***/ }),
+
+/***/ "./resources/ts/components/molecules/FileUpload.tsx":
+/*!**********************************************************!*\
+  !*** ./resources/ts/components/molecules/FileUpload.tsx ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.FileUpload = void 0;
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/dist/browser/axios.cjs"));
+var FileUpload = function FileUpload() {
+  // const imgForm = useRef<HTMLFormElement>(null);
+  // const [fileInfo, setFile] = useState<{object: File, base64data: string}[]>([]);
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //     e.preventDefault();
+  //     console.log(fileInfo)
+  //     const data = fileInfo[0].base64data.replace(/data:.*\/.*;base64,/, '');
+  //     console.log(data)
+  //     axios.post('/api/artwork',  { title: "aaa", imgURL: fileInfo[0].base64data.replace(/data:.*\/.*;base64,/, '') })
+  //     .then(response => {
+  //         console.log(response)
+  //     })
+  //     .catch((err) => {
+  //         console.log(err)
+  //     })
+  // }
+  // const handleChangeaInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //     //ファイル情報を読み込む
+  //     setFile((fileInfo) => {
+  //         if(!event.target.files) return [];
+  //         return [{ ...fileInfo[0], object: event.target.files[0] }]
+  //     });
+  //     const reader = new FileReader()
+  //     // ファイルを読み込み終わったタイミングで実行するイベントハンドラー
+  //     reader.onload = (e) => {
+  //         //base64形式の画像データをfileInfoに格納
+  //         setFile((fileInfo) =>{
+  //             if(!e.target?.result) return [];
+  //             return [{ ...fileInfo[0], base64data: e.target.result.toString() }]
+  //         });
+  //     }
+  //     // ファイルを読み込む
+  //     // 読み込まれたファイルはデータURL形式で受け取れる（上記onload参照）
+  //     if(!event.target.files) return;
+  //     const dataURL = reader.readAsDataURL(event.target.files[0])
+  // }   
+  var _ref = (0, react_1.useState)(),
+    _ref2 = _slicedToArray(_ref, 2),
+    image = _ref2[0],
+    setImage = _ref2[1];
+  var _ref3 = (0, react_1.useState)(''),
+    _ref4 = _slicedToArray(_ref3, 2),
+    title = _ref4[0],
+    setTitle = _ref4[1];
+  var handleSubmit = function handleSubmit(e) {
+    e.preventDefault();
+    if (!image) return;
+    var file = new FormData();
+    file.append('imgURL', image[0]);
+    file.append('title', title);
+    axios_1["default"].post('/api/artwork', file, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    });
+    // .then(response => {
+    //     console.log(response)
+    // })
+    // .catch((err) => {
+    //     console.log(err)
+    // })
+  };
+
+  return react_1["default"].createElement("form", {
+    onSubmit: function onSubmit(e) {
+      return handleSubmit(e);
+    }
+  }, react_1["default"].createElement("input", {
+    type: "file",
+    name: "image",
+    onChange: function onChange(event) {
+      return setImage(event.target.files);
+    }
+  }), react_1["default"].createElement("input", {
+    type: "text",
+    name: "title",
+    onChange: function onChange(event) {
+      return setTitle(event.target.value);
+    }
+  }), react_1["default"].createElement("button", null));
+};
+exports.FileUpload = FileUpload;
 
 /***/ }),
 
@@ -6444,25 +6588,24 @@ var styled_components_1 = __importDefault(__webpack_require__(/*! styled-compone
 var AdminHeader_1 = __webpack_require__(/*! ../../components/atoms/AdminHeader */ "./resources/ts/components/atoms/AdminHeader.tsx");
 var DragAndDrop_1 = __webpack_require__(/*! ../../components/molecules/DragAndDrop */ "./resources/ts/components/molecules/DragAndDrop.tsx");
 var ArtworkQuery_1 = __webpack_require__(/*! ../../queries/ArtworkQuery */ "./resources/ts/queries/ArtworkQuery.ts");
+var FileUpload_1 = __webpack_require__(/*! ../../components/molecules/FileUpload */ "./resources/ts/components/molecules/FileUpload.tsx");
 var NewArtwork = function NewArtwork() {
   var _ref = (0, react_1.useState)(''),
     _ref2 = _slicedToArray(_ref, 2),
     title = _ref2[0],
     setTitle = _ref2[1];
-  var _ref3 = (0, react_1.useState)(''),
+  var _ref3 = (0, react_1.useState)(),
     _ref4 = _slicedToArray(_ref3, 2),
     imgURL = _ref4[0],
     setImgURL = _ref4[1];
   var postArtwork = (0, ArtworkQuery_1.usePostArtwork)();
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    postArtwork.mutate({
-      title: title,
-      imgURL: imgURL
-    });
+    postArtwork.mutate(imgURL);
   };
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(AdminHeader_1.AdminHeader, null), react_1["default"].createElement(StyledNewArtworkWrapper, {
-    onSubmit: handleSubmit
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(AdminHeader_1.AdminHeader, null), react_1["default"].createElement(FileUpload_1.FileUpload, null), react_1["default"].createElement(StyledNewArtworkWrapper, {
+    onSubmit: handleSubmit,
+    encType: "multipart/form-data"
   }, react_1["default"].createElement(DragAndDrop_1.DragAndDrop, {
     setImgURL: setImgURL
   }), react_1["default"].createElement(StyledArtworkTitle, {
@@ -6471,7 +6614,8 @@ var NewArtwork = function NewArtwork() {
     onChange: function onChange(e) {
       return setTitle(e.target.value);
     },
-    value: title
+    value: title,
+    name: "title"
   }), react_1["default"].createElement(StyledSubmitButton, {
     type: 'submit'
   }, "\u4FDD\u5B58\u3059\u308B")));
@@ -6806,6 +6950,7 @@ var usePostArtwork = function usePostArtwork() {
       react_toastify_1.toast.success('登録に成功しました');
     },
     onError: function onError() {
+      console.log('err');
       react_toastify_1.toast.error('登録に失敗しました。');
     }
   });
