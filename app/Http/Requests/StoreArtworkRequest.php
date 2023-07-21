@@ -22,8 +22,8 @@ class StoreArtworkRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'title' => 'required',
-            // 'imgURL' => 'required',
+            'title' => 'required',
+            'imgURL' => 'required',
         ];
     }
 }
