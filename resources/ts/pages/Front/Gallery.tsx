@@ -22,7 +22,6 @@ export const Gallery = () => {
             initialImgURL = location.state.imgURL;
         }
     
-        console.log(initialImgURL)
         if(!artworkDisplay.current) {
             return
         }

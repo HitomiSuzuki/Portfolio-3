@@ -9,7 +9,6 @@ const getArtwork = async () => {
 
 // 作品投稿処理
 const postArtwork = async(imgInfo: FormData) => {
-    console.log('HEY')
     await axios.post('/api/artwork', imgInfo, {
         headers: {
             'content-type': 'multipart/form-data',
