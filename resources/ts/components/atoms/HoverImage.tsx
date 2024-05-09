@@ -1,9 +1,10 @@
 import React, {useRef, createRef, RefObject} from "react";
 import styled from "styled-components";
+import { Artwork } from "../../type/type";
 
 type HoverImageProps = {
-    image: {title: string, imgURL: string, id: number};
-    setCurrentImage: React.Dispatch<React.SetStateAction<{title: string; src: string; id: number;}>>;
+    image: Artwork;
+    setCurrentImage: React.Dispatch<React.SetStateAction<Artwork>>;
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -23,7 +24,7 @@ export const HoverImage = (props: HoverImageProps) => {
     // モーダルを表示非表示
     const showModal = () => {
         // 親要素から渡されたsetStateたち
-        setCurrentImage({title: image.title, src: image.imgURL, id: image.id})
+        setCurrentImage({title: image.title, imgURL: image.imgURL, id: image.id, created_at: image.created_at, updated_at: image.updated_at})
         setShowModal(true);
     }
 
@@ -59,7 +60,7 @@ const StyledHoverImageOverlay = styled.div`
     top: -100%;
     left: 0;
     transition: all 0.1s ease-in-out;
-    background: green;
+    background: black;
     width: 100%;
     height: 100%;
     display: flex;

@@ -1,39 +1,34 @@
 import React, {useEffect, useState} from "react";
 import {  HoverImages } from "../../components/molecules/HoverImages";
-import { DeleteModal } from "../../components/atoms/Deletemodal";
+import { DeleteModal } from "../../components/molecules/Deletemodal";
 import { useGetArtwork } from "../../queries/ArtworkQuery";
+import { Artwork } from "../../type/type";
+import { AdminHeader } from "../../components/atoms/AdminHeader";
 
-type ArtworkFromDB = {
-    id: number;
-    title: string;
-    imgURL: string;
-    created_at: Date;
-    updated_at: Date;
-}
-
-type Artwork = {
-    id: number;
-    title: string;
-    imgURL: string;
-}
 
 export const Artworks = () => {
     
     const [images, setImages] = useState<Artwork[]>([])
-    const [currentImage, setCurrentImage] = useState({title: "", src: "", id: 0});
+    const [currentImage, setCurrentImage] = useState<Artwork>({title: "", imgURL: "", id: 0, created_at: new Date(), updated_at: new Date()});
     const [showModal, setShowModal] = useState(false);
-    
-    const {data} = useGetArtwork();
+    const [deletedData, setDeletedData] = useState<Artwork>({title: "", imgURL: "", id: 0, created_at: new Date(), updated_at: new Date()})
+
+    const data = useGetArtwork()
+
     useEffect(() => {
-        if(!data) return;
-        const fixedData = data?.map((data: ArtworkFromDB) => {return {id: data.id, title: data.title, imgURL: data.imgURL}})
-        setImages(fixedData)
-    }, [data])
+        if(!data) return
+        setImages(data)
+    },[data])
+
+    useEffect(() => {
+        setImages(images.filter((item) => item.id != deletedData.id))
+    },[deletedData])
 
     return (
         <>
+        <AdminHeader/>
         <HoverImages images={images} setCurrentImage={setCurrentImage} setShowModal={setShowModal} />
-        {showModal ? <DeleteModal currentImage={currentImage} setShowModal={setShowModal} /> : ""}
+        {showModal ? <DeleteModal currentImage={currentImage} setShowModal={setShowModal} setDeletedData={setDeletedData} /> : ""}
         
         </>
     )

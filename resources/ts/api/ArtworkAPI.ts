@@ -1,6 +1,14 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+type Artwork = {
+    id: number,
+    title: string,
+    imgURL: string,
+    updated_at: Date,
+    created_at: Date
+}
+
 // 作品取得処理
 const getArtwork = async () => {
     const {data} = await axios.get('api/artwork');
@@ -24,8 +32,25 @@ const postArtwork = async(imgInfo: FormData) => {
     })
 }
 
+const deleteArtwork = async(id: number) => {
+    const data = await axios.delete(`api/artwork/${id}`)
+    .then(response => {
+        console.log(response)
+        toast.success('削除に成功しました')
+        return response.data
+    })
+    .catch((err) => {
+        console.log(err)
+        toast.error('登録に失敗しました')
+        return
+    })
+
+    return data
+}
+
 export {
     postArtwork,
-    getArtwork
+    getArtwork,
+    deleteArtwork
 }
 

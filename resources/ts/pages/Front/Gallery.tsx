@@ -41,6 +41,8 @@ export const Gallery = () => {
     // モーダルが開いているか
     let [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+    // console.log("isMobile" + isMobile)
+
    
     // アートワークタイトルがクリックされた時
     const clickArtworkName = (currentImgURL: string) => {
@@ -73,16 +75,21 @@ export const Gallery = () => {
         <StyledGalleryWrapper>
             <StyledBackToTopLink to='/'>back to top</StyledBackToTopLink>
             <StyledArtworkList>
-                {artworkList.map((item, index) => {
+                {!isMobile ? 
+                artworkList.map((item, index) => {
                     return (
                             <StyledArtworkItem onClick={() => clickArtworkName(item.URL)}>{index + 1}</StyledArtworkItem>
                     )
-                })}
+                })
+                :
+                ''
+                }
+                
                 
             </StyledArtworkList>
 
             <StyledArtworkWrapper>
-                {isMobile ? 
+                {!isMobile ? 
                     <>
                     <StyledArtworkDisplay src='' ref={artworkDisplay}></StyledArtworkDisplay>
                     {artworkUrl !== '' ? <StyledArtworkLargerButton onClick={() => toggleModal()}/>: ''}

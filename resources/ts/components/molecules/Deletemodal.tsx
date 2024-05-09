@@ -1,16 +1,22 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
+import { deleteArtwork } from "../../api/ArtworkAPI";
+import { useGetArtwork } from "../../queries/ArtworkQuery";
+import { Artwork } from "../../type/type";
 
 type DeleteModalprops = { 
-    currentImage: {title: string, src: string, id: number};
+    currentImage: {title: string, imgURL: string, id: number, created_at: Date, updated_at: Date};
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setDeletedData: React.Dispatch<React.SetStateAction<Artwork>>
 }
 
 export const DeleteModal = (props: DeleteModalprops) => {
-    const {currentImage, setShowModal} = props;
+    const {currentImage, setShowModal, setDeletedData} = props;
 
-    const deleteItem = () => {
-        //画像削除処理を書く
+    const deleteItem = async () => {
+        const data = await deleteArtwork(currentImage.id)
+        if(!data) return
+        setDeletedData(data);
     }
 
     return (
@@ -38,7 +44,7 @@ const StyledDeleteModalBg = styled.div`
 `
 
 const StyledDeleteModalWrapper = styled.div`
-    position: absolute;
+    position: fixed;
     width: 80%;
     max-width: 300px;
     height: 200px;

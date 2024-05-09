@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 
 
 const useGetArtwork = () => {
-    const data = useQuery('artwork', () => api.getArtwork());
+    const {data} = useQuery('artwork', () => api.getArtwork());
     return data
 }
 

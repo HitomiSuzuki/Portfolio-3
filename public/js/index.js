@@ -4655,7 +4655,7 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.getArtwork = exports.postArtwork = void 0;
+exports.deleteArtwork = exports.getArtwork = exports.postArtwork = void 0;
 var axios_1 = __importDefault(__webpack_require__(/*! axios */ "./node_modules/axios/dist/browser/axios.cjs"));
 var react_toastify_1 = __webpack_require__(/*! react-toastify */ "./node_modules/react-toastify/dist/react-toastify.js");
 // 作品取得処理
@@ -4705,6 +4705,33 @@ var postArtwork = function postArtwork(imgInfo) {
   }));
 };
 exports.postArtwork = postArtwork;
+var deleteArtwork = function deleteArtwork(id) {
+  return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+    var data;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.next = 2;
+          return axios_1["default"]["delete"]("api/artwork/".concat(id)).then(function (response) {
+            console.log(response);
+            react_toastify_1.toast.success('削除に成功しました');
+            return response.data;
+          })["catch"](function (err) {
+            console.log(err);
+            react_toastify_1.toast.error('登録に失敗しました');
+            return;
+          });
+        case 2:
+          data = _context3.sent;
+          return _context3.abrupt("return", data);
+        case 4:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3);
+  }));
+};
+exports.deleteArtwork = deleteArtwork;
 
 /***/ }),
 
@@ -4849,10 +4876,16 @@ Object.defineProperty(exports, "__esModule", ({
 exports.AdminHeader = void 0;
 var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 var AuthQuery_1 = __webpack_require__(/*! ../../queries/AuthQuery */ "./resources/ts/queries/AuthQuery.ts");
 var AdminHeader = function AdminHeader() {
   var logout = (0, AuthQuery_1.useLogout)();
-  return react_1["default"].createElement(StyledAdminHeaderWrapper, null, react_1["default"].createElement(StyledAdminHeaderContent, null, "New"), react_1["default"].createElement(StyledAdminHeaderContent, null, "Artworks"), react_1["default"].createElement(StyledAdminHeaderContent, {
+  return react_1["default"].createElement(StyledAdminHeaderWrapper, null, react_1["default"].createElement(StyledAdminHeaderContent, {
+    to: "/new"
+  }, "New"), react_1["default"].createElement(StyledAdminHeaderContent, {
+    to: "/artworks"
+  }, "Artworks"), react_1["default"].createElement(StyledAdminHeaderContent, {
+    to: "/",
     onClick: function onClick() {
       return logout.mutate();
     }
@@ -4860,7 +4893,7 @@ var AdminHeader = function AdminHeader() {
 };
 exports.AdminHeader = AdminHeader;
 var StyledAdminHeaderWrapper = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    display: flex;\n    align-items: center;\n    justify-content: end;\n    border-bottom: 1px solid black;\n"])));
-var StyledAdminHeaderContent = styled_components_1["default"].p(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    margin: 0;\n    padding: 10px 15px;\n    font-size: 12px;\n"])));
+var StyledAdminHeaderContent = (0, styled_components_1["default"])(react_router_dom_1.Link)(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    margin: 0;\n    padding: 10px 15px;\n    font-size: 12px;\n"])));
 
 /***/ }),
 
@@ -5128,56 +5161,6 @@ var StyledCarouselImage = styled_components_1["default"].img(_templateObject4 ||
 
 /***/ }),
 
-/***/ "./resources/ts/components/atoms/Deletemodal.tsx":
-/*!*******************************************************!*\
-  !*** ./resources/ts/components/atoms/Deletemodal.tsx ***!
-  \*******************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _templateObject, _templateObject2, _templateObject3, _templateObject4;
-function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.DeleteModal = void 0;
-var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
-var DeleteModal = function DeleteModal(props) {
-  var currentImage = props.currentImage,
-    setShowModal = props.setShowModal;
-  var deleteItem = function deleteItem() {
-    //画像削除処理を書く
-  };
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(StyledDeleteModalBg, {
-    onClick: function onClick() {
-      return setShowModal(false);
-    }
-  }), react_1["default"].createElement(StyledDeleteModalWrapper, null, "You are going to delete ", currentImage.title, ". ", react_1["default"].createElement("br", null), " Are you sure ?", react_1["default"].createElement(StyledButtonWrapper, null, react_1["default"].createElement(StyledDeleteModalButton, {
-    onClick: function onClick() {
-      return setShowModal(false);
-    }
-  }, "cancel"), react_1["default"].createElement(StyledDeleteModalButton, {
-    onClick: function onClick() {
-      return deleteItem();
-    }
-  }, "delete"))));
-};
-exports.DeleteModal = DeleteModal;
-var StyledDeleteModalBg = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 100vw;\n    height: 100vh;\n    position: fixed;\n    background: black;\n    opacity: 0.6;\n    top: 0;\n    left: 0;\n"])));
-var StyledDeleteModalWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: absolute;\n    width: 80%;\n    max-width: 300px;\n    height: 200px;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    -webkit-transform: translate(-50%, -50%);\n    -ms-transform: translate(-50%, -50%);\n    background: lightgray;\n    padding: 100px;\n"])));
-var StyledButtonWrapper = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n    width: 100%;\n    margin-top: 50px;\n"])));
-var StyledDeleteModalButton = styled_components_1["default"].button(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    width: 45%;\n    height: 30px;\n    cursor: pointer;\n    &:hover {\n        opacity: 0.8;\n    }\n"])));
-
-/***/ }),
-
 /***/ "./resources/ts/components/atoms/Header.tsx":
 /*!**************************************************!*\
   !*** ./resources/ts/components/atoms/Header.tsx ***!
@@ -5295,8 +5278,10 @@ var HoverImage = function HoverImage(props) {
     // 親要素から渡されたsetStateたち
     setCurrentImage({
       title: image.title,
-      src: image.imgURL,
-      id: image.id
+      imgURL: image.imgURL,
+      id: image.id,
+      created_at: image.created_at,
+      updated_at: image.updated_at
     });
     setShowModal(true);
   };
@@ -5321,7 +5306,7 @@ var HoverImage = function HoverImage(props) {
 exports.HoverImage = HoverImage;
 var StyledHoverImageItem = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: relative;\n    width: 100%;\n    aspect-ratio: 1;\n    overflow: hidden;\n"])));
 var StyledHoverImage = styled_components_1["default"].img(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    object-position: center center;\n"])));
-var StyledHoverImageOverlay = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    top: -100%;\n    left: 0;\n    transition: all 0.1s ease-in-out;\n    background: green;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n\n    &.show {\n        top: 0;\n    }\n"])));
+var StyledHoverImageOverlay = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    top: -100%;\n    left: 0;\n    transition: all 0.1s ease-in-out;\n    background: black;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n\n    &.show {\n        top: 0;\n    }\n"])));
 var StyledDeleteButton = styled_components_1["default"].button(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: block;\n    margin: 0 auto;\n"])));
 
 /***/ }),
@@ -5928,6 +5913,108 @@ var StyledImageWrapper = styled_components_1["default"].div(_templateObject2 || 
 
 /***/ }),
 
+/***/ "./resources/ts/components/molecules/Deletemodal.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/ts/components/molecules/Deletemodal.tsx ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.DeleteModal = void 0;
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var ArtworkAPI_1 = __webpack_require__(/*! ../../api/ArtworkAPI */ "./resources/ts/api/ArtworkAPI.ts");
+var DeleteModal = function DeleteModal(props) {
+  var currentImage = props.currentImage,
+    setShowModal = props.setShowModal,
+    setDeletedData = props.setDeletedData;
+  var deleteItem = function deleteItem() {
+    return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var data;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return (0, ArtworkAPI_1.deleteArtwork)(currentImage.id);
+          case 2:
+            data = _context.sent;
+            if (data) {
+              _context.next = 5;
+              break;
+            }
+            return _context.abrupt("return");
+          case 5:
+            setDeletedData(data);
+          case 6:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    }));
+  };
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(StyledDeleteModalBg, {
+    onClick: function onClick() {
+      return setShowModal(false);
+    }
+  }), react_1["default"].createElement(StyledDeleteModalWrapper, null, "You are going to delete ", currentImage.title, ". ", react_1["default"].createElement("br", null), " Are you sure ?", react_1["default"].createElement(StyledButtonWrapper, null, react_1["default"].createElement(StyledDeleteModalButton, {
+    onClick: function onClick() {
+      return setShowModal(false);
+    }
+  }, "cancel"), react_1["default"].createElement(StyledDeleteModalButton, {
+    onClick: function onClick() {
+      return deleteItem();
+    }
+  }, "delete"))));
+};
+exports.DeleteModal = DeleteModal;
+var StyledDeleteModalBg = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 100vw;\n    height: 100vh;\n    position: fixed;\n    background: black;\n    opacity: 0.6;\n    top: 0;\n    left: 0;\n"])));
+var StyledDeleteModalWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: fixed;\n    width: 80%;\n    max-width: 300px;\n    height: 200px;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    -webkit-transform: translate(-50%, -50%);\n    -ms-transform: translate(-50%, -50%);\n    background: lightgray;\n    padding: 100px;\n"])));
+var StyledButtonWrapper = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n    width: 100%;\n    margin-top: 50px;\n"])));
+var StyledDeleteModalButton = styled_components_1["default"].button(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    width: 45%;\n    height: 30px;\n    cursor: pointer;\n    &:hover {\n        opacity: 0.8;\n    }\n"])));
+
+/***/ }),
+
 /***/ "./resources/ts/components/molecules/FileUpload.tsx":
 /*!**********************************************************!*\
   !*** ./resources/ts/components/molecules/FileUpload.tsx ***!
@@ -6315,8 +6402,9 @@ Object.defineProperty(exports, "__esModule", ({
 exports.Artworks = void 0;
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var HoverImages_1 = __webpack_require__(/*! ../../components/molecules/HoverImages */ "./resources/ts/components/molecules/HoverImages.tsx");
-var Deletemodal_1 = __webpack_require__(/*! ../../components/atoms/Deletemodal */ "./resources/ts/components/atoms/Deletemodal.tsx");
+var Deletemodal_1 = __webpack_require__(/*! ../../components/molecules/Deletemodal */ "./resources/ts/components/molecules/Deletemodal.tsx");
 var ArtworkQuery_1 = __webpack_require__(/*! ../../queries/ArtworkQuery */ "./resources/ts/queries/ArtworkQuery.ts");
+var AdminHeader_1 = __webpack_require__(/*! ../../components/atoms/AdminHeader */ "./resources/ts/components/atoms/AdminHeader.tsx");
 var Artworks = function Artworks() {
   var _ref = (0, react_1.useState)([]),
     _ref2 = _slicedToArray(_ref, 2),
@@ -6324,8 +6412,10 @@ var Artworks = function Artworks() {
     setImages = _ref2[1];
   var _ref3 = (0, react_1.useState)({
       title: "",
-      src: "",
-      id: 0
+      imgURL: "",
+      id: 0,
+      created_at: new Date(),
+      updated_at: new Date()
     }),
     _ref4 = _slicedToArray(_ref3, 2),
     currentImage = _ref4[0],
@@ -6334,26 +6424,34 @@ var Artworks = function Artworks() {
     _ref6 = _slicedToArray(_ref5, 2),
     showModal = _ref6[0],
     setShowModal = _ref6[1];
-  var _ref7 = (0, ArtworkQuery_1.useGetArtwork)(),
-    data = _ref7.data;
+  var _ref7 = (0, react_1.useState)({
+      title: "",
+      imgURL: "",
+      id: 0,
+      created_at: new Date(),
+      updated_at: new Date()
+    }),
+    _ref8 = _slicedToArray(_ref7, 2),
+    deletedData = _ref8[0],
+    setDeletedData = _ref8[1];
+  var data = (0, ArtworkQuery_1.useGetArtwork)();
   (0, react_1.useEffect)(function () {
     if (!data) return;
-    var fixedData = data === null || data === void 0 ? void 0 : data.map(function (data) {
-      return {
-        id: data.id,
-        title: data.title,
-        imgURL: data.imgURL
-      };
-    });
-    setImages(fixedData);
+    setImages(data);
   }, [data]);
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(HoverImages_1.HoverImages, {
+  (0, react_1.useEffect)(function () {
+    setImages(images.filter(function (item) {
+      return item.id != deletedData.id;
+    }));
+  }, [deletedData]);
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(AdminHeader_1.AdminHeader, null), react_1["default"].createElement(HoverImages_1.HoverImages, {
     images: images,
     setCurrentImage: setCurrentImage,
     setShowModal: setShowModal
   }), showModal ? react_1["default"].createElement(Deletemodal_1.DeleteModal, {
     currentImage: currentImage,
-    setShowModal: setShowModal
+    setShowModal: setShowModal,
+    setDeletedData: setDeletedData
   }) : "");
 };
 exports.Artworks = Artworks;
@@ -6420,6 +6518,7 @@ exports.Login = void 0;
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
 var AuthQuery_1 = __webpack_require__(/*! ../../queries/AuthQuery */ "./resources/ts/queries/AuthQuery.ts");
+var react_router_dom_1 = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/dist/index.js");
 var Login = function Login() {
   var login = (0, AuthQuery_1.useLogin)();
   var logout = (0, AuthQuery_1.useLogout)();
@@ -6431,12 +6530,14 @@ var Login = function Login() {
     _ref4 = _slicedToArray(_ref3, 2),
     password = _ref4[0],
     setPassword = _ref4[1];
+  var navigate = (0, react_router_dom_1.useNavigate)();
   var handleLogin = function handleLogin(e) {
     e.preventDefault();
     login.mutate({
       email: email,
       password: password
     });
+    navigate('/new');
   };
   return react_1["default"].createElement(StyledLoginWrapper, {
     onSubmit: handleLogin
@@ -6454,11 +6555,6 @@ var Login = function Login() {
     }
   }), react_1["default"].createElement(StyledButton, {
     type: 'submit'
-  }, "login"), react_1["default"].createElement(StyledButton, {
-    type: 'button',
-    onClick: function onClick() {
-      return logout.mutate();
-    }
   }, "login"));
 };
 exports.Login = Login;
@@ -6594,6 +6690,7 @@ var Gallery = function Gallery() {
     _ref4 = _slicedToArray(_ref3, 2),
     isModalOpen = _ref4[0],
     setIsModalOpen = _ref4[1];
+  // console.log("isMobile" + isMobile)
   // アートワークタイトルがクリックされた時
   var clickArtworkName = function clickArtworkName(currentImgURL) {
     if (!artworkDisplay.current) {
@@ -6634,13 +6731,13 @@ var Gallery = function Gallery() {
   }];
   return react_1["default"].createElement(StyledGalleryWrapper, null, react_1["default"].createElement(StyledBackToTopLink, {
     to: '/'
-  }, "back to top"), react_1["default"].createElement(StyledArtworkList, null, artworkList.map(function (item, index) {
+  }, "back to top"), react_1["default"].createElement(StyledArtworkList, null, !react_device_detect_1.isMobile ? artworkList.map(function (item, index) {
     return react_1["default"].createElement(StyledArtworkItem, {
       onClick: function onClick() {
         return clickArtworkName(item.URL);
       }
     }, index + 1);
-  })), react_1["default"].createElement(StyledArtworkWrapper, null, react_device_detect_1.isMobile ? react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(StyledArtworkDisplay, {
+  }) : ''), react_1["default"].createElement(StyledArtworkWrapper, null, !react_device_detect_1.isMobile ? react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(StyledArtworkDisplay, {
     src: '',
     ref: artworkDisplay
   }), artworkUrl !== '' ? react_1["default"].createElement(StyledArtworkLargerButton, {
@@ -6811,9 +6908,10 @@ exports.useGetArtwork = void 0;
 var api = __importStar(__webpack_require__(/*! ../api/ArtworkAPI */ "./resources/ts/api/ArtworkAPI.ts"));
 var react_query_1 = __webpack_require__(/*! react-query */ "./node_modules/react-query/es/index.js");
 var useGetArtwork = function useGetArtwork() {
-  var data = (0, react_query_1.useQuery)('artwork', function () {
-    return api.getArtwork();
-  });
+  var _ref = (0, react_query_1.useQuery)('artwork', function () {
+      return api.getArtwork();
+    }),
+    data = _ref.data;
   return data;
 };
 exports.useGetArtwork = useGetArtwork;

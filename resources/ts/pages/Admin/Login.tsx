@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import {useLogin, useLogout} from '../../queries/AuthQuery';
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
     const login = useLogin();
@@ -8,9 +9,12 @@ export const Login = () => {
     const [email, setEmail] = useState('admin@example.com');
     const [password, setPassword] = useState('Passw0rd');
 
+    const navigate = useNavigate();
+
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         login.mutate({email, password})
+        navigate('/new')
     }
 
     return (
@@ -28,7 +32,6 @@ export const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
              />
             <StyledButton type='submit'>login</StyledButton>
-            <StyledButton type='button' onClick={() => logout.mutate()}>login</StyledButton>
         </StyledLoginWrapper>
     )
 }

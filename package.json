@@ -33,6 +33,7 @@
         "@types/react-router-dom": "^5.3.3",
         "@types/react-toastify": "^4.1.0",
         "@types/slick-carousel": "^1.6.37",
+        "firebase": "^10.11.1",
         "gsap": "^3.12.2",
         "jquery": "^3.7.0",
         "react-anchor-link-smooth-scroll": "^1.0.12",

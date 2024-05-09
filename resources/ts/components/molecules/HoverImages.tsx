@@ -2,10 +2,11 @@ import React, {useState, createRef, RefObject} from "react";
 import styled from "styled-components";
 import { HoverImage } from "../atoms/HoverImage";
 import { TitleInput } from "../atoms/TitleInput";
+import { Artwork } from "../../type/type";
 
 type HoverImageProps = {
-    images: {title: string, imgURL: string, id: number}[];
-    setCurrentImage: React.Dispatch<React.SetStateAction<{title: string; src: string; id: number;}>>;
+    images: Artwork[];
+    setCurrentImage: React.Dispatch<React.SetStateAction<Artwork>>;
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
