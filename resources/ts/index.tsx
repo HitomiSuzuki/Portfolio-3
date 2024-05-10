@@ -7,6 +7,13 @@ import { Gallery } from './pages/Front/Gallery';
 import { Login } from './pages/Admin/Login';
 import { NewArtwork } from './pages/Admin/NewArtwork';
 import { Artworks } from './pages/Admin/Artworks';
+import { configureStore } from '@reduxjs/toolkit';
+import titlesReducer from './features/TitlesSlice'
+import { Provider, useSelector as rawUseSelector, TypedUseSelectorHook } from 'react-redux';
+
+const store = configureStore({ reducer: {titles: titlesReducer} })
+export type RootState = ReturnType<typeof store.getState>;
+export const useSelector: TypedUseSelectorHook<RootState> = rawUseSelector;
 
 const container = document.getElementById('app')!;
 const root = createRoot(container);
@@ -23,9 +30,11 @@ const router = createBrowserRouter([
 
 root.render(
     <React.StrictMode>
-        <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
-        </QueryClientProvider>
+        <Provider store={store}>
+            <QueryClientProvider client={queryClient}>
+                <RouterProvider router={router} />
+            </QueryClientProvider>
+        </Provider>
     </React.StrictMode>
 )
 

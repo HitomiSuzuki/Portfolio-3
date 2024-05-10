@@ -1,9 +1,15 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef} from "react";
 import styled from "styled-components";
-import {postArtwork} from '../../api/ArtworkAPI';
-import { getStorage, ref, uploadBytes } from "firebase/storage";
-import { app, storage }from '../../firebase';
-import { initializeApp  } from "firebase/app";
+import { ref, uploadBytes } from "firebase/storage";
+import { storage }from '../../firebase';
+import { useDispatch } from "react-redux";
+import { useSelector } from "../..";
+import { addTitle } from "../../features/TitlesSlice";
+
+type Item = {
+    id: number,
+    title: string
+}
 
 
 export const FileUpload = () => { 
@@ -13,23 +19,49 @@ export const FileUpload = () => {
     const titleInput = useRef<HTMLInputElement>(null);
     const dropZone = useRef<HTMLDivElement>(null);
 
+    // Redux関連
+    const titleList = useSelector(state => state);
+    const dispatch = useDispatch();
+
     // 画像の情報、タイトルを保持
     const [image, setImage] = useState<File | undefined>(undefined);
-    const [title, setTitle] = useState<string>('');
+    const [newTitle, setTitle] = useState<string>('');
     const [src, setSrc] = useState<string | undefined>('');
     const [typeError, setTypeError] = useState<boolean>(false);
 
     // 送信ボタン押した時
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // 拡張子を取得
-        const ext = image?.name.split('.').pop();
-        console.log("ext" + ext);
-        const fileRef = ref(storage, `images/upload/${title}.${ext}`);
-        if(image) {
-            await uploadBytes(fileRef, image);
-            console.log("uploaded!!")
+
+        // 現在のタイトル群を取得
+        
+
+        // 同一タイトルがないかチェック
+        if(titleList.titles.some(item => item.title === newTitle)) {
+            alert('同一タイトルが存在しています。')
+        } else {
+            // 拡張子を取得
+            const ext = image?.name.split('.').pop();
+            console.log("ext" + ext);
+            const fileRef = ref(storage, `images/${newTitle}.${ext}`);
+            if(image) {
+                await uploadBytes(fileRef, image);
+                console.log("uploaded!!")
+            }
+
+            dispatch(addTitle(
+                {
+                    id: titleList.titles.length,
+                    title: `${newTitle}.${ext}`
+                }
+            ));
         }
+
+        setTitle('');
+        setSrc('');
+        setImage(undefined);
+
+        console.log("titleList" + titleList);
     }
 
     // ドラッグしてエリアに入った時
@@ -108,9 +140,10 @@ export const FileUpload = () => {
             </StyledDropZone>
             <StyledTitleInput 
             ref={titleInput} 
-            type="text" 
+            type="text"
             name="title" 
-            onChange={event => setTitle(event.target.value)} 
+            onChange={event => setTitle(event.target.value)}
+            value={newTitle}
             />
             <StyledButton type="submit">保存する</StyledButton>
 
