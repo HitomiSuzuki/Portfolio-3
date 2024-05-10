@@ -9,32 +9,29 @@ import { storage } from "../../firebase";
 
 import styled from "styled-components";
 import { useSelector } from "../..";
+import { useDispatch } from "react-redux";
+import { addUrl } from "../../features/ImageSlice";
 
 
 export const Artworks = () => {
+
+    
     
     const [images, setImages] = useState<Artwork[]>([])
     const [currentImage, setCurrentImage] = useState<Artwork>({title: "", imgURL: "", id: 0, created_at: new Date(), updated_at: new Date()});
     const [showModal, setShowModal] = useState(false);
     const [deletedData, setDeletedData] = useState<Artwork>({title: "", imgURL: "", id: 0, created_at: new Date(), updated_at: new Date()});
+    const [urls, setUrls] = useState([''])
 
-    const titleList = useSelector(state => state);
+    const titleList = useSelector(state => state.titles);
     const storage = getStorage();
-
-    const urls: string[] = [];
-
-    // // const data = useGetArtwork()
-    // const storage = getStorage();
-    // const pathReference = ref(storage, 'images/全能.jpg');
-
-    const handleDownload = async () => {
-        console.log(titleList.titles)
-    }
+    const imageList = useSelector(state => state.images);
+    const dispatch = useDispatch();
 
 
     useEffect( () => {
-        titleList.titles.forEach((item, i) => {
-            console.log(i);
+        // TODO:なんか2回読み込まれてるので直す
+        titleList.forEach((item, i) => {
             getDownloadURL(ref(storage, `images/${item.title}`))
             .then((url) => {
                 // `url` is the download URL for 'images/stars.jpg'
@@ -47,16 +44,18 @@ export const Artworks = () => {
                 };
                 xhr.open('GET', url);
                 xhr.send();
-                console.log("url" + url);
-                urls.push(url);
-                console.log(urls);
+                dispatch(addUrl(
+                    {
+                        id: imageList.length,
+                        url: url
+                    }
+                ))
             })
             .catch((error) => {
                 // Handle any errors
                 console.log('err');
             });
         })
-        setImages(images.filter((item) => item.id != deletedData.id))
     },[])
 
     return (
@@ -65,7 +64,13 @@ export const Artworks = () => {
         {/* 
         <HoverImages images={images} setCurrentImage={setCurrentImage} setShowModal={setShowModal} />
         {showModal ? <DeleteModal currentImage={currentImage} setShowModal={setShowModal} setDeletedData={setDeletedData} /> : ""} */}
-        <StyledButton onClick={() => handleDownload()}>button</StyledButton>
+        {imageList.map(item => {
+            console.log(imageList)
+            return(
+                <img src={item.url} />
+            )
+        })}
+        
         </>
     )
 }

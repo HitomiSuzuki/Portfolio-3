@@ -20,8 +20,10 @@ export const FileUpload = () => {
     const dropZone = useRef<HTMLDivElement>(null);
 
     // Redux関連
-    const titleList = useSelector(state => state);
+    const titleList = useSelector(state => state.titles);
     const dispatch = useDispatch();
+
+    console.log(titleList)
 
     // 画像の情報、タイトルを保持
     const [image, setImage] = useState<File | undefined>(undefined);
@@ -37,7 +39,7 @@ export const FileUpload = () => {
         
 
         // 同一タイトルがないかチェック
-        if(titleList.titles.some(item => item.title === newTitle)) {
+        if(titleList.some(item => item.title === newTitle)) {
             alert('同一タイトルが存在しています。')
         } else {
             // 拡張子を取得
@@ -51,7 +53,7 @@ export const FileUpload = () => {
 
             dispatch(addTitle(
                 {
-                    id: titleList.titles.length,
+                    id: titleList.length,
                     title: `${newTitle}.${ext}`
                 }
             ));

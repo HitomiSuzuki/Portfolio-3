@@ -8,10 +8,11 @@ import { Login } from './pages/Admin/Login';
 import { NewArtwork } from './pages/Admin/NewArtwork';
 import { Artworks } from './pages/Admin/Artworks';
 import { configureStore } from '@reduxjs/toolkit';
-import titlesReducer from './features/TitlesSlice'
+import titlesReducer from './features/TitlesSlice';
+import imagesReducer from './features/ImageSlice';
 import { Provider, useSelector as rawUseSelector, TypedUseSelectorHook } from 'react-redux';
 
-const store = configureStore({ reducer: {titles: titlesReducer} })
+const store = configureStore({ reducer: {titles: titlesReducer, images: imagesReducer} })
 export type RootState = ReturnType<typeof store.getState>;
 export const useSelector: TypedUseSelectorHook<RootState> = rawUseSelector;
 
