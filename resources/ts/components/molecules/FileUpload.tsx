@@ -1,6 +1,10 @@
 import React, {useState, useRef, useEffect} from "react";
 import styled from "styled-components";
 import {postArtwork} from '../../api/ArtworkAPI';
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { app, storage }from '../../firebase';
+import { initializeApp  } from "firebase/app";
+
 
 export const FileUpload = () => { 
     // 要素取得
@@ -10,25 +14,22 @@ export const FileUpload = () => {
     const dropZone = useRef<HTMLDivElement>(null);
 
     // 画像の情報、タイトルを保持
-    const [image, setImage] = useState<File | null>();
+    const [image, setImage] = useState<File | undefined>(undefined);
     const [title, setTitle] = useState<string>('');
     const [src, setSrc] = useState<string | undefined>('');
     const [typeError, setTypeError] = useState<boolean>(false);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    // 送信ボタン押した時
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(!image) return;
-        // 新規にFormDataを作成して、画像とタイトルを格納する
-        const file = new FormData()
-        file.append('imgURL', image);
-        if(image.type == 'image/jpeg') file.append('title', title + '.jpeg');
-        if(image.type == 'image/png') file.append('title', title + '.png');
-        if(image.type == 'image/jpg') file.append('title', title + '.jpg');
-        
-
-        // ファイルが正しくセットされていたらpost
-        if(!file) return;
-        postArtwork(file);
+        // 拡張子を取得
+        const ext = image?.name.split('.').pop();
+        console.log("ext" + ext);
+        const fileRef = ref(storage, `images/upload/${title}.${ext}`);
+        if(image) {
+            await uploadBytes(fileRef, image);
+            console.log("uploaded!!")
+        }
     }
 
     // ドラッグしてエリアに入った時
