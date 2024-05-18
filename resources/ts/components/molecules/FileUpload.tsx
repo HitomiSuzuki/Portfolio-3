@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ref, uploadBytes } from "firebase/storage";
 import { storage }from '../../firebase';
 import { useDispatch } from "react-redux";
-import { useSelector } from "../..";
+import { useSelector } from "../../store/store";
 import { addTitle } from "../../features/TitlesSlice";
 
 type Item = {
