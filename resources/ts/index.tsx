@@ -14,7 +14,7 @@ import persistStore from 'redux-persist/es/persistStore';
 import { store } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
-let persistor = persistStore(store)
+// let persistor = persistStore(store)
 
 const container = document.getElementById('app')!;
 const root = createRoot(container);
@@ -32,11 +32,11 @@ const router = createBrowserRouter([
 root.render(
     // <React.StrictMode>
         <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
+            {/* <PersistGate loading={null} persistor={persistor}> */}
                 <QueryClientProvider client={queryClient}>
                     <RouterProvider router={router} />
                 </QueryClientProvider>
-            </PersistGate>
+            {/* </PersistGate> */}
         </Provider>
     // </React.StrictMode>
 )

@@ -19,10 +19,15 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = configureStore({
-    reducer: persistedReducer,
-});
+// export const store = configureStore({
+//     reducer: persistedReducer,
+// });
 
 export type RootState = ReturnType<typeof store.getState>;
 export const useSelector: TypedUseSelectorHook<RootState> = rawUseSelector;
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);
+
+
+export const store = configureStore({
+    reducer: {titles: titlesReducer, images: imagesReducer}
+})

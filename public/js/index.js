@@ -16245,6 +16245,111 @@ var StyledHeaderAnchorLink = (0, styled_components_1["default"])(react_anchor_li
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/HoverImage.tsx":
+/*!******************************************************!*\
+  !*** ./resources/ts/components/atoms/HoverImage.tsx ***!
+  \******************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.HoverImage = void 0;
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var HoverImage = function HoverImage(props) {
+  var image = props.image,
+    setCurrentImage = props.setCurrentImage,
+    setShowModal = props.setShowModal;
+  // 親要素の中で配列になるので、Refに数字を割り当てる
+  var targetOverlay = _defineProperty({}, image.id, (0, react_1.useRef)(null));
+  // オーバーレイを表示非表示
+  var toggleOverlay = function toggleOverlay() {
+    var _a, _b, _c;
+    ((_a = targetOverlay[image.id].current) === null || _a === void 0 ? void 0 : _a.classList.contains('show')) ? (_b = targetOverlay[image.id].current) === null || _b === void 0 ? void 0 : _b.classList.remove('show') : (_c = targetOverlay[image.id].current) === null || _c === void 0 ? void 0 : _c.classList.add('show');
+  };
+  // モーダルを表示非表示
+  var showModal = function showModal() {
+    // 親要素から渡されたsetStateたち
+    setCurrentImage({
+      title: image.title,
+      url: image.url,
+      id: image.id,
+      created_at: image.created_at
+    });
+    setShowModal(true);
+  };
+  return react_1["default"].createElement(StyledHoverImageItem, {
+    onMouseEnter: function onMouseEnter() {
+      return toggleOverlay();
+    },
+    onMouseLeave: function onMouseLeave() {
+      return toggleOverlay();
+    }
+  }, react_1["default"].createElement(StyledHoverImage, {
+    src: image.url
+  }), react_1["default"].createElement(StyledHoverImageOverlay, {
+    ref: targetOverlay[image.id]
+  }, react_1["default"].createElement(StyledDeleteButton, {
+    type: "button",
+    onClick: function onClick() {
+      return showModal();
+    }
+  }, "Delete")));
+};
+exports.HoverImage = HoverImage;
+var StyledHoverImageItem = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    position: relative;\n    width: 100%;\n    aspect-ratio: 1;\n    overflow: hidden;\n"])));
+var StyledHoverImage = styled_components_1["default"].img(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 100%;\n    height: 100%;\n    object-fit: cover;\n    object-position: center center;\n"])));
+var StyledHoverImageOverlay = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    position: absolute;\n    top: -100%;\n    left: 0;\n    transition: all 0.1s ease-in-out;\n    background: black;\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n\n    &.show {\n        top: 0;\n    }\n"])));
+var StyledDeleteButton = styled_components_1["default"].button(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    display: block;\n    margin: 0 auto;\n"])));
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/HoverLink.tsx":
 /*!*****************************************************!*\
   !*** ./resources/ts/components/atoms/HoverLink.tsx ***!
@@ -16608,6 +16713,115 @@ var StyledText = styled_components_1["default"].p(_templateObject4 || (_template
 
 /***/ }),
 
+/***/ "./resources/ts/components/atoms/TitleInput.tsx":
+/*!******************************************************!*\
+  !*** ./resources/ts/components/atoms/TitleInput.tsx ***!
+  \******************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+var _templateObject, _templateObject2;
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _defineProperty(obj, key, value) { key = _toPropertyKey(key); if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
+function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  var desc = Object.getOwnPropertyDescriptor(m, k);
+  if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+    desc = {
+      enumerable: true,
+      get: function get() {
+        return m[k];
+      }
+    };
+  }
+  Object.defineProperty(o, k2, desc);
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  __setModuleDefault(result, mod);
+  return result;
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.TitleInput = void 0;
+var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var TitleInput = function TitleInput(props) {
+  var img = props.img;
+  var _ref = (0, react_1.useState)(false),
+    _ref2 = _slicedToArray(_ref, 2),
+    editable = _ref2[0],
+    setEditable = _ref2[1];
+  var _ref3 = (0, react_1.useState)(img.title),
+    _ref4 = _slicedToArray(_ref3, 2),
+    title = _ref4[0],
+    setTitle = _ref4[1];
+  // 親要素の中で配列になるので数字を渡しておく
+  var input = _defineProperty({}, img.id, (0, react_1.useRef)(null));
+  // 文字編集状態にする
+  var editText = function editText() {
+    setEditable(true);
+  };
+  // フォーカスアウトで文字を保存する
+  var saveText = function saveText() {
+    setEditable(false);
+    //文字列を保存するメソッドを書く
+  };
+  // setStateが遅れて起こるので、それに合わせてインプットにカーソルを当てる
+  (0, react_1.useEffect)(function () {
+    var _a;
+    (_a = input[img.id].current) === null || _a === void 0 ? void 0 : _a.focus();
+  }, [editable]);
+  return react_1["default"].createElement(react_1["default"].Fragment, null, editable ? react_1["default"].createElement(StyledTitleInput, {
+    ref: input[img.id],
+    onBlur: function onBlur() {
+      return saveText();
+    },
+    onChange: function onChange(e) {
+      return setTitle(e.target.value);
+    }
+  }) : react_1["default"].createElement(StyledTitleText, {
+    onClick: function onClick() {
+      return editText();
+    }
+  }, title));
+};
+exports.TitleInput = TitleInput;
+var StyledTitleInput = styled_components_1["default"].input(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    margin: 5px 0;\n    font-size: 12px;\n    height: 16px;\n    width: 93%;\n"])));
+var StyledTitleText = styled_components_1["default"].p(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    margin: 5px 0;\n    font-size: 12px;\n    height: 18px;\n    padding: 2px;\n"])));
+
+/***/ }),
+
 /***/ "./resources/ts/components/atoms/TopCarousel.tsx":
 /*!*******************************************************!*\
   !*** ./resources/ts/components/atoms/TopCarousel.tsx ***!
@@ -16738,6 +16952,113 @@ var StyledImageWrapper = styled_components_1["default"].div(_templateObject2 || 
 
 /***/ }),
 
+/***/ "./resources/ts/components/molecules/Deletemodal.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/ts/components/molecules/Deletemodal.tsx ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _templateObject, _templateObject2, _templateObject3, _templateObject4;
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.DeleteModal = void 0;
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var storage_1 = __webpack_require__(/*! firebase/storage */ "./node_modules/firebase/storage/dist/index.cjs.js");
+var ImageSlice_1 = __webpack_require__(/*! ../../features/ImageSlice */ "./resources/ts/features/ImageSlice.ts");
+var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/cjs/index.js");
+var store_1 = __webpack_require__(/*! ../../store/store */ "./resources/ts/store/store.ts");
+var DeleteModal = function DeleteModal(props) {
+  var currentImage = props.currentImage,
+    setShowModal = props.setShowModal,
+    setDeletedData = props.setDeletedData;
+  var storage = (0, storage_1.getStorage)();
+  var desertRef = (0, storage_1.ref)(storage, "images/".concat(currentImage.title));
+  var dispatch = (0, react_redux_1.useDispatch)();
+  var imageList = (0, store_1.useSelector)(function (state) {
+    return state.images;
+  });
+  var deleteItem = function deleteItem() {
+    return __awaiter(void 0, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            (0, storage_1.deleteObject)(desertRef).then(function () {
+              alert("delete" + currentImage.title);
+            })["catch"](function (err) {
+              alert('error happens!!');
+              console.log(err);
+            });
+            dispatch((0, ImageSlice_1.removeImage)(currentImage));
+            setShowModal(false);
+          case 3:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    }));
+  };
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(StyledDeleteModalBg, {
+    onClick: function onClick() {
+      return setShowModal(false);
+    }
+  }), react_1["default"].createElement(StyledDeleteModalWrapper, null, "You are going to delete ", currentImage.title, ". ", react_1["default"].createElement("br", null), " Are you sure ?", react_1["default"].createElement(StyledButtonWrapper, null, react_1["default"].createElement(StyledDeleteModalButton, {
+    onClick: function onClick() {
+      return setShowModal(false);
+    }
+  }, "cancel"), react_1["default"].createElement(StyledDeleteModalButton, {
+    onClick: function onClick() {
+      return deleteItem();
+    }
+  }, "delete"))));
+};
+exports.DeleteModal = DeleteModal;
+var StyledDeleteModalBg = styled_components_1["default"].div(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 100vw;\n    height: 100vh;\n    position: fixed;\n    background: black;\n    opacity: 0.6;\n    top: 0;\n    left: 0;\n"])));
+var StyledDeleteModalWrapper = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    position: fixed;\n    width: 80%;\n    max-width: 300px;\n    height: 200px;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n    -webkit-transform: translate(-50%, -50%);\n    -ms-transform: translate(-50%, -50%);\n    background: lightgray;\n    padding: 100px;\n"])));
+var StyledButtonWrapper = styled_components_1["default"].div(_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n    display: flex;\n    justify-content: space-between;\n    width: 100%;\n    margin-top: 50px;\n"])));
+var StyledDeleteModalButton = styled_components_1["default"].button(_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n    width: 45%;\n    height: 30px;\n    cursor: pointer;\n    &:hover {\n        opacity: 0.8;\n    }\n"])));
+
+/***/ }),
+
 /***/ "./resources/ts/components/molecules/FileUpload.tsx":
 /*!**********************************************************!*\
   !*** ./resources/ts/components/molecules/FileUpload.tsx ***!
@@ -16830,7 +17151,7 @@ var storage_1 = __webpack_require__(/*! firebase/storage */ "./node_modules/fire
 var firebase_1 = __webpack_require__(/*! ../../firebase */ "./resources/ts/firebase.ts");
 var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/cjs/index.js");
 var store_1 = __webpack_require__(/*! ../../store/store */ "./resources/ts/store/store.ts");
-var TitlesSlice_1 = __webpack_require__(/*! ../../features/TitlesSlice */ "./resources/ts/features/TitlesSlice.ts");
+var ImageSlice_1 = __webpack_require__(/*! ../../features/ImageSlice */ "./resources/ts/features/ImageSlice.ts");
 var FileUpload = function FileUpload() {
   // 要素取得
   var form = (0, react_1.useRef)(null);
@@ -16842,7 +17163,6 @@ var FileUpload = function FileUpload() {
     return state.titles;
   });
   var dispatch = (0, react_redux_1.useDispatch)();
-  console.log(titleList);
   // 画像の情報、タイトルを保持
   var _ref = (0, react_1.useState)(undefined),
     _ref2 = _slicedToArray(_ref, 2),
@@ -16893,9 +17213,11 @@ var FileUpload = function FileUpload() {
           case 11:
             console.log("uploaded!!");
           case 12:
-            dispatch((0, TitlesSlice_1.addTitle)({
+            dispatch((0, ImageSlice_1.addImage)({
               id: titleList.length,
-              title: "".concat(newTitle, ".").concat(ext)
+              title: "".concat(newTitle, ".").concat(ext),
+              url: "https://firebasestorage.googleapis.com/v0/b/portfolio-3-2d14e.appspot.com/o/images%2F".concat(newTitle, ".").concat(ext, "?alt=media"),
+              created_at: new Date()
             }));
           case 13:
             setTitle('');
@@ -17021,6 +17343,52 @@ var StyledPrevImg = styled_components_1["default"].img(_templateObject7 || (_tem
 
 /***/ }),
 
+/***/ "./resources/ts/components/molecules/HoverImages.tsx":
+/*!***********************************************************!*\
+  !*** ./resources/ts/components/molecules/HoverImages.tsx ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _templateObject, _templateObject2;
+function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.HoverImages = void 0;
+var react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
+var HoverImage_1 = __webpack_require__(/*! ../atoms/HoverImage */ "./resources/ts/components/atoms/HoverImage.tsx");
+var TitleInput_1 = __webpack_require__(/*! ../atoms/TitleInput */ "./resources/ts/components/atoms/TitleInput.tsx");
+var HoverImages = function HoverImages(props) {
+  var images = props.images,
+    setCurrentImage = props.setCurrentImage,
+    setShowModal = props.setShowModal;
+  return react_1["default"].createElement(StyledHoverImageList, null, images.map(function (img, i) {
+    return react_1["default"].createElement(StyledHoverImageItem, {
+      key: i
+    }, react_1["default"].createElement(HoverImage_1.HoverImage, {
+      setCurrentImage: setCurrentImage,
+      setShowModal: setShowModal,
+      image: img
+    }), react_1["default"].createElement(TitleInput_1.TitleInput, {
+      img: img
+    }));
+  }));
+};
+exports.HoverImages = HoverImages;
+var StyledHoverImageList = styled_components_1["default"].ul(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    list-style: none;\n    margin: 200px 110px;\n    padding: 0;\n    display: flex;\n    flex-wrap: wrap;\n    justify-content: flex-start;\n"])));
+var StyledHoverImageItem = styled_components_1["default"].div(_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n    width: 22%;\n    margin: 20px 1.5%;\n"])));
+
+/***/ }),
+
 /***/ "./resources/ts/features/ImageSlice.ts":
 /*!*********************************************!*\
   !*** ./resources/ts/features/ImageSlice.ts ***!
@@ -17034,17 +17402,17 @@ var _a;
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.removeUrl = exports.addUrl = void 0;
+exports.removeImage = exports.addImage = void 0;
 var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/cjs/index.js");
 var initialState = [];
 var imageSlice = (0, toolkit_1.createSlice)({
   name: 'images',
   initialState: initialState,
   reducers: {
-    addUrl: function addUrl(state, action) {
+    addImage: function addImage(state, action) {
       state.push(action.payload);
     },
-    removeUrl: function removeUrl(state, action) {
+    removeImage: function removeImage(state, action) {
       var index = state.findIndex(function (item) {
         return item.id === action.payload.id;
       });
@@ -17054,7 +17422,7 @@ var imageSlice = (0, toolkit_1.createSlice)({
     }
   }
 });
-_a = imageSlice.actions, exports.addUrl = _a.addUrl, exports.removeUrl = _a.removeUrl;
+_a = imageSlice.actions, exports.addImage = _a.addImage, exports.removeImage = _a.removeImage;
 exports["default"] = imageSlice.reducer;
 
 /***/ }),
@@ -17159,10 +17527,8 @@ var Login_1 = __webpack_require__(/*! ./pages/Admin/Login */ "./resources/ts/pag
 var NewArtwork_1 = __webpack_require__(/*! ./pages/Admin/NewArtwork */ "./resources/ts/pages/Admin/NewArtwork.tsx");
 var Artworks_1 = __webpack_require__(/*! ./pages/Admin/Artworks */ "./resources/ts/pages/Admin/Artworks.tsx");
 var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/cjs/index.js");
-var persistStore_1 = __importDefault(__webpack_require__(/*! redux-persist/es/persistStore */ "./node_modules/redux-persist/es/persistStore.js"));
 var store_1 = __webpack_require__(/*! ./store/store */ "./resources/ts/store/store.ts");
-var react_2 = __webpack_require__(/*! redux-persist/integration/react */ "./node_modules/redux-persist/es/integration/react.js");
-var persistor = (0, persistStore_1["default"])(store_1.store);
+// let persistor = persistStore(store)
 var container = document.getElementById('app');
 var root = (0, client_1.createRoot)(container);
 var queryClient = new react_query_1.QueryClient();
@@ -17186,14 +17552,11 @@ root.render(
 // <React.StrictMode>
 react_1["default"].createElement(react_redux_1.Provider, {
   store: store_1.store
-}, react_1["default"].createElement(react_2.PersistGate, {
-  loading: null,
-  persistor: persistor
 }, react_1["default"].createElement(react_query_1.QueryClientProvider, {
   client: queryClient
 }, react_1["default"].createElement(react_router_dom_1.RouterProvider, {
   router: router
-}))))
+})))
 // </React.StrictMode>
 );
 
@@ -17257,80 +17620,50 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.Artworks = void 0;
 var react_1 = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+var HoverImages_1 = __webpack_require__(/*! ../../components/molecules/HoverImages */ "./resources/ts/components/molecules/HoverImages.tsx");
+var Deletemodal_1 = __webpack_require__(/*! ../../components/molecules/Deletemodal */ "./resources/ts/components/molecules/Deletemodal.tsx");
 var AdminHeader_1 = __webpack_require__(/*! ../../components/atoms/AdminHeader */ "./resources/ts/components/atoms/AdminHeader.tsx");
-var storage_1 = __webpack_require__(/*! firebase/storage */ "./node_modules/firebase/storage/dist/index.cjs.js");
 var styled_components_1 = __importDefault(__webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js"));
 var store_1 = __webpack_require__(/*! ../../store/store */ "./resources/ts/store/store.ts");
-var react_redux_1 = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/dist/cjs/index.js");
 var Artworks = function Artworks() {
-  var _ref = (0, react_1.useState)([]),
+  var _ref = (0, react_1.useState)({
+      title: "",
+      url: "",
+      id: 0,
+      created_at: new Date()
+    }),
     _ref2 = _slicedToArray(_ref, 2),
-    images = _ref2[0],
-    setImages = _ref2[1];
-  var _ref3 = (0, react_1.useState)({
-      title: "",
-      imgURL: "",
-      id: 0,
-      created_at: new Date(),
-      updated_at: new Date()
-    }),
+    currentImage = _ref2[0],
+    setCurrentImage = _ref2[1];
+  var _ref3 = (0, react_1.useState)(false),
     _ref4 = _slicedToArray(_ref3, 2),
-    currentImage = _ref4[0],
-    setCurrentImage = _ref4[1];
-  var _ref5 = (0, react_1.useState)(false),
-    _ref6 = _slicedToArray(_ref5, 2),
-    showModal = _ref6[0],
-    setShowModal = _ref6[1];
-  var _ref7 = (0, react_1.useState)({
+    showModal = _ref4[0],
+    setShowModal = _ref4[1];
+  var _ref5 = (0, react_1.useState)({
       title: "",
-      imgURL: "",
+      url: "",
       id: 0,
-      created_at: new Date(),
-      updated_at: new Date()
+      created_at: new Date()
     }),
-    _ref8 = _slicedToArray(_ref7, 2),
-    deletedData = _ref8[0],
-    setDeletedData = _ref8[1];
-  var titleList = (0, store_1.useSelector)(function (state) {
-    return state.titles;
-  });
-  var storage = (0, storage_1.getStorage)();
+    _ref6 = _slicedToArray(_ref5, 2),
+    deletedData = _ref6[0],
+    setDeletedData = _ref6[1];
   var imageList = (0, store_1.useSelector)(function (state) {
     return state.images;
   });
-  var dispatch = (0, react_redux_1.useDispatch)();
-  var urls = [];
-  (0, react_1.useEffect)(function () {
-    titleList.forEach(function (item, i) {
-      (0, storage_1.getDownloadURL)((0, storage_1.ref)(storage, "images/".concat(item.title))).then(function (url) {
-        // `url` is the download URL for 'images/stars.jpg'
-        // This can be downloaded directly:
-        // const xhr = new XMLHttpRequest();
-        // xhr.responseType = 'blob';
-        // xhr.onload = (event) => {
-        //     const blob = xhr.response;
-        // };
-        // xhr.open('GET', url);
-        // xhr.send();
-        // dispatch(addUrl(
-        //     {
-        //         id: imageList.length,
-        //         url: url
-        //     }
-        // ))
-        [].concat(urls, [url]);
-      })["catch"](function (error) {
-        // Handle any errors
-        console.log('err');
-      });
-    });
-  }, []);
-  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(AdminHeader_1.AdminHeader, null), images.map(function (item) {
-    console.log(images);
+  return react_1["default"].createElement(react_1["default"].Fragment, null, react_1["default"].createElement(AdminHeader_1.AdminHeader, null), react_1["default"].createElement(HoverImages_1.HoverImages, {
+    images: imageList,
+    setCurrentImage: setCurrentImage,
+    setShowModal: setShowModal
+  }), showModal ? react_1["default"].createElement(Deletemodal_1.DeleteModal, {
+    currentImage: currentImage,
+    setShowModal: setShowModal,
+    setDeletedData: setDeletedData
+  }) : "", react_1["default"].createElement(ArtworkImageList, null, imageList.map(function (item) {
     return react_1["default"].createElement(ArtworkImageItem, null, react_1["default"].createElement(ArtworkImage, {
       src: item.url
     }));
-  }));
+  })));
 };
 exports.Artworks = Artworks;
 var StyledButton = styled_components_1["default"].button(_templateObject || (_templateObject = _taggedTemplateLiteral(["\n    width: 100px;\n    height: 30px;\n    margin-top: 500px;\n"])));
@@ -17836,7 +18169,7 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
-exports.persistor = exports.useSelector = exports.store = void 0;
+exports.store = exports.useSelector = void 0;
 var toolkit_1 = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/cjs/index.js");
 var TitlesSlice_1 = __importDefault(__webpack_require__(/*! ../features/TitlesSlice */ "./resources/ts/features/TitlesSlice.ts"));
 var ImageSlice_1 = __importDefault(__webpack_require__(/*! ../features/ImageSlice */ "./resources/ts/features/ImageSlice.ts"));
@@ -17853,11 +18186,14 @@ var persistConfig = {
   storage: async_storage_1["default"]
 };
 var persistedReducer = (0, redux_persist_1.persistReducer)(persistConfig, rootReducer);
-exports.store = (0, toolkit_1.configureStore)({
-  reducer: persistedReducer
-});
 exports.useSelector = react_redux_1.useSelector;
-exports.persistor = (0, redux_persist_1.persistStore)(exports.store);
+// export const persistor = persistStore(store);
+exports.store = (0, toolkit_1.configureStore)({
+  reducer: {
+    titles: TitlesSlice_1["default"],
+    images: ImageSlice_1["default"]
+  }
+});
 
 /***/ }),
 
@@ -93718,127 +94054,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-/***/ }),
-
-/***/ "./node_modules/redux-persist/es/integration/react.js":
-/*!************************************************************!*\
-  !*** ./node_modules/redux-persist/es/integration/react.js ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   PersistGate: () => (/* binding */ PersistGate)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
- // eslint-disable-line import/no-unresolved
-
-var PersistGate =
-/*#__PURE__*/
-function (_PureComponent) {
-  _inherits(PersistGate, _PureComponent);
-
-  function PersistGate() {
-    var _getPrototypeOf2;
-
-    var _this;
-
-    _classCallCheck(this, PersistGate);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(PersistGate)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    _defineProperty(_assertThisInitialized(_this), "state", {
-      bootstrapped: false
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "_unsubscribe", void 0);
-
-    _defineProperty(_assertThisInitialized(_this), "handlePersistorState", function () {
-      var persistor = _this.props.persistor;
-
-      var _persistor$getState = persistor.getState(),
-          bootstrapped = _persistor$getState.bootstrapped;
-
-      if (bootstrapped) {
-        if (_this.props.onBeforeLift) {
-          Promise.resolve(_this.props.onBeforeLift()).finally(function () {
-            return _this.setState({
-              bootstrapped: true
-            });
-          });
-        } else {
-          _this.setState({
-            bootstrapped: true
-          });
-        }
-
-        _this._unsubscribe && _this._unsubscribe();
-      }
-    });
-
-    return _this;
-  }
-
-  _createClass(PersistGate, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this._unsubscribe = this.props.persistor.subscribe(this.handlePersistorState);
-      this.handlePersistorState();
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this._unsubscribe && this._unsubscribe();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      if (true) {
-        if (typeof this.props.children === 'function' && this.props.loading) console.error('redux-persist: PersistGate expects either a function child or loading prop, but not both. The loading prop will be ignored.');
-      }
-
-      if (typeof this.props.children === 'function') {
-        return this.props.children(this.state.bootstrapped);
-      }
-
-      return this.state.bootstrapped ? this.props.children : this.props.loading;
-    }
-  }]);
-
-  return PersistGate;
-}(react__WEBPACK_IMPORTED_MODULE_0__.PureComponent);
-
-_defineProperty(PersistGate, "defaultProps", {
-  children: null,
-  loading: null
-});
 
 /***/ }),
 

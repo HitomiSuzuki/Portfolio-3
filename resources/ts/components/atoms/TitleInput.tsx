@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 
 type TitleInputProps = {
-    img: {title: string, imgURL: string, id: number};
+    img: {title: string, url: string, id: number};
 }
 
 export const TitleInput = (props: TitleInputProps) => {

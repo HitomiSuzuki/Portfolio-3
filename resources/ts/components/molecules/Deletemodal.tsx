@@ -3,20 +3,35 @@ import styled from "styled-components";
 import { deleteArtwork } from "../../api/ArtworkAPI";
 import { useGetArtwork } from "../../queries/ArtworkQuery";
 import { Artwork } from "../../type/type";
+import { getStorage, ref, deleteObject }from "firebase/storage"; 
+import { removeImage } from "../../features/ImageSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../../store/store";
 
 type DeleteModalprops = { 
-    currentImage: {title: string, imgURL: string, id: number, created_at: Date, updated_at: Date};
+    currentImage: {title: string, url: string, id: number, created_at: Date};
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
     setDeletedData: React.Dispatch<React.SetStateAction<Artwork>>
 }
 
 export const DeleteModal = (props: DeleteModalprops) => {
     const {currentImage, setShowModal, setDeletedData} = props;
+    const storage = getStorage();
+    const desertRef = ref(storage, `images/${currentImage.title}`);
+    const dispatch = useDispatch();
+    const imageList = useSelector(state => state.images);
 
     const deleteItem = async () => {
-        const data = await deleteArtwork(currentImage.id)
-        if(!data) return
-        setDeletedData(data);
+        deleteObject(desertRef).then(() => {
+            alert("delete" + currentImage.title);
+        }).catch((err) => {
+            alert('error happens!!');
+            console.log(err);
+        });
+
+        dispatch(removeImage( currentImage ));
+
+        setShowModal(false);
     }
 
     return (

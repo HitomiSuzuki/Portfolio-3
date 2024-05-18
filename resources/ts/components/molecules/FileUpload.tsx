@@ -5,6 +5,7 @@ import { storage }from '../../firebase';
 import { useDispatch } from "react-redux";
 import { useSelector } from "../../store/store";
 import { addTitle } from "../../features/TitlesSlice";
+import { addImage } from "../../features/ImageSlice";
 
 type Item = {
     id: number,
@@ -22,8 +23,6 @@ export const FileUpload = () => {
     // Redux関連
     const titleList = useSelector(state => state.titles);
     const dispatch = useDispatch();
-
-    console.log(titleList)
 
     // 画像の情報、タイトルを保持
     const [image, setImage] = useState<File | undefined>(undefined);
@@ -48,13 +47,15 @@ export const FileUpload = () => {
             const fileRef = ref(storage, `images/${newTitle}.${ext}`);
             if(image) {
                 await uploadBytes(fileRef, image);
-                console.log("uploaded!!")
+                console.log("uploaded!!");
             }
 
-            dispatch(addTitle(
+            dispatch(addImage(
                 {
                     id: titleList.length,
-                    title: `${newTitle}.${ext}`
+                    title: `${newTitle}.${ext}`,
+                    url: `https://firebasestorage.googleapis.com/v0/b/portfolio-3-2d14e.appspot.com/o/images%2F${newTitle}.${ext}?alt=media`,
+                    created_at: new Date()
                 }
             ));
         }

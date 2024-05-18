@@ -24,14 +24,14 @@ export const HoverImage = (props: HoverImageProps) => {
     // モーダルを表示非表示
     const showModal = () => {
         // 親要素から渡されたsetStateたち
-        setCurrentImage({title: image.title, imgURL: image.imgURL, id: image.id, created_at: image.created_at, updated_at: image.updated_at})
+        setCurrentImage({title: image.title, url: image.url, id: image.id, created_at: image.created_at})
         setShowModal(true);
     }
 
     return (
             
         <StyledHoverImageItem  onMouseEnter={() => toggleOverlay()} onMouseLeave={() => toggleOverlay()}>
-            <StyledHoverImage src={image.imgURL}/>
+            <StyledHoverImage src={image.url}/>
             <StyledHoverImageOverlay ref={targetOverlay[image.id]}>
                 <StyledDeleteButton type="button" onClick={() => showModal()}>Delete</StyledDeleteButton>
             </StyledHoverImageOverlay>

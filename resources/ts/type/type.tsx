@@ -1,9 +1,8 @@
 type Artwork = {
     id: number;
     title: string;
-    imgURL: string;
+    url: string;
     created_at: Date;
-    updated_at: Date;
 }
 
 export {
